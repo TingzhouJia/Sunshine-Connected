@@ -1,7 +1,8 @@
 <template>
   <div>
-      <avue-crud v-if="option.column" :data="data.data" :option="option"
-        @row-save="save" @row-del="remove" @row-update="update" 
+      <avue-crud v-if="option.column" :data="data.data" :option="option" :page="page"
+        @row-save="save" @row-del="remove" @row-update="update" @on-load="changePage" @sort-change="changeSort"
+        @search="search"
       >
       </avue-crud>
   </div>
@@ -12,10 +13,42 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 @Component({})
 export default class ResourceCrud extends Vue {
     @Prop(String) resource:string
-    option={}
-    data={}
+    option:any={}
+    data:any={}
+    query:any={
+       
+    }
+    page={
+        total:0,
+        //pageSize:2,
+    }
+    async search(where,done){
+        for(let k in where){
+            const field=this.option.column.find(v=>v.prop===k)
+            if(field.regex){
+                where[k]={$regex:where[k]}
+            }
+        }
+        this.query.where=where
+        this.fetch()
+        done()
+    }
+    async changeSort({prop,order}){
+        if(!order){
+            this.query.sort=null
+        }else{
+            this.query.sort={[prop]:order==='ascending'?1:-1}
+        }
+        this.fetch()
+    }
+    async changePage({paegSize,currentPage}){
+        this.query.page=currentPage
+        this.query.limit=paegSize
+        this.fetch()
+    }
      async fetch(){
-        const res=await this.$http.get(`/${this.resource}`)
+        const res=await this.$http.get(`/${this.resource}`,{params:{query:this.query}})
+        this.page.total=res.data.total
         this.data=res.data
     } 
      async fetchOption(){

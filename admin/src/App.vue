@@ -21,4 +21,7 @@ body {
   margin: 0;
   padding: 0;
 }
+.avue-upload_avatar {
+  height: auto !important;
+}
 </style>

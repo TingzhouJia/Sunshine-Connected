@@ -7,7 +7,9 @@ import axios from 'axios'
 import EleForm from 'vue-ele-form'
 Vue.config.productionTip = false
 Vue.use(EleForm)
-Vue.prototype.$http=axios.create({baseURL:"http://localhost:3000"})
+const http=axios.create({baseURL:"http://localhost:3000"})
+Vue.prototype.$httpajax=http
+Vue.prototype.$http=http
 new Vue({
   router,
   render: h => h(App)
