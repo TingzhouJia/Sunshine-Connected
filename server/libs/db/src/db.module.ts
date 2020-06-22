@@ -8,8 +8,11 @@ const models=TypegooseModule.forFeature([User,Course])
 @Global()
 @Module({
   imports:[
-    TypegooseModule.forRoot('mongodb://localhost/topfullstack',{
-      useNewUrlParser:true,useCreateIndex:true,useUnifiedTopology:true,useFindAndModify:false
+    TypegooseModule.forRootAsync({
+      
+      useFactory(){
+        return { uri:process.env.DB,useNewUrlParser:true,useCreateIndex:true,useUnifiedTopology:true,useFindAndModify:false}
+      }
     }),
     models
   ],
