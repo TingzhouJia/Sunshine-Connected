@@ -3,7 +3,8 @@ import { ApiProperty } from '@nestjs/swagger'
 import { Episode } from './episode.model'
 @ModelOptions({
     schemaOptions:{
-        timestamps:true
+        timestamps:true,
+        toJSON:{virtuals:true}
     }
 })
 
@@ -16,7 +17,7 @@ export class Course{
     cover:string
 
     @ApiProperty({description:'课时'})
-    @prop({ref:Episode})
+    @prop({ref:Episode,localField:'_id',foreignField:"course"})
     episodes:Ref<Episode>[]
 
 }

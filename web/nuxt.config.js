@@ -1,5 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
-
+import dotenv from 'dotenv'
+dotenv.config()
 export default {
   /*
    ** Nuxt rendering mode
@@ -27,7 +28,13 @@ export default {
         content: process.env.npm_package_description || '',
       },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },{href:"https://fonts.googleapis.com/css?family=Material+Icons", rel:'stylesheet'}],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        href: 'https://fonts.googleapis.com/css?family=Material+Icons',
+        rel: 'stylesheet',
+      },
+    ],
   },
   /*
    ** Global CSS
