@@ -2,12 +2,7 @@
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" app clipped>
       <v-list dense>
-        <v-list-item
-          v-for="item in items"
-          :key="item.text"
-          :to="item.link"
-          link
-        >
+        <v-list-item v-for="item in items" :key="item.text" :to="item.link" link>
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -15,35 +10,33 @@
             <v-list-item-title>{{ item.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-subheader class="mt-4 grey--text text--darken-1"
-          >SUBSCRIPTIONS</v-subheader
-        >
+        <v-subheader class="mt-4 grey--text text--darken-1">SUBSCRIPTIONS</v-subheader>
         <v-list>
           <v-list-item v-for="item in items2" :key="item.text" link>
             <v-list-item-avatar>
-              <img
-                :src="`https://randomuser.me/api/portraits/men/${item.picture}.jpg`"
-                alt
-              />
+              <img :src="`https://randomuser.me/api/portraits/men/${item.picture}.jpg`" alt />
             </v-list-item-avatar>
             <v-list-item-title v-text="item.text"></v-list-item-title>
           </v-list-item>
         </v-list>
-        <v-list-item class="mt-4" link>
+       
+        <v-list-item class="mt-4" v-if="$store.state.auth.user" link>
           <v-list-item-action>
-            <v-icon color="grey darken-1">mdi-plus-circle-outline</v-icon>
+            <v-icon color="grey darken-1">mdi-user</v-icon>
           </v-list-item-action>
-          <v-list-item-title class="grey--text text--darken-1"
-            >Browse Channels</v-list-item-title
-          >
+          <v-list-item-title class="grey--text text--darken-1" >{{$store.state.auth.user.username}}</v-list-item-title>
+        </v-list-item>
+         <v-list-item v-else class="mt-4" link>
+          <v-list-item-action>
+            <v-icon color="grey darken-1">mdi-lock</v-icon>
+          </v-list-item-action>
+          <v-list-item-title class="grey--text text--darken-1" @click="isShowLoginForm=true">登陆</v-list-item-title>
         </v-list-item>
         <v-list-item link>
           <v-list-item-action>
             <v-icon color="grey darken-1">mdi-cog</v-icon>
           </v-list-item-action>
-          <v-list-item-title class="grey--text text--darken-1"
-            >Manage Subscriptions</v-list-item-title
-          >
+          <v-list-item-title class="grey--text text--darken-1">Manage Subscriptions</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -72,13 +65,29 @@
         <nuxt-child />
       </v-container>
     </v-main>
+    <v-bottom-sheet v-model="isShowLoginForm" inset>
+     <v-form class="pa-4" @submit.prevent="login">
+       <v-text-field label="用户名" v-model="loginModel.username"></v-text-field>
+        <v-text-field label="密码" type="password"  v-model="loginModel.username"></v-text-field>
+        <v-btn color="success" type="submit">登陆</v-btn>
+     </v-form>
+    </v-bottom-sheet>
   </v-app>
 </template>
 
 <script>
 export default {
+  isshowLoginForm:false,
+  loginModel:{},
   props: {
     source: String,
+  },
+  methods:{
+    async login(){
+      await this.$auth.loginWith('login',{
+        data:this.loginModel
+      })
+    }
   },
   data: () => ({
     drawer: null,

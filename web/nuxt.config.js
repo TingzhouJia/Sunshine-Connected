@@ -66,12 +66,31 @@ export default {
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
+    '@nuxtjs/dotenv',
+    '@nuxtjs/auth'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {},
+  auth:{
+    strategies:{
+      local:{
+        endpoints:{
+          login:{
+            url:"/auth/login"
+          },
+          logout:{
+            url:'/auth/logout'
+          },
+          user:{
+            url:'/auth/user',propertyName:false
+          }
+        }
+      }
+    }
+  },
   /*
    ** Content module configuration
    ** See https://content.nuxtjs.org/configuration
