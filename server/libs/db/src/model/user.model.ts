@@ -1,6 +1,11 @@
 import {prop, ModelOptions} from '@typegoose/typegoose'
 import { ApiProperty } from '@nestjs/swagger'
 import {hashSync} from 'bcryptjs'
+
+
+export enum UserEnum {
+    
+}
 @ModelOptions({
     schemaOptions:{
         timestamps:true
@@ -22,7 +27,8 @@ export class User{
     })
     password:string
 
-    @prop({ref:'Course'})
-    liked:
+
+
+ 
 
 }

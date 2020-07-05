@@ -1,6 +1,10 @@
 import {prop, Ref, ModelOptions, } from '@typegoose/typegoose'
 import { ApiProperty } from '@nestjs/swagger'
-import { Episode } from './episode.model'
+import { User } from './user.model'
+import { Question } from './question.model'
+
+
+
 @ModelOptions({
     schemaOptions:{
         timestamps:true,
@@ -9,15 +13,18 @@ import { Episode } from './episode.model'
 })
 
 export class Course{
-    @ApiProperty({description:'课程名称'})
+    @ApiProperty({description:'video name'})
     @prop()
     title:string
-    @ApiProperty({description:'封面',example:"pass1"})
+    @ApiProperty({description:'covering',example:"pass1"})
     @prop()
     cover:string
-
-    @ApiProperty({description:'课时'})
-    @prop({ref:Episode,localField:'_id',foreignField:"course"})
-    episodes:Ref<Episode>[]
+    @prop({ref:Question,localField:'_id',foreignField:'course'})
+    questions:Ref<Question>[]
+    @prop()
+    file:string
+    @ApiProperty({description:'author'})
+    @prop({ref:User})
+    author:Ref<User>
 
 }

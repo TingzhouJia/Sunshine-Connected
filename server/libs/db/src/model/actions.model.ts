@@ -2,20 +2,29 @@ import { prop, ModelOptions, Ref } from "@typegoose/typegoose";
 import { User } from "./user.model";
 import { Course } from "./course.model";
 import { Episode } from "./episode.model";
+import { ApiProperty } from "@nestjs/swagger";
 
 @ModelOptions({
+    options:{
+        customName:"Action"
+    },
     schemaOptions:{
-        timestamps:true
+        timestamps:true,
+        
     }
 })
 export class Action{
+    @ApiProperty({description:'user who act'})
     @prop({ref:"User"})
     user:Ref<User>
-    @prop({enum:['Course','Episode']})
+    @ApiProperty({description:'type of target'})
+    @prop({enum:['Course','User']})
     type:string
+    @ApiProperty({description:'object of target'})
     @prop({refPath:'type'})
-    object:Ref<Course|Episode>
-    @prop({enum:[]})
+    object:Ref<Course|User>
+    @ApiProperty({description:'type of action'})
+    @prop({enum:['like','subscribe']})
     name:string
 
 }
