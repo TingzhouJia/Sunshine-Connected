@@ -27,4 +27,10 @@ export class Course{
     @prop({ref:User})
     author:Ref<User>
 
+    @ApiProperty({description:'category of post',})
+    @prop()
+    progress:string
+    
+
+
 }

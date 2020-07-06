@@ -19,4 +19,17 @@ export class Audit{
     @ApiProperty({description:'object of audit'})
     @prop({refPath:'type'})
     object:Ref<Workshop|Course>
+    @ApiProperty({description:'deadline for audit'})
+    @prop()
+    deadline:Date
+    @ApiProperty({description:'progress for audit'})
+    @prop()
+    progress:number
+
+    @ApiProperty({description:'leaving message'})
+    @prop()
+    message:string[]
+
+
+
 }

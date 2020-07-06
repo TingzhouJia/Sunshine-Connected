@@ -27,6 +27,14 @@ export class Question{
     @prop()
     isAnswered:boolean
 
+    @ApiProperty({description:"question name"})
+    @prop()
+    content:string
+
+    @ApiProperty({description:'timing of question'})
+    @prop()
+    timing?:string
+
     @ApiProperty({description:'answer to question'})
     @prop({ref:Answer,localField:'_id',foreignField:'question'})
     answer:Ref<Answer>[]
