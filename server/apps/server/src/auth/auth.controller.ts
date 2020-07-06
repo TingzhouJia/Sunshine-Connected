@@ -8,13 +8,14 @@ import { Register } from './dto/register.dto';
 import { Login } from './dto/login.dto';
 import {JwtService} from '@nestjs/jwt'
 import { CurrentUser } from './currentUser.decorator';
+import { AuthService } from './auth.service';
 
 @ApiTags('aurthentication')
 @Controller('auth')
 export class AuthController {
-    constructor(@InjectModel(User) private usermodel:ReturnModelType<typeof User>,private jwtService:JwtService ){}
+    constructor(private readonly userService:AuthService,private jwtService:JwtService ){}
     @Post('register')
-    @ApiOperation({summary:"注册"})
+    @ApiOperation({summary:"registration"})
     async register(@Body() body:Register){
             const {username,password}=body
           //  const user=await this.usermodel.create({username,password})

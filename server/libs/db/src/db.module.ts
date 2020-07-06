@@ -6,13 +6,15 @@ import { Course } from './model/course.model';
 import { Question } from './model/question.model';
 import { Answer } from './model/answer.model';
 import { Action } from './model/actions.model';
+import { Workshop } from './model/workshop.model';
+import { Audit } from './model/audit.model';
 
-const models=TypegooseModule.forFeature([User,Course,Question,Answer,Action])
+const models=TypegooseModule.forFeature([User,Course,Question,Answer,Action,Workshop,Audit])
 @Global()
 @Module({
   imports:[
     TypegooseModule.forRootAsync({
-      
+    
       useFactory(){
         return { uri:process.env.DB,useNewUrlParser:true,useCreateIndex:true,useUnifiedTopology:true,useFindAndModify:false}
       }
