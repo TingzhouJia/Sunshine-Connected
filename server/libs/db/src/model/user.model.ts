@@ -4,7 +4,11 @@ import {hashSync} from 'bcryptjs'
 
 
 export enum UserEnum {
-    
+    VOLUNTEER="volunteer",
+    COORDINATOR="coordinator",
+    SENIOR='senior',
+    ADMIN='admin'
+
 }
 @ModelOptions({
     schemaOptions:{
@@ -26,6 +30,15 @@ export class User{
         }
     })
     password:string
+    @ApiProperty({description:'email'})
+    @prop({required:true})
+    email:string
+
+    @prop({default:''})
+    description:string
+
+    @prop({enum:UserEnum})
+    role:UserEnum
 
 
 

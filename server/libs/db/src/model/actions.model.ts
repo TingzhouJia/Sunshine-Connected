@@ -18,13 +18,13 @@ export class Action{
     @prop({ref:"User"})
     user:Ref<User>
     @ApiProperty({description:'type of target'})
-    @prop({enum:['Course','User']})
+    @prop({enum:['Course','User','Workshop']})
     type:string
     @ApiProperty({description:'object of target'})
     @prop({refPath:'type'})
     object:Ref<Course|User>
     @ApiProperty({description:'type of action'})
-    @prop({enum:['like','subscribe']})
+    @prop({enum:['like','subscribe','register']})
     name:string
 
 }
