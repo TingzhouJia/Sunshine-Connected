@@ -17,8 +17,8 @@ export class AuthController {
     @ApiOperation({summary:"注册"})
     async register(@Body() body:Register){
             const {username,password}=body
-            const user=await this.usermodel.create({username,password})
-            return user
+          //  const user=await this.usermodel.create({username,password})
+          //  return user
     }
     @Post('login')
     @ApiOperation({summary:'login'})

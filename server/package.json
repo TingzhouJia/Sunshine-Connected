@@ -33,6 +33,7 @@
     "bcryptjs": "^2.4.3",
     "mongoose": "^5.9.21",
     "multer-aliyun-oss": "^1.1.0",
+    "nest-access-control": "^2.0.2",
     "nestjs-mongoose-crud": "^2.0.0",
     "nestjs-typegoose": "^7.1.28",
     "passport": "^0.4.1",
@@ -90,7 +91,9 @@
       "@libs/db/(.*)": "<rootDir>/libs/db/src/$1",
       "@libs/db": "<rootDir>/libs/db/src",
       "@app/common/(.*)": "<rootDir>/libs/common/src/$1",
-      "@app/common": "<rootDir>/libs/common/src"
+      "@app/common": "<rootDir>/libs/common/src",
+      "@app/role/(.*)": "<rootDir>/libs/role/src/$1",
+      "@app/role": "<rootDir>/libs/role/src"
     }
   }
 }

@@ -23,6 +23,12 @@
       ],
       "@app/common/*": [
         "libs/common/src/*"
+      ],
+      "@app/role": [
+        "libs/role/src"
+      ],
+      "@app/role/*": [
+        "libs/role/src/*"
       ]
     }
   }
