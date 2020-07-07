@@ -31,6 +31,8 @@
     "@typegoose/typegoose": "^7.2.0",
     "@types/mongoose": "^5.7.29",
     "bcryptjs": "^2.4.3",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.12.2",
     "mongoose": "^5.9.21",
     "multer-aliyun-oss": "^1.1.0",
     "nest-access-control": "^2.0.2",
@@ -93,7 +95,9 @@
       "@app/common/(.*)": "<rootDir>/libs/common/src/$1",
       "@app/common": "<rootDir>/libs/common/src",
       "@app/role/(.*)": "<rootDir>/libs/role/src/$1",
-      "@app/role": "<rootDir>/libs/role/src"
+      "@app/role": "<rootDir>/libs/role/src",
+      "@app/repository/(.*)": "<rootDir>/libs/repository/src/$1",
+      "@app/repository": "<rootDir>/libs/repository/src"
     }
   }
 }

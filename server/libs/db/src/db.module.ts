@@ -1,13 +1,9 @@
 import { Module, Global } from '@nestjs/common';
 import { DbService } from './db.service';
 import { TypegooseModule } from 'nestjs-typegoose'
-import { User } from './model/user.model';
-import { Course } from './model/course.model';
-import { Question } from './model/question.model';
-import { Answer } from './model/answer.model';
-import { Action } from './model/actions.model';
-import { Workshop } from './model/workshop.model';
-import { Audit } from './model/audit.model';
+
+import { BaseRepository } from './repository';
+import { User,Course,Question,Action,Answer,Audit,Workshop } from './model';
 
 const models=TypegooseModule.forFeature([User,Course,Question,Answer,Action,Workshop,Audit])
 @Global()
@@ -22,7 +18,7 @@ const models=TypegooseModule.forFeature([User,Course,Question,Answer,Action,Work
     models
   ],
   providers: [DbService],
-  exports: [DbService,models],
+  exports: [DbService,models,BaseRepository],
 })
 export class DbModule {}
 
