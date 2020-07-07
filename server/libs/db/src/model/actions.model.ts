@@ -4,6 +4,7 @@ import { Course } from "./course.model";
 import { Episode } from "./episode.model";
 import { ApiProperty } from "@nestjs/swagger";
 import { BaseModel } from "./base.model";
+import { Workshop } from "./workshop.model";
 
 @ModelOptions({
     options:{
@@ -20,12 +21,12 @@ export class Action {
     user:Ref<User>
     @ApiProperty({description:'type of target'})
     @prop({enum:['Course','User','Workshop']})
-    type:string
+    types:string
     @ApiProperty({description:'object of target'})
-    @prop({refPath:'type'})
-    object:Ref<Course|User>
+    @prop({refPath:'types'})
+    object:Ref<Course|User|Workshop>
     @ApiProperty({description:'type of action'})
-    @prop({enum:['like','subscribe','register']})
+    @prop({enum:['like','subscribe','register','view']})
     name:string
 
 }
