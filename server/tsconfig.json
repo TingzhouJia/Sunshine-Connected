@@ -29,6 +29,12 @@
       ],
       "@app/role/*": [
         "libs/role/src/*"
+      ],
+      "@app/repository": [
+        "libs/repository/src"
+      ],
+      "@app/repository/*": [
+        "libs/repository/src/*"
       ]
     }
   }

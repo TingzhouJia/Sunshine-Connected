@@ -11,6 +11,7 @@ export class CoursesController {
     constructor(@InjectModel(Course) private readonly model:ReturnModelType<typeof Course>){}
     @Get('option')
     option(){
+        
         return {
             title:"课程管路",
             column:[

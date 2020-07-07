@@ -3,6 +3,7 @@ import { User } from "./user.model";
 import { Course } from "./course.model";
 import { Episode } from "./episode.model";
 import { ApiProperty } from "@nestjs/swagger";
+import { BaseModel } from "./base.model";
 
 @ModelOptions({
     options:{
@@ -13,7 +14,7 @@ import { ApiProperty } from "@nestjs/swagger";
         
     }
 })
-export class Action{
+export class Action {
     @ApiProperty({description:'user who act'})
     @prop({ref:"User"})
     user:Ref<User>

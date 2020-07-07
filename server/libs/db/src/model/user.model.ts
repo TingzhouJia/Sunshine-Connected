@@ -31,14 +31,19 @@ export class User{
     })
     password:string
     @ApiProperty({description:'email'})
-    @prop({required:true})
-    email:string
+    @prop({required:false})
+    email?:string
 
+    @ApiProperty({description:'phone number'})
+    @prop({required:false})
+    phone?:string
     @prop({default:''})
     description:string
 
     @prop({enum:UserEnum})
     role:UserEnum
+
+
 
 
 
