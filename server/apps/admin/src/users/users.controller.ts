@@ -11,7 +11,5 @@ import { DocumentType, ReturnModelType } from '@typegoose/typegoose';
 export class UsersController {
     constructor(@InjectModel(User) private readonly model:ReturnModelType<typeof User>){ }
    
-    get(){
-        
-    }
+    
 }   

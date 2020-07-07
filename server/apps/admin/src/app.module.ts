@@ -14,14 +14,6 @@ const MAO = require('multer-aliyun-oss');
   imports: [
     CommonModule,
 
-    MulterModule.register({dest:'uploads',storage:MAO({
-      config: {
-          region: '<region>',
-          accessKeyId: '<accessKeyId>',
-          accessKeySecret: '<accessKeySecret>',
-          bucket: '<bucket>'
-      }
-  })}),
   
     UsersModule,
     CoursesModule,

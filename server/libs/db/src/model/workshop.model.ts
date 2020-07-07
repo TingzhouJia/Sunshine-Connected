@@ -1,6 +1,7 @@
 import { ModelOptions, prop, Ref } from "@typegoose/typegoose";
 import { ApiProperty } from "@nestjs/swagger";
 import { User } from "./user.model";
+import { Schema } from "mongoose";
 
 @ModelOptions({
     options:{customName:'Workshop'},
@@ -20,7 +21,7 @@ export class Workshop{
     deadline:string
 
     @ApiProperty({description:'applied volunteer'})
-    @prop({ref:User,localField:'_id'})
+    @prop({ref:'User',type:Schema.Types.ObjectId})
     applied:Ref<User>[]
 
 }
