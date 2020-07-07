@@ -26,7 +26,8 @@ export class AuthController {
     @UseGuards(AuthGuard('local'))
     async login(@CurrentUser() user:DocumentType<User>,@Body() body:Login){
         return {
-            token:this.jwtService.sign(String(user._id))
+            token:this.jwtService.sign(String(user._id)),
+            user
         }
     }
     @Get('user')
