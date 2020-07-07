@@ -6,11 +6,11 @@ import { User } from "./user.model";
 @ModelOptions({schemaOptions:{timestamps:true},options:{customName:"Answer"}})
 export class Answer{
     @ApiProperty({description:'related question'})
-    @prop({ref:Question})
+    @prop({ref:'Question'})
     question:Ref<Question>
     
     @ApiProperty({description:'author of answer'})
-    @prop({ref:User})
+    @prop({ref:'User'})
     author:Ref<User>
     @ApiProperty({description:'content of answer'})
     @prop()

@@ -4,7 +4,8 @@ import { ReturnModelType,DocumentType } from "@typegoose/typegoose";
 import { InjectModel } from "nestjs-typegoose";
 
 import { Injectable } from "@nestjs/common";
-import { BaseRepository } from "@libs/db/repository/base.repository";
+import { BaseRepository } from "./base.repository";
+
 
 
 export type UserEntity=User

@@ -11,7 +11,7 @@ import { Workshop } from "./workshop.model";
 
 export class Audit{
     @ApiProperty({description:'user send request'})
-    @prop({ref:User})
+    @prop({ref:'User'})
     sender:Ref<User>
     @ApiProperty({description:'type need audit'})
     @prop({enum:['Workshop','Course']})

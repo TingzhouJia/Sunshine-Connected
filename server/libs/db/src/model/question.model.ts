@@ -16,11 +16,11 @@ import { Answer } from "./answer.model";
 
 export class Question{
     @ApiProperty({description:'related course'})
-    @prop({ref:Course})
+    @prop({ref:'Course'})
     course:Ref<Course>
     
     @ApiProperty({description:'user ask question'})
-    @prop({ref:User})
+    @prop({ref:'User'})
     author:Ref<User>
 
     @ApiProperty({description:'whether answered officially'})
@@ -33,9 +33,9 @@ export class Question{
 
     @ApiProperty({description:'timing of question'})
     @prop()
-    timing?:string
+    timing:string
 
     @ApiProperty({description:'answer to question'})
-    @prop({ref:Answer,localField:'_id',foreignField:'question'})
+    @prop({ref:'Answer',localField:'_id',foreignField:'question'})
     answer:Ref<Answer>[]
 }

@@ -5,6 +5,7 @@ import { Episode } from "./episode.model";
 import { ApiProperty } from "@nestjs/swagger";
 import { BaseModel } from "./base.model";
 import { Workshop } from "./workshop.model";
+import { Schema } from "mongoose";
 
 @ModelOptions({
     options:{
@@ -17,7 +18,7 @@ import { Workshop } from "./workshop.model";
 })
 export class Action {
     @ApiProperty({description:'user who act'})
-    @prop({ref:"User"})
+    @prop({ref:"User",type:Schema.Types.ObjectId,})
     user:Ref<User>
     @ApiProperty({description:'type of target'})
     @prop({enum:['Course','User','Workshop']})

@@ -12,6 +12,7 @@ export enum UserEnum {
 }
 @ModelOptions({
     schemaOptions:{
+        _id:true,
         timestamps:true
     }
 })
@@ -39,9 +40,13 @@ export class User{
     phone?:string
     @prop({default:''})
     description:string
+    @ApiProperty({description:'avatar'})
+    @prop()
+    avatar:string
 
     @prop({enum:UserEnum})
     role:UserEnum
+
 
 
 
