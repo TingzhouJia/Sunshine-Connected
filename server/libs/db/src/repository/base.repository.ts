@@ -61,7 +61,7 @@ export abstract class PaginationParams<T> {
     public abstract readonly order?: OrderType<T>;
 
     @IsOptional()
-    public readonly query:any
+    public readonly query?:any
 }
 
 /**

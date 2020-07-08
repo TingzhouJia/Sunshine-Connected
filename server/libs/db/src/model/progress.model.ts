@@ -1,7 +1,7 @@
 import {prop, ModelOptions, } from '@typegoose/typegoose'
 import { ApiProperty } from '@nestjs/swagger'
 
-import {  Schema } from 'mongoose'
+
 enum ProgressStype{
     PUBLISHED='published',
     STAGE1='stage1',
@@ -21,9 +21,7 @@ export class Progress {
     status:string
     @prop({required:false})
     message:string
-    @prop({enum:['Workshop','Video']})
-    types:string
-    @prop({refPath:'types',type:Schema.Types.ObjectId})
+    @prop()
     obj_id:string
 
 }
