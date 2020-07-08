@@ -41,11 +41,11 @@ export class Course{
     progress:Ref<Progress>
     
     @ApiProperty({description:'view count'})
-    @prop({ref:'Action',localField:'_id',foreignField:'object._id',count:true,match:{name:'view'},default:0})
+    @prop({ref:'Action',localField:'_id',foreignField:'obj_id',count:true,match:{name:'view'},default:0})
     viewedCount:number
 
     @ApiProperty({description:'view count'})
-    @prop({ref:'Action',localField:'_id',foreignField:'object._id',count:true,match:{name:'like'},default:0})
+    @prop({ref:'Action',localField:'_id',foreignField:'obj_id',count:true,match:{name:'like'},default:0})
     likeCount:number
 
 

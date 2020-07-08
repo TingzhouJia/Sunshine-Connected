@@ -10,5 +10,8 @@ export class CourseDto{
     readonly file:string
     @ApiProperty()
     readonly author_id:string
-
+    @ApiProperty()
+    readonly course_id?:string
+    @ApiProperty()
+    readonly progress_id?:string
 }
