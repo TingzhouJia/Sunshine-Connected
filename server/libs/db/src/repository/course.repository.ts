@@ -15,9 +15,9 @@ export class CourseRepository extends BaseRepository<Course>{
   }
 
   async getCourseByAuthorId(authorId: string, pagenationParam: PaginationParams<Course>): Promise<Paginator<Course>> {
-    return super.paginator({ ...pagenationParam, query: { 'author': authorId } }, {},
+    return super.paginator({ ...pagenationParam, query: { 'author': authorId ,} }, {},
       { populates: [{ path: 'viewedCount' }, 
-      { path: 'likeCount' }, { path: 'questionCount' }, { path: 'author', select: '-password' }, { path: 'questions' }] }
+      { path: 'likeCount' }, { path: 'questionCount' }, {path:'progress'}] }
     )
   }
 
@@ -30,7 +30,7 @@ export class CourseRepository extends BaseRepository<Course>{
    * @param pagenationParam 
    */
   async getAllCoursePublished(pagenationParam: PaginationParams<Course>): Promise<Paginator<Course>> {
-    return super.paginator({ ...pagenationParam, query: { 'progress.status': 'published' } }, {}, { populates: [
+    return super.paginator({ ...pagenationParam, query: { 'progress.status': 'published' } }, '-file', { populates: [
       { path: 'viewedCount' }, 
       { path: 'likeCount' }, { path: 'questionCount' },{ path: 'author', match:'_id username avatar'}
     ] })
@@ -38,21 +38,16 @@ export class CourseRepository extends BaseRepository<Course>{
 
   async getVideo(id: string): Promise<Course> {
 
-    // return  (await this._model.findById(id)).populate()
-    //  .populate({path:'viewedCount',model:'Action',match:{name:'view'}})
-    //  .populate({path:'likeCount',model:'Action',match:{name:'like'}})
-    //  .populate({path:'questions',model:"Question"})
     return super.findByIdAsync(id, {},
       {
-        populates: [{ model: 'Question', path: 'questions', }, { path: 'viewedCount' },
-
+        populates: [{ model: 'Question', path: 'questions', }, { path: 'viewedCount' },{path:'author',model:"User"},{path:'progress'},{path:'likeCount'}
         ]
       })
   }
 
 
 
-  async createVideo(doc: Course, ): Promise<DocumentType<Course>> {
+  async createVideo(doc: Partial<Course>, ): Promise<DocumentType<Course>> {
     return super.create(doc)
   }
 

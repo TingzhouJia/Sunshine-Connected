@@ -18,14 +18,19 @@ import { Schema } from "mongoose";
 })
 export class Action {
     @ApiProperty({description:'user who act'})
-    @prop({ref:"User",type:Schema.Types.ObjectId,})
-    user:Ref<User>
+    @prop({ref:"User",required:false,localField:'author_id',foreignField:'_id',justOne:true})
+    user?:Ref<User>
+    @ApiProperty()
+    @prop()
+    author_id:string
     @ApiProperty({description:'type of target'})
     @prop({enum:['Course','User','Workshop']})
     types:string
     @ApiProperty({description:'object of target'})
     @prop({refPath:'types'})
     object:Ref<Course|User|Workshop>
+    
+    @ApiProperty()
     @ApiProperty({description:'type of action'})
     @prop({enum:['like','subscribe','register','view']})
     name:string

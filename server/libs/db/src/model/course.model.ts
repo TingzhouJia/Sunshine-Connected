@@ -4,8 +4,7 @@ import { User } from './user.model'
 import { Question } from './question.model'
 
 import { Progress } from './progress.model'
-import { Action } from './actions.model'
-import { Schema } from 'mongoose'
+
 
 
 
@@ -30,11 +29,15 @@ export class Course{
     @prop()
     file:string
     @ApiProperty({description:'author'})
-    @prop({ref:'User',localField:'author._id',foreignField:'_id',justOne:true,type:Schema.Types.ObjectId,})
+    @prop({ref:'User',localField:'author_id',foreignField:'_id',justOne:true})
     author:Ref<User>
 
+    @ApiProperty({description:'author_id'})
+    @prop()
+    author_id:string
+
     @ApiProperty({description:'category of post',})
-    @prop({ref:'Progress',localField:'_id',foreignField:'obj_id',})
+    @prop({ref:'Progress',localField:'_id',foreignField:'obj_id',justOne:true})
     progress:Ref<Progress>
     
     @ApiProperty({description:'view count'})
