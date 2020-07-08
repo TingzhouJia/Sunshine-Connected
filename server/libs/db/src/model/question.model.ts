@@ -36,6 +36,6 @@ export class Question{
     timing:string
 
     @ApiProperty({description:'answer to question'})
-    @prop({ref:'Answer',localField:'_id',foreignField:'question'})
+    @prop({ref:'Answer',localField:'_id',foreignField:'question_id'})
     answer:Ref<Answer>[]
 }

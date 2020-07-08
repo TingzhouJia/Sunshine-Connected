@@ -1,4 +1,4 @@
-import { Course, Action } from "../model";
+import { Course } from "../model";
 import { ReturnModelType, DocumentType, } from "@typegoose/typegoose";
 import { BaseRepository, PaginationParams, Paginator } from "./base.repository";
 import { InjectModel } from "nestjs-typegoose";
@@ -48,6 +48,7 @@ export class CourseRepository extends BaseRepository<Course>{
 
 
   async createVideo(doc: Partial<Course>, ): Promise<DocumentType<Course>> {
+    
     return super.create(doc)
   }
 

@@ -1,11 +1,11 @@
 import { prop, ModelOptions, Ref } from "@typegoose/typegoose";
 import { User } from "./user.model";
 import { Course } from "./course.model";
-import { Episode } from "./episode.model";
+
 import { ApiProperty } from "@nestjs/swagger";
-import { BaseModel } from "./base.model";
+
 import { Workshop } from "./workshop.model";
-import { Schema } from "mongoose";
+
 
 @ModelOptions({
     options:{
@@ -29,7 +29,9 @@ export class Action {
     @ApiProperty({description:'object of target'})
     @prop({refPath:'types'})
     object:Ref<Course|User|Workshop>
-    
+    @ApiProperty({description:'obj id'})
+    @prop()
+    obj_id:string
     @ApiProperty()
     @ApiProperty({description:'type of action'})
     @prop({enum:['like','subscribe','register','view']})
