@@ -307,7 +307,7 @@ export abstract class BaseRepository<T> {
      * @returns {Query<number>}
      */
     public count(conditions: AnyType): Query<number> {
-        return this.model.count(conditions)
+        return this.model.countDocuments(conditions)
     }
 
     public countAsync(conditions: AnyType): Promise<number> {

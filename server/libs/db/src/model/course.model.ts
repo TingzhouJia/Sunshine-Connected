@@ -1,4 +1,4 @@
-import {prop, Ref, ModelOptions, } from '@typegoose/typegoose'
+import {prop, Ref, ModelOptions, Post, getModelForClass, } from '@typegoose/typegoose'
 import { ApiProperty } from '@nestjs/swagger'
 import { User } from './user.model'
 import { Question } from './question.model'
@@ -14,7 +14,12 @@ import { Progress } from './progress.model'
         toJSON:{virtuals:true}
     }
 })
-
+@Post('remove',function(doc){
+    console.log('remove one1')
+    getModelForClass(Question).remove({course_id:doc._id})})
+    @Post('findOneAndRemove',function(doc){
+        console.log('remove one')
+        getModelForClass(Question).remove({course_id:doc._id})})
 export class Course{
     @ApiProperty({description:'video name'})
     @prop()
@@ -22,9 +27,9 @@ export class Course{
     @ApiProperty({description:'covering',example:"pass1"})
     @prop()
     cover:string
-    @prop({ref:'Question',localField:'_id',foreignField:'course._id'})
+    @prop({ref:'Question',localField:'_id',foreignField:'course_id'})
     questions:Ref<Question>[]
-    @prop({ref:'Question',localField:'_id',foreignField:'course._id',count:true})
+    @prop({ref:'Question',localField:'_id',foreignField:'course_id',count:true})
     questionCount:number
     @prop()
     file:string
