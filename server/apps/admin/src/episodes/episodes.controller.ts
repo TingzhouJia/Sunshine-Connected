@@ -4,7 +4,7 @@ import { Episode } from '@libs/db/model/episode.model';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { Crud } from 'nestjs-mongoose-crud';
 import { Course } from '@libs/db/model/course.model';
-@Crud({model:Episode})
+// @Crud({model:Episode})
 @Controller('episodes')
 export class EpisodesController {
     constructor(@InjectModel(Episode) private readonly model:ReturnModelType<typeof Episode>,

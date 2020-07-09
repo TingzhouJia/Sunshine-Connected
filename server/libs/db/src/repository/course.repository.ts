@@ -14,15 +14,19 @@ export class CourseRepository extends BaseRepository<Course>{
     super(_model)
    
   }
-
+  /**
+   * 
+   * @param authorId 
+   * @param pagenationParam  use for frontend sort limit
+   */
   async getCourseByAuthorId(authorId: string, pagenationParam?: PaginationParams<Course>) {
-    // return super.paginator({ ...pagenationParam, query: { 'author_id': authorId ,} }, {},
-    //   { populates: [{ path: 'viewedCount' }, 
-    //   { path: 'likeCount' }, { path: 'questionCount' }, {path:'progress'}] }
-    // )
-    return await super.findAllAsync({author_id:authorId},'',{ populates: [{ path: 'viewedCount' }, 
-      { path: 'likeCount' }, { path: 'questionCount' }, {path:'progress'}] })
-  }
+    return super.paginator({ ...pagenationParam, query: { 'author_id': authorId ,} }, {},
+      { populates: [{ path: 'viewedCount' }, 
+      { path: 'likeCount' }, { path: 'questionCount' }, {path:'progress'}] }
+    )
+  //   return await super.findAllAsync({author_id:authorId},'',{ populates: [{ path: 'viewedCount' }, 
+  //     { path: 'likeCount' }, { path: 'questionCount' }, {path:'progress'}] })
+   }
 
 
 
@@ -32,15 +36,15 @@ export class CourseRepository extends BaseRepository<Course>{
    * @param pagenationParam 
    */
   async getAllCoursePublished(pagenationParam: PaginationParams<Course>): Promise<Paginator<Course>> {
-    return super.paginator({ ...pagenationParam, query: { 'progress.status': 'published' } }, '-file', { populates: [
+    return super.paginator({ ...pagenationParam, query: { 'published': true } }, '-file', { populates: [
       { path: 'viewedCount' }, 
-      { path: 'likeCount' }, { path: 'questionCount' },{ path: 'author', match:'_id username avatar'}
+      { path: 'likeCount' }, { path: 'questionCount' },{ path: 'author', select:'_id username avatar'}
     ] })
   }
 
   async getVideo(id: string): Promise<Course> {
 
-    return super.findByIdAsync(id, {},
+    return await super.findByIdAsync(id, {},
       {
         populates: [{ model: 'Question', path: 'questions', }, { path: 'viewedCount' },{path:'author',model:"User"},{path:'progress'},{path:'likeCount'}
         ]
@@ -51,15 +55,15 @@ export class CourseRepository extends BaseRepository<Course>{
 
   async createVideo(doc: Partial<Course>, ): Promise<DocumentType<Course>> {
     
-    return super.create(doc)
+    return await super.create(doc)
   }
 
   async deleteVideo(id: string): Promise<FindAndModifyWriteOpResultObject<DocumentType<Course>>> {
-    return super.deleteByIdAsync(id);
+    return await super.deleteByIdAsync(id);
   }
 
 
   async updateVideo(doc: Partial<Course>, id: string) {
-    return super.updateAsync(id, doc)
+    return await super.updateAsync(id, doc)
   }
 }

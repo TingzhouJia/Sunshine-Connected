@@ -15,11 +15,14 @@ import { Progress } from './progress.model'
     }
 })
 @Post('remove',function(doc){
-    console.log('remove one1')
+    console.log('remove questions when remove course')
     getModelForClass(Question).remove({course_id:doc._id})})
-    @Post('findOneAndRemove',function(doc){
-        console.log('remove one')
-        getModelForClass(Question).remove({course_id:doc._id})})
+@Post('findOneAndRemove',function(doc){
+    console.log('remove question when remove course')
+    getModelForClass(Question).remove({course_id:doc._id})})
+@Post('save',function(doc){
+    console.log('create progress')
+})
 export class Course{
     @ApiProperty({description:'video name'})
     @prop()
@@ -43,7 +46,11 @@ export class Course{
 
     @ApiProperty({description:'category of post',})
     @prop({ref:'Progress',localField:'_id',foreignField:'obj_id',justOne:true})
-    progress:Ref<Progress>
+    progress?:Ref<Progress>
+
+    @ApiProperty({description:'if video is in progress then it should be false'})
+    @prop({default:false})
+    published:boolean
     
     @ApiProperty({description:'view count'})
     @prop({ref:'Action',localField:'_id',foreignField:'obj_id',count:true,match:{name:'view'},default:0})
