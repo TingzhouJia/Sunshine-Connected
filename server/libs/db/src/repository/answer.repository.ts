@@ -30,6 +30,10 @@ export class AnswerRepository extends BaseRepository<Answer>{
     async deleteAnswer(id:string){
         return await super.deleteByIdAsync(id)
     }
+
+    async deleteByQuestionId(id:string){
+        return await super.deleteAsync({question_id:id})
+    }
     /**
      * @description answer question from draft box
      * @param id answer id

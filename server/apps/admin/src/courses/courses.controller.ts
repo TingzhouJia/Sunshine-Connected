@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Query, Body, Param, Put, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Query, Body, Param, Put, HttpException, HttpStatus, Delete } from '@nestjs/common';
 import { Crud } from 'nestjs-mongoose-crud';
 import { Course } from '@libs/db/model/course.model';
 import { InjectModel } from 'nestjs-typegoose';
@@ -23,7 +23,7 @@ export class CoursesController {
 
     @ApiOperation({ description: 'fetch all video of one user' })
     @ApiBody({ type: PaginationDto, description: 'pagination info, Optional' })
-    @Get('fetch_all/:id')
+    @Post('fetch_all/:id')
     async fetchAll(@Param('id') id: string, @Body('pagination') pagination: PaginationDto) {
         return await this.courseService.getMyCourse(id, pagination)
     }
@@ -33,6 +33,11 @@ export class CoursesController {
     @Post('create')
     async create(@Body('course') course:CourseDto){
         return await this.courseService.createCourse(course)
+    }
+    @ApiOperation({description:'remove a video'})
+    @Delete(':id')
+    async remove(@Param('id') id:string){
+        return await this.courseService.deleteCourseById(id)
     }
 
     @ApiOperation({description:'update a video'})

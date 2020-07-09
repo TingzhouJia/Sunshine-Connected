@@ -1,5 +1,5 @@
-import { Course } from "../model";
-import { ReturnModelType, DocumentType, } from "@typegoose/typegoose";
+import { Course, Question } from "../model";
+import { ReturnModelType, DocumentType, buildSchema, getModelForClass, } from "@typegoose/typegoose";
 import { BaseRepository, PaginationParams, Paginator } from "./base.repository";
 import { InjectModel } from "nestjs-typegoose";
 import { FindAndModifyWriteOpResultObject } from 'mongodb'
@@ -12,16 +12,18 @@ const popuList: ModelPopulateOptions[] = [{ model: 'Question', path: 'questions'
 export class CourseRepository extends BaseRepository<Course>{
   constructor(@InjectModel(Course) private readonly _model: CourseModel) {
     super(_model)
+   
   }
 
-  async getCourseByAuthorId(authorId: string, pagenationParam: PaginationParams<Course>): Promise<Paginator<Course>> {
-    return super.paginator({ ...pagenationParam, query: { 'author': authorId ,} }, {},
-      { populates: [{ path: 'viewedCount' }, 
-      { path: 'likeCount' }, { path: 'questionCount' }, {path:'progress'}] }
-    )
+  async getCourseByAuthorId(authorId: string, pagenationParam?: PaginationParams<Course>) {
+    // return super.paginator({ ...pagenationParam, query: { 'author_id': authorId ,} }, {},
+    //   { populates: [{ path: 'viewedCount' }, 
+    //   { path: 'likeCount' }, { path: 'questionCount' }, {path:'progress'}] }
+    // )
+    return await super.findAllAsync({author_id:authorId},'',{ populates: [{ path: 'viewedCount' }, 
+      { path: 'likeCount' }, { path: 'questionCount' }, {path:'progress'}] })
   }
 
-  
 
 
   /**
