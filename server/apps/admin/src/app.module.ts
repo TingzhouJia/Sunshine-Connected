@@ -10,6 +10,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { CommonModule } from 'libs/common/src';
 import { AnswersModule } from './answers/answers.module';
 import { QuestionsModule } from './questions/questions.module';
+import { ProgressModule } from './progress/progress.module';
 
 
 const MAO = require('multer-aliyun-oss');
@@ -22,7 +23,8 @@ const MAO = require('multer-aliyun-oss');
     CoursesModule,
     EpisodesModule,
     AnswersModule,
-    QuestionsModule
+    QuestionsModule,
+    ProgressModule
   ],
   controllers: [AppController],
   providers: [AppService],

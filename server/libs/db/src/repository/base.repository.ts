@@ -16,9 +16,9 @@ import { IsOptional, Max, Min } from 'class-validator';
 import { ReturnModelType, DocumentType } from '@typegoose/typegoose';
 import { AnyParamConstructor } from '@typegoose/typegoose/lib/types';
 import { InternalServerErrorException } from '@nestjs/common';
-import { type } from 'os';
 
-export type OrderType<T> = Record<keyof T, 'asc' | 'desc' | 'ascending' | 'descending' | 1 | -1>;
+
+export type OrderType<T> = Partial<Record< keyof Partial<T>, 'asc' | 'desc' | 'ascending' | 'descending' | 1 | -1>>;
 
 export type AnyType=any
 export type QueryList<T > = DocumentQuery<Array<DocumentType<T>>, DocumentType<T>>;
