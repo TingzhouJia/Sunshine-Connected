@@ -3,5 +3,6 @@ import { Request } from "express";
 
 export const CurrentUser=createParamDecorator((data,ctx:ExecutionContext)=>{
     const request:Request = ctx.switchToHttp().getRequest();
+   
     return request.user;
 })

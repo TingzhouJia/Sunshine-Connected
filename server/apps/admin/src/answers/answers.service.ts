@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AnswerRepository, OrderType } from '@libs/db/repository';
+import { AnswerRepository, OrderType, PaginationParams } from '@libs/db/repository';
 import { AnswerDto } from './dto/answer.dto';
 import { Answer } from '@libs/db/model';
 
@@ -8,8 +8,8 @@ export class AnswersService {
     constructor(private readonly answerRepository:AnswerRepository){
     }
 
-    async getAnswerByAuthorId(id:string,sorter:OrderType<Answer>){
-        return this.answerRepository.getAnswerListByUserId(id,sorter);
+    async getAnswerByAuthorId(id:string,pagination:PaginationParams<Answer>){
+        return this.answerRepository.getAnswerListByUserId(id,pagination);
     }
 
     async getDraftAnswer(id:string){

@@ -6,6 +6,10 @@ import { ReturnModelType } from '@typegoose/typegoose';
 import { AnswerDto } from './dto/answer.dto';
 import { AnswersService } from './answers.service';
 import { ApiTags } from '@nestjs/swagger';
+import { Pagination } from '../decorator/pagination.decorator';
+import { PaginationDto } from '../courses/dto/pagination.dto';
+
+
 @ApiTags('')
 @Crud({model:Answer})
 @Controller('answers')
@@ -19,8 +23,12 @@ export class AnswersController {
         return this.answerService.getDraftAnswer(id)
     }
     @Get('pagination/:id')
-    async getAnswerPagination(@Query('field') field:string,@Query('order')order:string,@Param('id') id:string){
-        return this.answerService.getAnswerByAuthorId(id)
+    async getAnswerPagination(
+   @Param('id') id:string,
+    @Pagination() pagination:PaginationDto<Answer>){
+       
+        return this.answerService.getAnswerByAuthorId(id,pagination)
     }
+
  
 }

@@ -1,12 +1,13 @@
-import { Controller, Get, Post, Query, Body, Param, Put, HttpException, HttpStatus, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, HttpException, HttpStatus, Delete } from '@nestjs/common';
 import { Crud } from 'nestjs-mongoose-crud';
 import { Course } from '@libs/db/model/course.model';
 import { InjectModel } from 'nestjs-typegoose';
 import { ReturnModelType } from '@typegoose/typegoose';
-import { ApiTags, ApiOperation, ApiParam, ApiBody } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBody } from '@nestjs/swagger';
 import { CourseDto } from './dto/course.dto';
 import { CoursesService } from './courses.service';
 import { PaginationDto } from './dto/pagination.dto';
+import { Pagination } from '../decorator/pagination.decorator';
 // @Crud({model:Course})
 @Controller('courses')
 @ApiTags('course')
@@ -23,11 +24,16 @@ export class CoursesController {
 
     @ApiOperation({ description: 'fetch all video of one user' })
     @ApiBody({ type: PaginationDto, description: 'pagination info, Optional' })
-    @Post('fetch_all/:id')
-    async fetchAll(@Param('id') id: string, @Body('pagination') pagination: PaginationDto) {
+    @Get('fetch_all/:id')
+    async fetchAll(@Param('id') id: string, @Pagination() pagination: PaginationDto) {
         return await this.courseService.getMyCourse(id, pagination)
     }
 
+    @ApiOperation({description:'fetch question list for one publisher'})
+    @Get('all_question/:id')
+    async fetchQuestionList(@Param('id') id:string,@Pagination() pagination:PaginationDto){
+        return await this.courseService.getAnswerListByUser(id,pagination)
+    }
     @ApiOperation({description:'create a video'})
     @ApiBody({type:CourseDto,description:'body for course'})
     @Post('create')
