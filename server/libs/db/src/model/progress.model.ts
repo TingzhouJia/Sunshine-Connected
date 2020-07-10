@@ -1,11 +1,12 @@
-import {prop, ModelOptions, } from '@typegoose/typegoose'
+import {prop, ModelOptions, Ref, } from '@typegoose/typegoose'
 import { ApiProperty } from '@nestjs/swagger'
+import { User } from './user.model'
 
 
-enum ProgressStype{
-    PUBLISHED='published',
-    STAGE1='stage1',
-    STAGE2='stage2',
+export enum ProgressType{
+
+    STAGE1='need audit',
+    STAGE2='in audit',
     FAILED='failed'
 }
 @ModelOptions({
@@ -17,11 +18,15 @@ enum ProgressStype{
 
 export class Progress {
     @ApiProperty({description:'status of progress'})
-    @prop({enum:ProgressStype,})
+    @prop({enum:ProgressType,})
     status:string
     @prop({required:false})
     message:string
     @prop()
     obj_id:string
+    @prop({required:false})
+    auditer_id?:string
+    @prop({ref:'User',localField:'auditer_id',foreignField:'_id'})
+    auditer?:Ref<User>
 
 }

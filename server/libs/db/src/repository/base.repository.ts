@@ -36,7 +36,7 @@ export abstract class PaginationParams<T> {
     @Min(1)
     @Max(50)
     @Transform((val: string) => parseInt(val, 10) || 10)
-    public readonly limit = 10;
+    public readonly limit:number;
 
     /**
      * Pagination offset

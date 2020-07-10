@@ -1,5 +1,5 @@
-import { Course, Question } from "../model";
-import { ReturnModelType, DocumentType, buildSchema, getModelForClass, } from "@typegoose/typegoose";
+import { Course } from "../model";
+import { ReturnModelType, DocumentType,  } from "@typegoose/typegoose";
 import { BaseRepository, PaginationParams, Paginator } from "./base.repository";
 import { InjectModel } from "nestjs-typegoose";
 import { FindAndModifyWriteOpResultObject } from 'mongodb'
@@ -27,8 +27,14 @@ export class CourseRepository extends BaseRepository<Course>{
   //   return await super.findAllAsync({author_id:authorId},'',{ populates: [{ path: 'viewedCount' }, 
   //     { path: 'likeCount' }, { path: 'questionCount' }, {path:'progress'}] })
    }
-
-
+  /**
+   * @description get all question from all video of a user
+   * @param uid 
+   * @param pagenationParam 
+   */
+   async getQuestionListFromUser(uid:string,pagenationParam:PaginationParams<Course>){
+      return super.paginator({...pagenationParam,query:{'author_id':uid}},'title ',{populates:[{path:'question',populate:[{path:'author'}]}]})
+   }
 
   /**
    * @description this is api for home page video

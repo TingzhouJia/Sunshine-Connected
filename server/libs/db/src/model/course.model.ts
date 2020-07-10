@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger'
 import { User } from './user.model'
 import { Question } from './question.model'
 
-import { Progress } from './progress.model'
+import { Progress, ProgressType } from './progress.model'
 
 
 
@@ -16,13 +16,18 @@ import { Progress } from './progress.model'
 })
 @Post('remove',function(doc){
     console.log('remove questions when remove course')
-    getModelForClass(Question).remove({course_id:doc._id})})
+    getModelForClass(Question).remove({course_id:doc._id})
+    getModelForClass(Progress).remove({obj_id:doc._id})
+})
+    
 @Post('findOneAndRemove',function(doc){
     console.log('remove question when remove course')
     getModelForClass(Question).remove({course_id:doc._id})})
 @Post('save',function(doc){
-    console.log('create progress')
+    getModelForClass(Progress).create({obj_id:doc._id,status:ProgressType.STAGE1,message:'need audit',})
 })
+
+
 export class Course{
     @ApiProperty({description:'video name'})
     @prop()

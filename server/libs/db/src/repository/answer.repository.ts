@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { BaseRepository,OrderType } from "./base.repository";
+import { BaseRepository,OrderType, PaginationParams } from "./base.repository";
 import { Answer, Question } from "../model";
 import { InjectModel } from "nestjs-typegoose";
 import { ReturnModelType } from "@typegoose/typegoose";
@@ -15,17 +15,18 @@ export class AnswerRepository extends BaseRepository<Answer>{
     }
 
 
-    async getAnswerListByQuestion(id:string){
-       return await super.findAllAsync({question_id:id},'',{populates:[{path:'author'}]})
+    async getAnswerListByQuestion(id:string,pagination?:PaginationParams<Answer>){
+      // return await super.findAllAsync({question_id:id},'',{populates:[{path:'author'}]})
+       return await super.paginator({...pagination,query:{question_id:id,isDraft:false}},'',{populates:{path:'author'}})
     }
 
-    async getAnswerListByUserId(id:string,sortOption?:OrderType<Answer>){
-     
-        return await super.findAllAsync({author_id:id,isDraft:false},'',{populates:{path:'question'},sort:sortOption})
+    async getAnswerListByUserId(id:string,pagination?:PaginationParams<Answer>){
+        return await super.paginator({...pagination,query:{author_id:id,isDraft:false}},'',{populates:{path:'question'}})
+       // return await super.findAllAsync({author_id:id,isDraft:false},'',{populates:{path:'question'},sort:sortOption})
     }
 
     async getDraftAnswerListByUserId(id:string){
-        return await super.findAllAsync({author_id:id,isDraft:true},)
+        return await super.findAllAsync({author_id:id,isDraft:true})
     }
 
     async deleteAnswer(id:string){

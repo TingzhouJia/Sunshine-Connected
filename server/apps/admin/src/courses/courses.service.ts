@@ -10,7 +10,7 @@ export class CoursesService {
     constructor(private readonly courseRepository:CourseRepository,private readonly progressRepository:ProgressRepository){}
 
 
-    async getMyCourse(id:string,pagination?:PaginationDto){
+    async getMyCourse(id:string,pagination?:PaginationDto<Course>){
         return this.courseRepository.getCourseByAuthorId(id,{...pagination})
     }
 
@@ -39,5 +39,9 @@ export class CoursesService {
         await this.progressRepository.updateAsync(progress_id,{status:'stage1'})
 
         return a.populate({path:'progress'})
+    }
+
+    async getAnswerListByUser(id:string,pagination:PaginationDto<Course>){
+        await this.courseRepository.getQuestionListFromUser(id,pagination)
     }
 }
