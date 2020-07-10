@@ -86,7 +86,7 @@ export class CourseRepository extends BaseRepository<Course> {
       {},
       {
         populates: [
-          { model: 'Question', path: 'questions' },
+          { model: 'Question', path: 'questions_count' },
           { path: 'viewedCount' },
           { path: 'author', model: 'User' },
           { path: 'progress' },
@@ -94,6 +94,19 @@ export class CourseRepository extends BaseRepository<Course> {
         ],
       },
     );
+  }
+
+  async getVideoForSpecificUser(id:string,uid:string):Promise<Course>{
+    return await super.findByIdAsync(id,'',{
+      populates:[
+        { model: 'Question', path: 'questions_count' },
+        { path: 'viewedCount' },
+        { path: 'author', model: 'User' },
+        { path: 'progress' },
+        { path: 'likeCount' },
+        {path:'reactions',match:{'author_id':uid},}
+      ]
+    })
   }
 
   async getAllCourseNeedAudit(pagination: PaginationParams<Course>) {

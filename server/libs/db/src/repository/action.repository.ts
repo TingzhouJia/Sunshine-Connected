@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { ReturnModelType } from '@typegoose/typegoose';
-import { BaseRepository } from './base.repository';
+import { BaseRepository, PaginationParams } from './base.repository';
 import { InjectModel } from 'nestjs-typegoose';
 import { Action } from '../model';
 
@@ -21,7 +21,9 @@ export class ActionRepository extends BaseRepository<Action> {
     return super.deleteAsync(id);
   }
 
-  async getActionsById(id: string) {
-    return super.findAllAsync({ user: id }, {});
+
+  async getMyActionByType(id:string,pagination:PaginationParams<Action>,type:string){
+    return  super.paginator({...pagination,query:{author_id:id,name:type}},'',{populates:[{path:'object',populate:[{path:'viewedCount'}]}]})
   }
+  
 }

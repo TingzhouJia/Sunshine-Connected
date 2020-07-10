@@ -12,6 +12,7 @@ import { ServicesModule } from '@app/services';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+     
       //envFilePath:`${process.env.NODE_ENV || 'development'}.env`,
     }),
     DbModule,
