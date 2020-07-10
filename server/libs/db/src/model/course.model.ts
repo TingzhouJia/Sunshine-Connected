@@ -11,6 +11,12 @@ import { User } from './user.model';
 import { Question } from './question.model';
 
 import { Progress, ProgressType } from './progress.model';
+import {Action} from './actions.model'
+
+
+export enum CATEGORY{
+
+}
 
 @ModelOptions({
   schemaOptions: {
@@ -67,6 +73,10 @@ export class Course {
   })
   author: Ref<User>;
 
+  @ApiProperty({description:'category'})
+  @prop({enum:CATEGORY})
+  category:string
+
   @ApiProperty({ description: 'author_id' })
   @prop()
   author_id: string;
@@ -110,4 +120,8 @@ export class Course {
     default: 0,
   })
   likeCount: number;
+
+  @ApiProperty({description:'use this field when need reaction of user'})
+  @prop({ref:'Action',localField:"_id",foreignField:'obj_id'})
+  reactions:Ref<Action>[]
 }

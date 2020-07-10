@@ -31,13 +31,13 @@ export class Action {
   @prop({ enum: ['Course', 'User', 'Workshop'] })
   types: string;
   @ApiProperty({ description: 'object of target' })
-  @prop({ refPath: 'types' })
+  @prop({ refPath: 'types',localField:'obj_id',foreignField:'_id' })
   object: Ref<Course | User | Workshop>;
   @ApiProperty({ description: 'obj id' })
   @prop()
   obj_id: string;
   @ApiProperty()
   @ApiProperty({ description: 'type of action' })
-  @prop({ enum: ['like', 'subscribe', 'register', 'view'] })
+  @prop({ enum: ['like', 'subscribe', 'register', 'view','collect'] })
   name: string;
 }
