@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { CoursesController } from './courses.controller';
 import { CoursesService } from './courses.service';
-import { CourseRepository, ProgressRepository } from '@libs/db/repository';
+import { CourseRepository } from '@libs/db/repository';
 
 @Module({
-  imports:[CourseRepository,ProgressRepository],
+  imports: [CourseRepository],
   controllers: [CoursesController],
-  providers: [CoursesService,CourseRepository,ProgressRepository]
+  providers: [CoursesService, CourseRepository],
 })
 export class CoursesModule {}

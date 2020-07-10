@@ -10,26 +10,22 @@ import { MulterModule } from '@nestjs/platform-express';
 import { CommonModule } from 'libs/common/src';
 import { AnswersModule } from './answers/answers.module';
 import { QuestionsModule } from './questions/questions.module';
-import { ProgressModule } from './progress/progress.module';
 import { AuditModule } from './audit/audit.module';
-
 
 const MAO = require('multer-aliyun-oss');
 @Module({
   imports: [
     CommonModule,
 
-  
     UsersModule,
     CoursesModule,
     EpisodesModule,
     AnswersModule,
     QuestionsModule,
-    ProgressModule,
-    AuditModule
+
+    AuditModule,
   ],
   controllers: [AppController],
   providers: [AppService],
-
 })
 export class AppModule {}

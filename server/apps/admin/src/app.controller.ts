@@ -1,6 +1,12 @@
-import { Controller, Get, Post, UseInterceptors, UploadedFile } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  UseInterceptors,
+  UploadedFile,
+} from '@nestjs/common';
 import { AppService } from './app.service';
-import {FileInterceptor} from '@nestjs/platform-express'
+import { FileInterceptor } from '@nestjs/platform-express';
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
@@ -11,7 +17,5 @@ export class AppController {
   }
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
-  async upload(@UploadedFile('file') file){
-    
-  }
+  async upload(@UploadedFile('file') file) {}
 }
