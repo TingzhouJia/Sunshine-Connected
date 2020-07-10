@@ -53,13 +53,14 @@
         "tsConfigPath": "libs/role/tsconfig.lib.json"
       }
     },
-    "repository": {
+
+    "services": {
       "type": "library",
-      "root": "libs/repository",
+      "root": "libs/services",
       "entryFile": "index",
-      "sourceRoot": "libs/repository/src",
+      "sourceRoot": "libs/services/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/repository/tsconfig.lib.json"
+        "tsConfigPath": "libs/services/tsconfig.lib.json"
       }
     }
   }

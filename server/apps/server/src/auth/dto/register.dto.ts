@@ -1,8 +1,8 @@
-import { ApiProperty } from "@nestjs/swagger"
+import { ApiProperty } from '@nestjs/swagger';
 
-export class Register{
-    @ApiProperty()
-    username:string
-    @ApiProperty()
-    password:string
+export class Register {
+  @ApiProperty()
+  username: string;
+  @ApiProperty()
+  password: string;
 }

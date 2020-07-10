@@ -9,26 +9,24 @@ import { ApiTags } from '@nestjs/swagger';
 import { Pagination } from '../decorator/pagination.decorator';
 import { PaginationDto } from '../courses/dto/pagination.dto';
 
-
 @ApiTags('')
-@Crud({model:Answer})
+@Crud({ model: Answer })
 @Controller('answers')
 export class AnswersController {
-    constructor(@InjectModel(Answer) private readonly model:ReturnModelType<typeof Answer>,
-    private readonly answerService:AnswersService
-    ){}
+  constructor(
+    @InjectModel(Answer) private readonly model: ReturnModelType<typeof Answer>,
+    private readonly answerService: AnswersService,
+  ) {}
 
-    @Get('draft/:id')
-    async getDraftList(@Param('id') id:string){
-        return this.answerService.getDraftAnswer(id)
-    }
-    @Get('pagination/:id')
-    async getAnswerPagination(
-   @Param('id') id:string,
-    @Pagination() pagination:PaginationDto<Answer>){
-       
-        return this.answerService.getAnswerByAuthorId(id,pagination)
-    }
-
- 
+  @Get('draft/:id')
+  async getDraftList(@Param('id') id: string) {
+    return this.answerService.getDraftAnswer(id);
+  }
+  @Get('pagination/:id')
+  async getAnswerPagination(
+    @Param('id') id: string,
+    @Pagination() pagination: PaginationDto<Answer>,
+  ) {
+    return this.answerService.getAnswerByAuthorId(id, pagination);
+  }
 }

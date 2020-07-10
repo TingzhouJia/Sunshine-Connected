@@ -35,6 +35,18 @@
       ],
       "@app/repository/*": [
         "libs/repository/src/*"
+      ],
+      "@app/mailer": [
+        "libs/mailer/src"
+      ],
+      "@app/mailer/*": [
+        "libs/mailer/src/*"
+      ],
+      "@app/services": [
+        "libs/services/src"
+      ],
+      "@app/services/*": [
+        "libs/services/src/*"
       ]
     }
   }
