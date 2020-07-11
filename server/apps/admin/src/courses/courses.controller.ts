@@ -8,6 +8,7 @@ import {
   HttpException,
   HttpStatus,
   Delete,
+  UseInterceptors,
 } from '@nestjs/common';
 import { Crud } from 'nestjs-mongoose-crud';
 import { Course } from '@libs/db/model/course.model';
@@ -18,7 +19,8 @@ import { CourseDto } from './dto/course.dto';
 import { CoursesService } from './courses.service';
 import { PaginationDto } from './dto/pagination.dto';
 import { Pagination } from '../decorator/pagination.decorator';
-@Crud({ model: Course, routes: { update: false } })
+import { CourseChangeInterceptor } from '@app/services/interceptor/courseChange.interceptor';
+@Crud({ model: Course, routes: { update: false ,delete:false} })
 @Controller('courses')
 @ApiTags('course')
 export class CoursesController {
@@ -34,7 +36,6 @@ export class CoursesController {
   }
 
   @ApiOperation({ description: 'fetch all video of one user' })
-  @ApiBody({ type: PaginationDto, description: 'pagination info, Optional' })
   @Get('fetch_all/:id')
   async fetchAll(
     @Param('id') id: string,
@@ -65,8 +66,16 @@ export class CoursesController {
 
   @ApiOperation({ description: 'update a video' })
   @ApiBody({ type: CourseDto, description: 'body for course' })
-  @Put()
-  async updateOne(@Body('course') course: CourseDto) {
-    return await this.courseService.updateCourse(course.course_id, course);
+  @UseInterceptors(CourseChangeInterceptor)
+  @Put(':id')
+  async updateOne(@Body('course') course: CourseDto,@Param('id') id:string) {
+    return await this.courseService.updateCourse(id, course);
+  }
+
+  @ApiOperation({description:'delete a video'})
+  @UseInterceptors(CourseChangeInterceptor)
+  @Delete(':id')
+  async deleteOne(@Param('id') id: string){
+    return await this.courseService.deleteCourseById(id)
   }
 }
