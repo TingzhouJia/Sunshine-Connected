@@ -1,4 +1,4 @@
-import { Injectable, NestInterceptor, ExecutionContext } from "@nestjs/common";
+import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from "@nestjs/common";
 import { InjectQueue } from "@nestjs/bull";
 import { Queue } from "bull";
 import { AuditRepository } from "@libs/db/repository";
@@ -17,7 +17,7 @@ export class CourseChangeInterceptor implements NestInterceptor{
     constructor( @InjectQueue('mail') private mailQueue:Queue,
     private readonly auditRepository:AuditRepository){}
 
-    async intercept(context: ExecutionContext, next: import("@nestjs/common").CallHandler<any>):Promise<Observable<any>> {
+    async intercept(context: ExecutionContext, next: CallHandler<any>):Promise<Observable<any>> {
 
         const request:Request=context.switchToHttp().getRequest()
         const method=context.getHandler().name

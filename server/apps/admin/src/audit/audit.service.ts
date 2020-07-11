@@ -11,4 +11,14 @@ export class AuditService {
   async getMyCurAduit(id: string, pagination: PaginationParams<Audit>) {
     return await this.auditRepository.getMyAudit(pagination, id);
   }
+  async createAudit(doc:Partial<Audit>){
+    return (await this.auditRepository.create(doc)).populate('auditer')
+    
+  }
+
+  async deleteAudit(id:string){
+    return await this.auditRepository.deleteByIdAsync(id)
+  }
+
+  
 }

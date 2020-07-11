@@ -17,6 +17,6 @@ import { MailProcessor } from './services/mail.processor';
     BullModule.registerQueue({name:'mail'})
   ],
   providers: [ServicesService,CurMailService,MailProcessor],
-  exports: [ServicesService],
+  exports: [ServicesService,CurMailService],
 })
 export class ServicesModule {}
