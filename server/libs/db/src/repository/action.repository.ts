@@ -14,6 +14,7 @@ export class ActionRepository extends BaseRepository<Action> {
   }
 
   async create(doc: Partial<Action>): Promise<any> {
+    
     return super.create(doc);
   }
 
@@ -25,5 +26,5 @@ export class ActionRepository extends BaseRepository<Action> {
   async getMyActionByType(id:string,pagination:PaginationParams<Action>,type:string){
     return  super.paginator({...pagination,query:{author_id:id,name:type}},'',{populates:[{path:'object',populate:[{path:'viewedCount'}]}]})
   }
-  
+
 }
