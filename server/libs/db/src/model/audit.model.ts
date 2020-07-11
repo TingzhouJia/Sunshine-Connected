@@ -2,7 +2,6 @@ import {
   ModelOptions,
   prop,
   Ref,
-  post,
   getModelForClass,
   DocumentType,
   Post,
@@ -12,6 +11,7 @@ import { User } from './user.model';
 import { Course } from './course.model';
 import { Workshop } from './workshop.model';
 import { Progress, ProgressType } from './progress.model';
+import { validate } from 'class-validator';
 
 @ModelOptions({
   options: { customName: 'Audit' },
@@ -26,22 +26,22 @@ import { Progress, ProgressType } from './progress.model';
       message: doc.message,
     },
   );
-  getModelForClass(Course).updateOne(
-    { _id: doc.obj_id },
-    { stage: ProgressType.STAGE2 },
-  );
+    if(doc.type==='Course'){
+      getModelForClass(Course).updateOne(
+        { _id: doc.obj_id },
+        { stage: ProgressType.STAGE2 },
+      );
+    }
 })
 //update means course is not accepted
-@Post('findOneAndUpdate', function (doc: DocumentType<Audit>) {
-  const a = getModelForClass(Course).findById(doc.obj_id).exec();
-  a.then((val) => {
-    getModelForClass(Course).updateOne(
-      { _id: doc.obj_id },
-      { stage: ProgressType.FAILED, time: val.time + 1 },
-    );
-  });
+@Post('findOneAndUpdate', async (doc: DocumentType<Audit>) => {
+  const a = await getModelForClass(Course).findById(doc.obj_id).exec();
+  getModelForClass(Course).updateOne(
+    { _id: doc.obj_id },
+    { stage: ProgressType.FAILED, time: a.time + 1 },
+  );
   getModelForClass(Progress).updateOne(
-    { _id: doc.progress_id },
+    { _id: doc.progress_id },{message:doc.message},
     { status: ProgressType.FAILED },
   );
 })

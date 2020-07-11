@@ -5,8 +5,7 @@ import {
   Body,
   Param,
   Put,
-  HttpException,
-  HttpStatus,
+
   Delete,
   UseInterceptors,
 } from '@nestjs/common';
@@ -19,7 +18,7 @@ import { CourseDto } from './dto/course.dto';
 import { CoursesService } from './courses.service';
 import { PaginationDto } from './dto/pagination.dto';
 import { Pagination } from '../decorator/pagination.decorator';
-import { CourseChangeInterceptor } from '@app/services/interceptor/courseChange.interceptor';
+import { CourseChangeInterceptor } from '@app/services/interceptor';
 @Crud({ model: Course, routes: { update: false ,delete:false} })
 @Controller('courses')
 @ApiTags('course')
