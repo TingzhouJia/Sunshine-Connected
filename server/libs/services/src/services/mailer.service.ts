@@ -9,9 +9,16 @@ export class CurMailService{
     /**
      * @description: when audit start ,send email to author
      */
-    async progressEmail(){
-       await this.mailService.sendMail({
-
+    async progressEmail(source:Partial<Workshop|Course>,target:Partial<User>){
+       return await this.mailService.sendMail({
+            to:target.email,
+            from: process.env.EMAIL,
+            subject:`Your Video ${source.title} has been review`,
+            template:'progress',
+            context:{
+                auditer:target.username,
+              
+            }
         })
     }
    
@@ -27,13 +34,13 @@ export class CurMailService{
     /**
      * @description: send email to auditer when the video is deleted 
      */
-    async AuditCancel(){
+    async AuditCancel(resource:Partial<Course>,target:Partial<User>){
 
     }
     /**
      * @description: send email to auditer when video is changed
      */
-    async ReAudit(){
+    async ReAudit(resource:Partial<Course>,target:Partial<User>){
 
     }
 

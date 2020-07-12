@@ -8,7 +8,8 @@ import { PaginationParams } from '@libs/db/repository';
 import { AuditService } from './audit.service';
 import { AuditDto } from './dto/audit.dto';
 import { AuditInterceptor } from '@app/services/interceptor';
-@Crud({ model: Audit,routes:{create:false} })
+import { ApiOperation } from '@nestjs/swagger';
+
 @Controller('audit')
 export class AuditController {
   constructor(
@@ -24,15 +25,23 @@ export class AuditController {
     return this.auditService.getMyCurAduit(id, pagination);
   }
 
+  @ApiOperation({description:'create audit'})
   @Post('')
   @UseInterceptors(AuditInterceptor)
   async createAudit(@Body('audit') body:AuditDto){
     return await this.auditService.createAudit(body)
   }
 
+  @ApiOperation({description:'when audit is finished, and it is successful, delete audit'})
   @Delete(':id')
   @UseInterceptors(AuditInterceptor)
   async deleteAudit(@Param('id') id:string){
     return await this.auditService.deleteAudit(id)
+  }
+  @ApiOperation({description:'update the audit when audit is failed'})
+  @Put(':id')
+  @UseInterceptors(AuditInterceptor)
+  async updateAudit(@Param('id') id:string,@Body('audit') audit:AuditDto){
+    return await this.auditService.updateAudit(id,audit)
   }
 }
