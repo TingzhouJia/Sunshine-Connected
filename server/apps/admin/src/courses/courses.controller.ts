@@ -57,11 +57,7 @@ export class CoursesController {
   async create(@Body('course') course: CourseDto) {
     return await this.courseService.createCourse(course);
   }
-  // @ApiOperation({description:'remove a video'})
-  // @Delete(':id')
-  // async remove(@Param('id') id:string){
-  //     return await this.courseService.deleteCourseById(id)
-  // }
+
 
   @ApiOperation({ description: 'update a video' })
   @ApiBody({ type: CourseDto, description: 'body for course' })

@@ -4,4 +4,5 @@ export class AuditDto{
     object_id:string
     deadline:Date
     progress_id:string
+    message:string
 }

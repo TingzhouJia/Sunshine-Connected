@@ -7,6 +7,7 @@ import {Request} from 'express'
 import { Audit, User } from "@libs/db/model";
 import {DocumentType} from '@typegoose/typegoose'
 import { Mongoose } from "mongoose";
+import { tap, map } from "rxjs/operators";
 /**
  * @description: this is interceptor when update or delete a 
  */
@@ -22,13 +23,19 @@ export class CourseChangeInterceptor implements NestInterceptor{
         const request:Request=context.switchToHttp().getRequest()
         const method=context.getHandler().name
         const id=request.params.id
+        let audit:Audit=await this.auditRepository.findOneAsync({obj_id:id},'',{populates:[{path:'auditer',model:'User'},{path:'object'}]});
+      
 
-        const audit:Audit=await this.auditRepository.findOneAsync({obj_id:id},'',{populates:[{path:'auditer',model:'User'},{path:'object'}]})
-        if(audit.auditer){
-        
-          await this.mailQueue.add('change_video',{sender:audit.auditer,info:audit.object,type:method})
-        }
-        return next.handle()
+        return next.handle().pipe(tap(async()=>{
+            if(audit.auditer!==null){
+               if(method==='deleteOne'){
+                return await this.mailQueue.add('delete_video',{sender:audit.auditer,info:audit.object,})
+               }else{
+                return await this.mailQueue.add('update_video',{id:id})
+               }
+            }
+           
+        }))
         
     }
     

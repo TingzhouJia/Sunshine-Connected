@@ -16,6 +16,9 @@ export class Workshop {
   @prop()
   introduction: string;
 
+  @prop()
+  author:Ref<User>
+
   @ApiProperty({ description: 'due date' })
   @prop()
   deadline: string;
