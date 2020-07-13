@@ -8,16 +8,16 @@ import { PaginationParams } from '@libs/db/repository';
 import { AuditService } from './audit.service';
 import { AuditDto } from './dto/audit.dto';
 
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiOperation, ApiTags, ApiBody } from '@nestjs/swagger';
 import { AuditInterceptor } from './auditChange.interceptor';
-
+@ApiTags('audit')
 @Controller('audit')
 export class AuditController {
   constructor(
     @InjectModel(Audit) private readonly _model: ReturnModelType<typeof Audit>,
     private readonly auditService: AuditService,
   ) {}
-
+  @ApiOperation({description:'find my audit'})
   @Get('pagination/:id')
   async getMyAuditPagination(
     @Pagination() pagination: PaginationParams<Audit>,
@@ -27,9 +27,11 @@ export class AuditController {
   }
 
   @ApiOperation({description:'create audit'})
-  @Post('')
+  @ApiBody({type:AuditDto,})
+  @Post('/create')
   @UseInterceptors(AuditInterceptor)
   async createAudit(@Body('audit') body:AuditDto){
+  
     return await this.auditService.createAudit(body)
   }
 

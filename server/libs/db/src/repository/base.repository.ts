@@ -211,7 +211,7 @@ export abstract class BaseRepository<T> {
       [key: string]: AnyType;
     } = {},
   ): Promise<Paginator<T>> {
-    const { limit, offset, page, order, ...query } = conditions;
+    const { limit, offset, page, order,query } = conditions;
 
     // 拼装分页返回参数
     const result: Paginator<T> = {

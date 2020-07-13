@@ -19,5 +19,9 @@ export class AuditRepository extends BaseRepository<Audit> {
     });
   }
 
+  async createIt(doc:Partial<Audit>){
+    return super.create(doc)
+  }
+
 
 }

@@ -7,7 +7,10 @@ import { AuditRepository, CourseRepository } from '@libs/db/repository';
 @Global()
 @Module({
   imports:[
-    BullModule.registerQueue({name:'mail'})
+    BullModule.registerQueue({name:'mail',redis: {
+      host: 'localhost',
+      port: 6379,
+    },})
   ],
   providers:[MailProcessor,AuditRepository,CourseRepository,CurMailService,MailQueueService],
   exports:[MailProcessor,MailQueueService]

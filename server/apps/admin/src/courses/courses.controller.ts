@@ -8,6 +8,7 @@ import {
 
   Delete,
   UseInterceptors,
+  Query,
 } from '@nestjs/common';
 import { Crud } from 'nestjs-mongoose-crud';
 import { Course } from '@libs/db/model/course.model';
@@ -56,6 +57,7 @@ export class CoursesController {
   @ApiBody({ type: CourseDto, description: 'body for course' })
   @Post('create')
   async create(@Body('course') course: CourseDto) {
+
     return await this.courseService.createCourse(course);
   }
 
@@ -73,5 +75,11 @@ export class CoursesController {
   @Delete(':id')
   async deleteOne(@Param('id') id: string){
     return await this.courseService.deleteCourseById(id)
+  }
+
+  @ApiOperation({description:'course need audit'})
+  @Get('/need_audit')
+  async getCourseNeedAudit(@Pagination() pagniation:PaginationDto<Course>,@Query('id') id:string){
+      return await this.courseService.getCourseNeedAudit(id,pagniation)
   }
 }
