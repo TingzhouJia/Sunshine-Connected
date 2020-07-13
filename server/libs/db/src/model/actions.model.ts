@@ -1,4 +1,4 @@
-import { prop, ModelOptions, Ref } from '@typegoose/typegoose';
+import { prop, ModelOptions, Ref, Post, buildSchema ,DocumentType, getClassForDocument} from '@typegoose/typegoose';
 import { User } from './user.model';
 import { Course } from './course.model';
 
@@ -9,10 +9,17 @@ import { Workshop } from './workshop.model';
 @ModelOptions({
   options: {
     customName: 'Action',
+    
   },
   schemaOptions: {
     timestamps: true,
+    
   },
+})
+@Post('save',(doc:DocumentType<Action>)=>{
+  if(doc.name==='view'){
+    buildSchema(Action).index('createdAt',{expires:'2592000'})
+  }
 })
 export class Action {
   @ApiProperty({ description: 'user who act' })
@@ -38,6 +45,6 @@ export class Action {
   obj_id: string;
   @ApiProperty()
   @ApiProperty({ description: 'type of action' })
-  @prop({ enum: ['like', 'subscribe', 'register', 'view','collect'] })
+  @prop({ enum: ['like', 'subscribe', 'register', 'view','collect'], })
   name: string;
 }
