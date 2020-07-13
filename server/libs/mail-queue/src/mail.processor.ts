@@ -1,7 +1,7 @@
 
 import { Process, Processor } from '@nestjs/bull';
 import {Job} from 'bull'
-import { CurMailService } from './mailer.service';
+import { CurMailService } from '../../services/src/services/mailer.service';
 import { Course, User, Workshop, Audit, ProgressType } from '@libs/db/model';
 import { AuditRepository, CourseRepository } from '@libs/db/repository';
 import { isRefType, isDocument } from '@typegoose/typegoose';

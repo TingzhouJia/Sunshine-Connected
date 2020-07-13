@@ -47,6 +47,12 @@
       ],
       "@app/services/*": [
         "libs/services/src/*"
+      ],
+      "@app/mail-queue": [
+        "libs/mail-queue/src"
+      ],
+      "@app/mail-queue/*": [
+        "libs/mail-queue/src/*"
       ]
     }
   }

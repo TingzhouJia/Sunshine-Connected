@@ -5,9 +5,10 @@ import { AuditRepository } from "@libs/db/repository";
 import { Observable } from "rxjs";
 import {Request} from 'express'
 import { Audit, User } from "@libs/db/model";
-import {DocumentType} from '@typegoose/typegoose'
-import { Mongoose } from "mongoose";
+
 import { tap, map } from "rxjs/operators";
+import { MailQueueService } from "@app/mail-queue";
+import { isDocument } from "@typegoose/typegoose";
 /**
  * @description: this is interceptor when update or delete a 
  */
@@ -15,7 +16,8 @@ import { tap, map } from "rxjs/operators";
 export class CourseChangeInterceptor implements NestInterceptor{
    
 
-    constructor( @InjectQueue('mail') private mailQueue:Queue,
+    constructor(
+        private readonly mailQueueService:MailQueueService,
     private readonly auditRepository:AuditRepository){}
 
     async intercept(context: ExecutionContext, next: CallHandler<any>):Promise<Observable<any>> {
@@ -28,10 +30,10 @@ export class CourseChangeInterceptor implements NestInterceptor{
 
         return next.handle().pipe(tap(async()=>{
             if(audit.auditer!==null){
-               if(method==='deleteOne'){
-                return await this.mailQueue.add('delete_video',{sender:audit.auditer,info:audit.object,})
+               if(method==='deleteOne'&&isDocument(audit.auditer)&&isDocument(audit.object)){
+                return await this.mailQueueService.addDeleteVideo(audit.auditer,audit.object)
                }else{
-                return await this.mailQueue.add('update_video',{id:id})
+                return await this.mailQueueService.addChangeVideo(id)
                }
             }
            

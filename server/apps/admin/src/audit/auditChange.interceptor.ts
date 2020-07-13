@@ -6,13 +6,14 @@ import { InjectQueue } from "@nestjs/bull";
 import { tap,map } from 'rxjs/operators';
 import {Request } from 'express'
 import { Audit } from "@libs/db/model";
+import { MailQueueService } from "@app/mail-queue";
 export interface Response<Audit>{
     data:Audit
 }
 @Injectable()
 export class AuditInterceptor<T> implements NestInterceptor<Audit,Response<Audit>>{
 
-    constructor(@InjectQueue('mail') private mailQueue:Queue,
+    constructor(private readonly mailQueueService:MailQueueService,
     private readonly auditRepository:AuditRepository){}
     async intercept(context: ExecutionContext, next: CallHandler<any>): Promise<Observable<any>> {
             const request:Request=context.switchToHttp().getRequest()
@@ -26,9 +27,9 @@ export class AuditInterceptor<T> implements NestInterceptor<Audit,Response<Audit
        
         return next.handle().pipe(tap(async()=>{
             if(method==='deleteAudit'){
-                return await this.mailQueue.add('end_audit',{id:res.obj_id})
+                return await this.mailQueueService.addChangeAudit(res.obj_id)// this.mailQueue.add('end_audit',{id:res.obj_id})
             }
-            return await this.mailQueue.add('start_audit',{id:id})
+            return await this.mailQueueService.addStartAudit(id)
         }))
     }
   

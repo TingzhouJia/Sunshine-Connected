@@ -7,8 +7,9 @@ import { Pagination } from '../decorator/pagination.decorator';
 import { PaginationParams } from '@libs/db/repository';
 import { AuditService } from './audit.service';
 import { AuditDto } from './dto/audit.dto';
-import { AuditInterceptor } from '@app/services/interceptor';
+
 import { ApiOperation } from '@nestjs/swagger';
+import { AuditInterceptor } from './auditChange.interceptor';
 
 @Controller('audit')
 export class AuditController {
