@@ -109,15 +109,16 @@ export class CourseRepository extends BaseRepository<Course> {
     })
   }
 
-  async getAllCourseNeedAudit(pagination: PaginationParams<Course>) {
+  async getAllCourseNeedAudit(pagination: PaginationParams<Course>,id:string) {
     return await super.paginator(
-      { ...pagination, query: { stage: ProgressType.STAGE1 } },
+      { ...pagination, query: { stage: ProgressType.STAGE1,author_id:{$ne:id}} },
       '',
       { populates: [{ path: 'author', select: '_id username avatar' }] },
     );
   }
 
   async createVideo(doc: Partial<Course>): Promise<DocumentType<Course>> {
+
     return await super.create(doc);
   }
 

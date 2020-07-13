@@ -9,34 +9,34 @@ import { MailQueueModule } from '@app/mail-queue';
 
 
 @Module({
-  imports:[
+  imports: [
     MailerModule.forRootAsync({
-      imports:[ConfigModule],
-      useFactory:()=>({
+      imports: [ConfigModule],
+      useFactory: () => ({
         transport: {
-            host: process.env.SMTP_HOST || 'localhost',
-            port: parseInt(process.env.SMTP_PORT, 10) || 1025,
-            secure: process.env.SMTP_SECURE === 'true',
-            ignoreTLS: process.env.SMTP_SECURE !== 'false',
-            auth: {
-              user: process.env.SMTP_AUTH_USER || 'username',
-              pass: process.env.SMTP_AUTH_PASS || 'password',
-            },
+          host: process.env.SMTP_HOST || 'localhost',
+          port: parseInt(process.env.SMTP_PORT, 10) || 1025,
+          secure: process.env.SMTP_SECURE === 'true',
+          ignoreTLS: process.env.SMTP_SECURE !== 'false',
+          auth: {
+            user: process.env.SMTP_AUTH_USER || 'username',
+            pass: process.env.SMTP_AUTH_PASS || 'password',
           },
-          default:{
-            from:''
-          },
-          template: {
-            dir: `${process.cwd()}/templates/`,
-            adapter: new HandlebarsAdapter(),
-          },
-      })   ,   
-      inject:[ConfigService],
-    
+        },
+        default: {
+          from: ''
+        },
+        template: {
+          dir: `${process.cwd()}/templates/`,
+          adapter: new HandlebarsAdapter(),
+        },
+      }),
+      inject: [ConfigService],
+
     }),
     MailQueueModule,
   ],
-  providers: [ServicesService,CurMailService,],
-  exports: [ServicesService,CurMailService],
+  providers: [ServicesService, CurMailService,],
+  exports: [ServicesService, CurMailService],
 })
-export class ServicesModule {}
+export class ServicesModule { }

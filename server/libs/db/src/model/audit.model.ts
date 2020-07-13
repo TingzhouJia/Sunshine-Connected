@@ -11,14 +11,16 @@ import { User } from './user.model';
 import { Course } from './course.model';
 import { Workshop } from './workshop.model';
 import { Progress, ProgressType } from './progress.model';
-import { validate } from 'class-validator';
+
+
 
 @ModelOptions({
   options: { customName: 'Audit' },
-  schemaOptions: { timestamps: true },
+  schemaOptions: { timestamps: true},
 })
-@Post('save', function (doc: DocumentType<Audit>) {
-  getModelForClass(Progress).updateOne(
+@Post('save',async (doc: DocumentType<Audit>)=> {
+ 
+  await getModelForClass(Progress).updateOne(
     { _id: doc.progress_id },
     {
       status: ProgressType.STAGE2,
@@ -26,11 +28,15 @@ import { validate } from 'class-validator';
       message: doc.message,
     },
   );
-    if(doc.type==='Course'){
-      getModelForClass(Course).updateOne(
-        { _id: doc.obj_id },
-        { stage: ProgressType.STAGE2 },
-      );
+    if(doc.type=='Course'){
+      try{
+        await getModelForClass(Course).findByIdAndUpdate(
+          doc.obj_id,
+           { "stage": ProgressType.STAGE2 },
+         );
+      }catch(e){
+        console.log(e)
+      }
     }
 })
 //update means course is not accepted
@@ -59,7 +65,7 @@ import { validate } from 'class-validator';
 })
 export class Audit {
   @ApiProperty({ description: 'user  audit' })
-  @prop({ ref: 'User', localField: 'author_id', foreignField: '_id' })
+  @prop({ ref: 'User', localField: 'auditer_id', foreignField: '_id' })
   auditer: Ref<User>;
   @ApiProperty({ description: 'sender id' })
   @prop()

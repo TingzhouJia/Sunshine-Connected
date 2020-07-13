@@ -12,7 +12,7 @@ export class AuditService {
     return await this.auditRepository.getMyAudit(pagination, id);
   }
   async createAudit(doc:Partial<Audit>){
-    return (await this.auditRepository.create(doc)).populate('auditer')
+    return await this.auditRepository.createIt(doc)
     
   }
 

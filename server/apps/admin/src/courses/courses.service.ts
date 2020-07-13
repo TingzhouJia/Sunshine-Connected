@@ -19,7 +19,7 @@ export class CoursesService {
 
   async createCourse(dto: CourseDto) {
 
-    return await this.courseRepository.createVideo({ ...dto });
+    return await this.courseRepository.createVideo(dto);
 
   }
   /**
@@ -43,6 +43,10 @@ export class CoursesService {
     )
 
    
+  }
+
+  async getCourseNeedAudit(id:string,pagination:PaginationDto<Course>){
+    return await this.courseRepository.getAllCourseNeedAudit(pagination,id)
   }
 
   async getAnswerListByUser(id: string, pagination: PaginationDto<Course>) {

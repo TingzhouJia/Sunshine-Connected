@@ -1,8 +1,16 @@
+import { ApiProperty } from "@nestjs/swagger"
+
 export class AuditDto{
-    author_id:string
-    type:string
-    object_id:string
-    deadline:Date
-    progress_id:string
-    message:string
+    @ApiProperty()
+    auditor_id:string
+    @ApiProperty()
+    type?:string
+    @ApiProperty()
+    obj_id:string
+    @ApiProperty()
+    deadline?:Date
+    @ApiProperty()
+    progress_id?:string
+    @ApiProperty()
+    message?:string
 }
