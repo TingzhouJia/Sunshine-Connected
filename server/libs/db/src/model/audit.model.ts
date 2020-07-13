@@ -68,7 +68,7 @@ export class Audit {
   @prop({ enum: ['Workshop', 'Course'] })
   type: string;
   @ApiProperty({ description: 'object of audit' })
-  @prop({ refPath: 'type', localField: 'obj_id', foreignField: '_id' })
+  @prop({ refPath: 'type',  })
   object: Ref<Workshop | Course>;
   @ApiProperty({ description: 'target id' })
   @prop()

@@ -1,4 +1,4 @@
-import { prop, ModelOptions, Ref, Post, buildSchema ,DocumentType, getClassForDocument} from '@typegoose/typegoose';
+import { prop, ModelOptions, Ref, Post, buildSchema ,DocumentType, getClassForDocument, mongoose} from '@typegoose/typegoose';
 import { User } from './user.model';
 import { Course } from './course.model';
 
@@ -38,8 +38,8 @@ export class Action {
   @prop({ enum: ['Course', 'User', 'Workshop'] })
   types: string;
   @ApiProperty({ description: 'object of target' })
-  @prop({ refPath: 'types',localField:'obj_id',foreignField:'_id' })
-  object: Ref<Course | User | Workshop>;
+  @prop({ refPath: 'types'})
+  object?: Ref<Course | User | Workshop>;
   @ApiProperty({ description: 'obj id' })
   @prop()
   obj_id: string;

@@ -104,7 +104,9 @@
       "@app/role/(.*)": "<rootDir>/libs/role/src/$1",
       "@app/role": "<rootDir>/libs/role/src",
       "@app/services/(.*)": "<rootDir>/libs/services/src/$1",
-      "@app/services": "<rootDir>/libs/services/src"
+      "@app/services": "<rootDir>/libs/services/src",
+      "@app/mail-queue/(.*)": "<rootDir>/libs/mail-queue/src/$1",
+      "@app/mail-queue": "<rootDir>/libs/mail-queue/src"
     }
   }
 }
