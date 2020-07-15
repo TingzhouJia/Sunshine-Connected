@@ -7,7 +7,7 @@ export const Home: I18nPage = () => {
     <div className="container">
     
    <AppLayout>
-     <div style={{background:'red',height:500,width:500}}></div>
+   
    </AppLayout>
    
   </div>

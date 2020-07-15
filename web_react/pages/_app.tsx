@@ -3,10 +3,9 @@ import App from 'next/app'
 import { Provider } from 'react-redux'
 import store from '../redux/store'
 import NProgress from 'nprogress'
-
-import 'antd/dist/antd.css'
+import 'antd/dist/antd.less'
+import '../style/gloabl.less'
 import { appWithTranslation } from '../i18n'
-import '../style/global.css'
 import { Router } from 'next/router'
 NProgress.configure({ showSpinner: false })
 Router.events.on('routeChangeStart', () => NProgress.start())
