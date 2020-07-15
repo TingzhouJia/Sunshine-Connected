@@ -1,0 +1,33 @@
+@import '../../style/antd-custom.less';
+.header {
+    display: flex;
+    flex-direction: row;
+   justify-content: space-between;
+   padding-left: 2vw;
+   padding-right: 2vw;
+   align-items: center;
+   background: @primary_color;
+   .img {
+       width: 8vh;
+       height: 8vh;
+       object-fit: fill;
+   }
+   .title {
+       font-size: 2rem;
+       color: #00000000;
+       font-weight: bold;
+       padding-left: 2vw;
+       padding-right: 2vw;
+   }
+   .ant-input {
+        .borderRadius(10px)
+    }   
+
+    .icon {
+        width: "20vw";
+        padding-left: '1vw';
+        padding-right: '1vw';
+        display: flex;
+        justify-content: space-between;
+    }
+}
