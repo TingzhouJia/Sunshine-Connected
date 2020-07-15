@@ -16,6 +16,9 @@ export const nextI18next = new NextI18Next({
 export const appWithTranslation = nextI18next.appWithTranslation
 export const Trans = nextI18next.Trans
 
+export const includeDefaultNamespaces = (namespaces: string[]) =>
+  ["common", "_error"].concat(namespaces);
+
 export type I18nPage<P = {}> = NextComponentType<
   NextPageContext,
   { namespacesRequired: string[] },

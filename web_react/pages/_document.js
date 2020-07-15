@@ -1,33 +1,30 @@
-import * as React from 'react';
-import Document, { Head, Main, NextScript } from 'next/document';
-import {Stylesheet,InjectionMode, resetIds } from '@fluentui/react'
+import Document from 'next/document'
+import { ServerStyleSheet } from 'styled-components'
 
 export default class MyDocument extends Document {
-  static getInitialProps({ renderPage }) {
-    const stylesheet = Stylesheet.getInstance();
-    stylesheet.setConfig({
-        injectionMode: InjectionMode.none,
-        namespace: 'server'      
-    });
-    stylesheet.reset();
-    resetIds();
+  static async getInitialProps(ctx) {
+    const sheet = new ServerStyleSheet()
+    const originalRenderPage = ctx.renderPage
 
-    const page = renderPage((App) => (props) => <App {...props} />);
-    
-    return { ...page, styleTags: stylesheet.getRules(true) };
-  }
+    try {
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: (App) => (props) =>
+            sheet.collectStyles(<App {...props} />),
+        })
 
-  render() {
-    return (
-      <html>
-        <Head>       
-          <style type="text/css" dangerouslySetInnerHTML={{__html: this.props.styleTags}} />          
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </html>
-    );
+      const initialProps = await Document.getInitialProps(ctx)
+      return {
+        ...initialProps,
+        styles: (
+          <>
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </>
+        ),
+      }
+    } finally {
+      sheet.seal()
+    }
   }
 }
