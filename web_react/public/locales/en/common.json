@@ -1,4 +1,7 @@
 {
     "intor":"aa",
-    "header_input_placeholder":"Search videos or volunteers..."
+    "header_input_placeholder":"Search videos or volunteers...",
+    "search":"Search",
+    "lang":"Language",
+    "font":"Font Size"
 }
