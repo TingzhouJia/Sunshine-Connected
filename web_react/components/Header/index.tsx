@@ -5,17 +5,14 @@ import {Input, Select, Avatar, Dropdown, Menu, Button, Tooltip} from 'antd'
 import { useTranslation } from '../../i18n';
 import styled from 'styled-components';
 import { fontSize } from '../../layout/app_layout';
+import { Span } from '../../layout/app_layout';
 const Search=Input.Search
 const Option=Select.Option
 interface header{
   func:(val:any)=>void
 }
 
-const H1=styled.h1`
-  padding-top:2vh;
-  color:black;
-  font-size:2rem;
-`
+
 
 
 export const Header: React.FC<header> = ({func}) => {
@@ -25,12 +22,19 @@ export const Header: React.FC<header> = ({func}) => {
     i18n.changeLanguage(val)
    }
   }
+const H1=styled.h1`
+  padding-top:2vh;
+  color:black;
+  font-size:${fontSize}%;
+`
+
+
   return (
     <div className="header">
       <Link href="/"><img  src="/main.png" alt="logo of sunshine connected" className="img" /></Link>
-      <H1  >Sunshine Connected</H1>
+      <H1 types="title" >Sunshine Connected</H1>
       <Search
-      style={{width:'30vw'}} 
+      style={{maxWidth:'30vw'}} 
       placeholder={t('header_input_placeholder')}
      enterButton={<Tooltip title={t('search')}><SearchOutlined style={{color:"black"}}/></Tooltip>  }
      
@@ -39,8 +43,8 @@ export const Header: React.FC<header> = ({func}) => {
     />
     <div className="icons">
       <div className="trans">
-        <TranslationOutlined style={{color:'black',fontSize:"1.5rem",paddingRight:"1vw"}} />
-        <Select defaultValue={i18n.language} style={{width:'9vw'}} onChange={handleChangelang}>
+        <TranslationOutlined style={{color:'black',fontSize:"150%",paddingRight:"1vw"}} />
+        <Select aria-label={t('pick_lang')} defaultValue={i18n.language} style={{minWidth:"8vw"}}  onChange={handleChangelang}>
             <Option value="en">English</Option>
             <Option value="fr">Français</Option>
         </Select>
@@ -50,10 +54,13 @@ export const Header: React.FC<header> = ({func}) => {
         
 
 
-        <FontSizeOutlined style={{paddingRight:'0.5vw',paddingLeft:'1vw'}}/>
-        <Select defaultValue={'default'} style={{width:'9vw'}} onChange={handleChangelang}>
-            <Option value="default">Font Size</Option>
-            <Option value="fr">Français</Option>
+        <FontSizeOutlined style={{paddingRight:'0.5vw',paddingLeft:'1vw',color:'black',fontSize:"150%"}}/>
+        <Select aria-label={t('pick_font')} defaultValue={'default'} style={{minWidth:"8vw"}}  onChange={(val:string)=>func(val)}>
+            <Option value="default"><span>Default Font</span></Option>
+            <Option value="median"><span style={{fontSize:'120%'}}>Median</span></Option>
+            <Option value="large"><span style={{fontSize:"150%"}}>Large</span></Option>
+            <Option value="xlarge"><span style={{fontSize:"170%"}}>XLarge</span></Option>
+            <Option value="grand"><span style={{fontSize:"200%"}}>Grand</span></Option>
         </Select>
     
    
