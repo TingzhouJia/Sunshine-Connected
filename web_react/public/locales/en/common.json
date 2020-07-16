@@ -3,5 +3,12 @@
     "header_input_placeholder":"Search videos or volunteers...",
     "search":"Search",
     "lang":"Language",
-    "font":"Font Size"
+    "font":"Font Size",
+    "pick_lang":"Pick Your Language",
+    "pick_font":"Pick Your Font Size",
+    "buddy_system":"Buddy System",
+    "volunteer_poll":"Volunteer Poll",
+    "meeting_progress":"Meeting Progress",
+    "candidates":"Candidates",
+    "video_system":"Video System"
 }

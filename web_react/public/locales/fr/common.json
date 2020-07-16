@@ -1,3 +1,9 @@
 {
-    "header_input_placeholder":"Rechercher des vidéos ou des bénévoles"
+    "header_input_placeholder":"Rechercher des vidéos ou des bénévoles",
+    "buddy_system":"système de jumelage",
+    "search":"Chercher",
+    "lang":"Langue",
+    "font":"Taille de police",
+    "pick_lang":"Choisir la langue",
+    "pick_font":"Choisir la taille de la police"
 }
