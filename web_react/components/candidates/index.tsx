@@ -26,26 +26,28 @@ const BaseLineCol = styled.div`
 const RowBox = styled.div`
     display:flex;
     flex-direction:row;
-    justify-content:flex-start
+    justify-content:flex-start;
+    align-items:center;
 `
 
 const TabContent1 = ({ t }) => (
    <div >
-        <Space direction="vertical">
-        <Span weight="bold" types="nav_title">{t('general_info')}</Span>
-        <Divider />
+        <Space direction="vertical" size="small">
+        <Span weight="bold" types="nav_title">{t('candidates:general_info')}</Span>
+        <Divider orientation="left" />
         <RowBox>
-            <Span colors="grey" types="subSpan">{t('tags')}:</Span>
+            <Space direction="horizontal">
+            <Span colors="grey" types="subSpan">{t('candiates:tags')}:</Span>
             <div>
                 <Tag color="magenta"><Span>magenta</Span></Tag>
                 <Tag color="red"><Span>red</Span></Tag>
-
             </div>
+            </Space>
 
         </RowBox>
         <Divider />
         <div>
-            <RowBox><Span types="subSpan">{t('intro')}</Span></RowBox>
+            <RowBox><Span types="nav_title">{t('candidates:intro')}</Span></RowBox>
             <Typography.Paragraph>
                 Cras quis nulla commodo, aliquam lectus sed, blandit augue. Cras ullamcorper
                  bibendum bibendum. Duis tincidunt urna non pretium porta. Nam condimentum vitae ligula v
@@ -85,7 +87,7 @@ export const TabView = ({ t }) => (
             tab={
                 <Span>
                     <IdcardOutlined />
-                    {t('overview')}
+                    {t('candidates:overview')}
                 </Span>
             }
             key="1"

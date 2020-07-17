@@ -4,6 +4,7 @@ import { Tooltip, Avatar, Space, Button } from "antd"
 import { useTranslation } from "../../i18n"
 import { Span } from "../../layout"
 import { useRouter } from "next/router"
+import { TFunction } from "next-i18next"
 
 const CardDiv=styled.div`
     display:flex;
@@ -35,8 +36,8 @@ const EndFlex=styled.div`
     align-items:center
 `
 
-export const VolunteerCard:React.FC=()=>{
-    const {t}=useTranslation()
+export const VolunteerCard:React.FC<{t:TFunction}>=({t})=>{
+
     const router=useRouter()
     const handleClick=(e)=>{
         e.preventDefault()
@@ -52,7 +53,7 @@ export const VolunteerCard:React.FC=()=>{
             <Span weight={500} types="subSpan" colors="grey">email</Span>
             </Space>
             </div>
-            <Button style={{width:"80%",}} onClick={handleClick} aria-label={t('pairing')} type="primary"><Span >{t('pair_btn')}</Span></Button>
+            <Button style={{width:"80%",}} onClick={handleClick} aria-label={t('poll:pairing')} type="primary"><Span >{t('poll:pair_btn')}</Span></Button>
         </CardDiv>
     )
 }

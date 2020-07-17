@@ -9,11 +9,11 @@ const PollPage:I18nPage=()=>{
     return <AppLayout>
             <FlexBox>
                 <Space size="middle" direction="vertical">
-                <Span types="title" weight="bold">{t('poll_title')}</Span>
+                <Span types="title" weight="bold">{t('poll:poll_title')}</Span>
                 <div style={{background:"black",width:"90%",height:"0.1vh"}}/>
                <div style={{display:"flex",flexDirection:"row",flexWrap:"wrap"}}>
                {[1,2,3,4,5,6,7,8].map((each)=>(
-                    <VolunteerCard key={each}></VolunteerCard>
+                    <VolunteerCard t={t} key={each}></VolunteerCard>
                 ))}
                </div>
                 </Space>

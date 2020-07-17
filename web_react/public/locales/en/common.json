@@ -10,6 +10,9 @@
     "volunteer_poll":"Volunteer Poll",
     "meeting_progress":"Meeting Progress",
     "candidates":"Candidates",
-    "video_system":"Video System"
+    "video_system":"Video System",
+    "populate_video":"Populate Video",
+    "fav_video":"Favorite Video",
+    "video_history":"Video History"
     
 }

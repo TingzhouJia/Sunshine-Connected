@@ -12,7 +12,7 @@ export const nextI18next = new NextI18Next({
   fallbackLng: 'en',
   otherLanguages: ['fr'],
 })
-
+export const withTranslation=nextI18next.withTranslation
 export const appWithTranslation = nextI18next.appWithTranslation
 export const Trans = nextI18next.Trans
 
