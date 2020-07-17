@@ -1,14 +1,14 @@
-import {AppLayout} from '../layout/app_layout'
 
 
-import { I18nPage ,includeDefaultNamespaces} from '../i18n'
-export const Home: I18nPage = () => {
+
+import { I18nPage ,includeDefaultNamespaces, useTranslation} from '../i18n'
+import { withTranslation } from 'react-i18next'
+export const Home = () => {
+  const {t}=useTranslation()
   return(
     <div className="container">
     
-   <AppLayout>
-   
-   </AppLayout>
+    {t('zzzz')}
    
   </div>
   )

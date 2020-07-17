@@ -23,16 +23,18 @@ export const Header: React.FC<header> = ({func}) => {
    }
   }
 const H1=styled.h1`
-  padding-top:2vh;
+  font-weight:bolder;
+  
   color:black;
-  font-size:${fontSize}%;
+  line-height:2rem;
+  font-size:2rem;
 `
 
 
   return (
     <div className="header">
       <Link href="/"><img  src="/main.png" alt="logo of sunshine connected" className="img" /></Link>
-      <H1 types="title" >Sunshine Connected</H1>
+      <H1  >Sunshine Connected</H1>
       <Search
       style={{maxWidth:'30vw'}} 
       placeholder={t('header_input_placeholder')}
@@ -45,8 +47,8 @@ const H1=styled.h1`
       <div className="trans">
         <TranslationOutlined style={{color:'black',fontSize:"150%",paddingRight:"1vw"}} />
         <Select aria-label={t('pick_lang')} defaultValue={i18n.language} style={{minWidth:"8vw"}}  onChange={handleChangelang}>
-            <Option value="en">English</Option>
-            <Option value="fr">Français</Option>
+            <Option value="en"><Span>English</Span></Option>
+            <Option value="fr"><Span>Français</Span></Option>
         </Select>
       </div>
       <div className="trans">

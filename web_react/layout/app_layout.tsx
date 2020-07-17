@@ -4,7 +4,7 @@ import { Layout, ConfigProvider } from 'antd'
 import styled, { ThemeProvider } from 'styled-components'
 import theme from 'styled-theming'
 import { SideMenu } from "../components/Sider"
-
+import PropTypes from 'prop-types'
 export const fontSize = theme.variants('size', 'types', {
     span: {
         default: '100',
@@ -20,14 +20,36 @@ export const fontSize = theme.variants('size', 'types', {
         xlarge: '140',
         grand: '160'
     },
+    sSpan:{
+        default: '60',
+        median: '80',
+        large: '100',
+        xlarge: '120',
+        grand: '140'
+    },
     title:{
-        default:"140",
-        median:"160",
-        large:"180",
-        xlarge:"200",
-        grand:"220"
+        default:"300",
+        median:"320",
+        large:"350",
+        xlarge:"370",
+        grand:"4000"
+    },
+    nav_title:{
+        default:'120',
+        median:"140",
+        large:"160",
+        xlarge:"180",
+        grand:"200"
     }
 })
+
+export const FlexBox=styled.div`
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+   
+`
 
 
 export const NavTitle = styled.h1`
@@ -43,22 +65,28 @@ export const NavLink = styled.link`
 
 
 export const Span = styled.span`
-    font-size:${fontSize}%;
+    font-size:${fontSize}% !important;
     font-weight:${(props:any) => props.weight || 500};
-    color:${(props) => props.colors || 'black'}
+    color:${(props) => props.colors || 'black'};
     word-break:normal; 
     width:auto; 
-    display:block; 
+    display:inline-block; 
     white-space:pre-wrap;
-    word-wrap : break-word ;
+    word-wrap : break-word;
     overflow: hidden ;
 `
-
+Span.propTypes={
+    types:PropTypes.oneOf(['span','sSpan','subSpan','nav_title',"title"]),
+    
+}
 
 Span.defaultProps={
-    types:'default',
-
+    types:"span"
 }
+
+
+
+
 
 
 
@@ -74,18 +102,23 @@ export const AppLayout: React.FC = ({ children }) => {
 
                 </Layout.Header>
                 <Layout>
-                    <Layout.Sider breakpoint="lg"
-                        collapsedWidth="0"
-                        style={{ position: 'fixed', overflow: 'auto', left: 0, top: '10vh', height: "90vh", minWidth: '15vw', background: "white !important" }}
+                    <Layout.Sider  width={"15vw"}
+                       
+                        style={{ position: 'fixed', overflow: 'auto', left: 0, top: '10vh', height: "90vh", width: '15vw !important', background: "white !important" }}
                     >
                         <SideMenu />
                     </Layout.Sider>
-                    <Layout.Content>
+                    
+                   <Layout style={{width:"85vw !important",marginLeft:"15vw",marginTop:"10vh",padding:"2vw",background:"#eee"}}>
+                   <Layout.Content  >
                         {children}
                     </Layout.Content>
+               
+                   </Layout>
                 </Layout>
             </Layout>
 
         </ThemeProvider>
     </React.Fragment>
 }
+
