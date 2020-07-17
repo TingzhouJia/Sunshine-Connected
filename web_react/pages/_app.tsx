@@ -7,19 +7,28 @@ import 'antd/dist/antd.less'
 import '../style/gloabl.less'
 import { appWithTranslation } from '../i18n'
 import { Router } from 'next/router'
+import Head from 'next/head'
 NProgress.configure({ showSpinner: false })
-Router.events.on('routeChangeStart', () => NProgress.start())
+Router.events.on('routeChangeStart', (url) => {
+  console.log(`Loading: ${url}`)
+  NProgress.start()
+})
 Router.events.on('routeChangeComplete', () => NProgress.done())
 Router.events.on('routeChangeError', () => NProgress.done())
 
 
 const MyApp = ({ Component, pageProps }) => {
   return (
+    <>
+    <Head>
+        {/* Import CSS for nprogress */}
+        {/* <link rel="stylesheet" type="text/css" href="/gloabl.css" /> */}
+      </Head>
     <Provider store={store}>
-      
+       
         <Component {...pageProps} />
       
-    </Provider>
+    </Provider></>
   )
 }
 MyApp.getInitialProps = async (appContext) => {
