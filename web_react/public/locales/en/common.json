@@ -1,0 +1,25 @@
+{
+    "header_input_placeholder":"Search videos or volunteers...",
+    "search":"Search",
+    "lang":"Language",
+    "font":"Font Size",
+    "pick_lang":"Pick Your Language",
+    "pick_font":"Pick Your Font Size",
+    "buddy_system":"Buddy System",
+    "volunteer_poll":"Volunteer Poll",
+    "meeting_progress":"Meeting Progress",
+    "candidates":"Candidates",
+    "meeting":"Meeting",
+    "video_system":"Video System",
+    "populate_video":"Populate Video",
+    "question_video":"Your Questions ",
+    "video_history":"Video History",
+    "go_poll":"go to poll page",
+    "go_progress":"go to progress page",
+    "go_candidates":"go to candidates page",
+    "go_video":"go to video page",
+    "go_question":"go to my questions page",
+    "go_history":"go to my history page",
+    "go_meeting":"go to meeting page"
+    
+}

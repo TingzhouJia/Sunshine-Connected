@@ -1,0 +1,193 @@
+@import '~antd/es/style/themes/default.less';
+
+@navbar-background: #F1C331 !important;
+@navbar-font-color: #eee !important;
+
+html,
+body,
+#root {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  
+  background-color: #fdfdfdea !important;
+}
+// .ant-input-affix-wrapper-focused {
+
+// }
+.ant-layout {
+	min-height: 100vh !important;
+	background-color: #eee;
+}
+.ant-card-body{
+	padding:1vw !important;
+}
+.ant-layout-sider-children{
+  background-color:white !important;
+}
+.ant-input-search-button {
+  background-color: white !important;
+  border: 1px solid #eee;
+}
+
+.antBtnLink {
+	color: rgba(0, 0, 0, 0.65) !important;
+}
+
+.custom-tag {
+	background: #6ec49a;
+	font-weight: bold;
+	color: white;
+	padding: 3px 5px;
+	display: inline;
+	line-height: 1.75;
+	font-family: 'Courier New', Courier, monospace;
+}
+
+.blockEdges {
+	border: solid rgba(0, 0, 0, .4);
+	border-radius: 5px !important;
+	border-width: 0.5px;
+}
+
+.ant-menu-item-selected {
+  color: #000 !important; 
+}
+.ant-tabs > .ant-tabs-nav .ant-tabs-nav-more, .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-more {
+	display: none;
+}
+
+canvas {
+	display: block;
+}
+
+body {
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+:global(.ant-col-xxl-18) {
+	max-width: 1350px;
+}
+
+#nprogress {
+	pointer-events: none;
+  }
+  
+  #nprogress .bar {
+	background: red;
+	position: fixed;
+	z-index: 1031;
+	top: 0;
+	left: 0;
+  
+	width: 100%;
+	height: 5px;
+  }
+  
+  /* Fancy blur effect */
+  #nprogress .peg {
+	display: block;
+	position: absolute;
+	right: 0px;
+	width: 100px;
+	height: 100%;
+	box-shadow: 0 0 10px red, 0 0 5px red;
+	opacity: 1.0;
+  
+	-webkit-transform: rotate(3deg) translate(0px, -4px);
+		-ms-transform: rotate(3deg) translate(0px, -4px);
+			transform: rotate(3deg) translate(0px, -4px);
+  }
+  
+  /* Remove these to get rid of the spinner */
+  #nprogress .spinner {
+	display: block;
+	position: fixed;
+	z-index: 1031;
+	top: 15px;
+	right: 15px;
+  }
+  
+  #nprogress .spinner-icon {
+	width: 18px;
+	height: 18px;
+	box-sizing: border-box;
+  
+	border: solid 2px transparent;
+	border-top-color: red;
+	border-left-color: red;
+	border-radius: 50%;
+  
+	-webkit-animation: nprogress-spinner 400ms linear infinite;
+			animation: nprogress-spinner 400ms linear infinite;
+  }
+  
+  .nprogress-custom-parent {
+	overflow: hidden;
+	position: relative;
+  }
+  
+  .nprogress-custom-parent #nprogress .spinner,
+  .nprogress-custom-parent #nprogress .bar {
+	position: absolute;
+  }
+  
+  @-webkit-keyframes nprogress-spinner {
+	0%   { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+  }
+  @keyframes nprogress-spinner {
+	0%   { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+  }
+
+.navBarlogo {
+	height: 40px;
+}
+
+.ant-menu-submenu {
+	display: none !important;
+}
+
+.ant-layout-header {
+	cursor: default;
+	background-color: @navbar-background;
+	color: @navbar-font-color;
+}
+
+.ant-layout-header > ul {
+	background-color: @navbar-background;
+	color: @navbar-font-color;
+}
+
+@media (max-width: @screen-xs) {
+	.ant-table {
+		width: 100%;
+		overflow-x: auto;
+		&-thead > tr,
+		&-tbody > tr {
+			> th,
+			> td {
+				white-space: pre;
+				> span {
+					display: block;
+				}
+			}
+		}
+	}
+}
+
+// Compatible with IE11
+@media screen and(-ms-high-contrast: active), (-ms-high-contrast: none) {
+	body > .ant-layout {
+		min-height: 100vh;
+	}
+}
