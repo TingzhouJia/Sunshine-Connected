@@ -7,6 +7,7 @@ import 'antd/dist/antd.less'
 import '../style/gloabl.less'
 import { appWithTranslation } from '../i18n'
 import { Router } from 'next/router'
+import 'react-virtualized/styles.css';
 import Head from 'next/head'
 NProgress.configure({ showSpinner: false })
 Router.events.on('routeChangeStart', (url) => {

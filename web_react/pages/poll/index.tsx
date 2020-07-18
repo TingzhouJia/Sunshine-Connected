@@ -6,12 +6,16 @@ import { VolunteerCard } from "../../components/Poll/volunteerCard";
 
 const PollPage:I18nPage=()=>{
     const {t}=useTranslation()
-    return <AppLayout>
+    return <AppLayout showSide={true}>
             <FlexBox>
                 <Space size="middle" direction="vertical">
                 <Span types="title" weight="bold">{t('poll:poll_title')}</Span>
                 <div style={{background:"black",width:"90%",height:"0.1vh"}}/>
+                <div>
+                    
+                </div>
                <div style={{display:"flex",flexDirection:"row",flexWrap:"wrap"}}>
+
                {[1,2,3,4,5,6,7,8].map((each)=>(
                     <VolunteerCard t={t} key={each}></VolunteerCard>
                 ))}
