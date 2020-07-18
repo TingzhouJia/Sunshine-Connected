@@ -12,6 +12,7 @@ export enum UserEnum {
   schemaOptions: {
     _id: true,
     timestamps: true,
+    toJSON: { virtuals: true },
   },
 })
 export class User {

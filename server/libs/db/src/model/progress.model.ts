@@ -11,6 +11,7 @@ export enum ProgressType {
 @ModelOptions({
   schemaOptions: {
     timestamps: true,
+    toJSON: { virtuals: true },
   },
 })
 export class Progress {

@@ -4,7 +4,7 @@ import { Question } from './question.model';
 import { User } from './user.model';
 
 @ModelOptions({
-  schemaOptions: { timestamps: true },
+  schemaOptions: { timestamps: true,toJSON:{virtuals:true}},
   options: { customName: 'Answer' },
 })
 export class Answer {
