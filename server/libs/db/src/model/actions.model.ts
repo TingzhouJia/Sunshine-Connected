@@ -13,7 +13,7 @@ import { Workshop } from './workshop.model';
   },
   schemaOptions: {
     timestamps: true,
-    
+    toJSON:{virtuals:true}
   },
 })
 @Post('save',(doc:DocumentType<Action>)=>{

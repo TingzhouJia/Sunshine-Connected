@@ -3,7 +3,6 @@ import {
   prop,
   Ref,
   Post,
-  buildSchema,
   getModelForClass,
 } from '@typegoose/typegoose';
 import { ApiProperty } from '@nestjs/swagger';

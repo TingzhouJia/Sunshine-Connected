@@ -7,7 +7,7 @@ import { ApiProperty } from "@nestjs/swagger";
     schemaOptions:{
         timestamps:true,
         _id:true,
-        
+        toJSON: { virtuals: true },
     },
     options:{customName:'Event'}
 })

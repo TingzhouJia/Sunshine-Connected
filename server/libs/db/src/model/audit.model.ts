@@ -16,7 +16,7 @@ import { Progress, ProgressType } from './progress.model';
 
 @ModelOptions({
   options: { customName: 'Audit' },
-  schemaOptions: { timestamps: true},
+  schemaOptions: { timestamps: true,toJSON:{virtuals:true}},
 })
 @Post('save',async (doc: DocumentType<Audit>)=> {
  
