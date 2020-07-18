@@ -1,6 +1,9 @@
-import styled from "styled-components"
-import { Avatar, Button, Tabs, Space, Divider, Tag, Typography } from "antd"
+
+
 import { Span } from "../../layout"
+
+import styled from "styled-components"
+import { Space, Divider, Tag, Typography, Avatar, Button, Tabs } from "antd"
 import { IdcardOutlined } from "@ant-design/icons"
 
 
