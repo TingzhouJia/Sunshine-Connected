@@ -15,7 +15,7 @@ import { IntroDiv, TabView } from "../../components/candidates"
     const { id } = router.query
     const { t } = useTranslation()
     return (
-        <AppLayout>
+        <AppLayout showSide={true}>
             <FlexBox>
                 <Space size='large' direction="vertical">
                    <Breadcrumb separator={<Span types="title">/</Span>}>

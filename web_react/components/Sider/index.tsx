@@ -26,14 +26,14 @@ export const SideMenu = () => {
                     </Menu.Item>
                 </Menu.ItemGroup>
                 <Menu.ItemGroup key="video_system" title={<NavTitle>{t('video_system')}</NavTitle>}>
-                    <Menu.Item key="popular_video">
-                        <Link href="/popular_video" passHref><Span><PlaySquareOutlined /><a >{t('populate_video')}</a></Span></Link>
+                    <Menu.Item key="video">
+                        <Link href="/video" passHref><Span><PlaySquareOutlined /><a >{t('populate_video')}</a></Span></Link>
                     </Menu.Item>
-                    <Menu.Item key="my_video">
+                    <Menu.Item key="myVideo">
                         <Span><HeartOutlined />{t('fav_video')}</Span>
                     </Menu.Item>
-                    <Menu.Item key="my_history">
-                        <Span><HeartOutlined />{t('video_history')}</Span>
+                    <Menu.Item key="myHistory">
+                        <Link href="/myHistory" passHref><Span><HeartOutlined /><a>{t('video_history')}</a></Span></Link>
                     </Menu.Item>
                 </Menu.ItemGroup>
             </Menu>
