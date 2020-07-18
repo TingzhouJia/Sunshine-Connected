@@ -6,9 +6,12 @@ import axios from 'axios'
 import { WindowScroller, AutoSizer, InfiniteLoader, List as VList, Grid } from 'react-virtualized'
 import React from "react";
 import { VideoSection } from "./videoSection";
+import { TFunction } from "next-i18next";
+
+
 const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
 
-export class LoadList extends React.Component<{ list: any[] }> {
+export class LoadList extends React.Component<{ list: any[] ,t:TFunction}> {
     state = {
         data: this.props.list,
         loading: false,
@@ -65,7 +68,7 @@ export class LoadList extends React.Component<{ list: any[] }> {
         style }) => {
         const item = this.state.data[rowIndex * 4 + columnIndex]
         return (
-            <div style={{...style,margin:"2vw"}}><VideoSection /></div>
+            <div style={{...style,margin:"2vw"}}><VideoSection  /></div>
         )
     }
 

@@ -117,7 +117,7 @@ export const AppLayout: React.FC<{ showSide: boolean }> = ({ children, showSide 
                                 <SideMenu />
                             </Layout.Sider>
 
-                            <Layout style={{ width: "85vw !important", marginLeft: "15vw", marginTop: "10vh", padding: "2vw", background: "#eee" }}>
+                            <Layout style={{ width: "85vw !important", marginLeft: "15vw", marginTop: "10vh", padding: "1vw", background: "#eee" }}>
                                 <Layout.Content  >
                                     {children}
                                 </Layout.Content>

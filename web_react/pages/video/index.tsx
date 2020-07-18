@@ -1,21 +1,30 @@
 import { AppLayout } from "../../layout"
-import { VirtualizedExample } from "../../components/video/visualList"
+import { VirtualizedExample, LoadList } from "../../components"
 import Axios from "axios"
-import { LoadList } from "../../components/video/loadList"
+import { I18nPage, useTranslation, includeDefaultNamespaces } from "../../i18n"
 
 
-export const VideoHome=({data})=>{
 
-
+const VideoHome:I18nPage<{data:any}>=({data,})=>{
+    const {t}=useTranslation()
     return (
         <AppLayout showSide={true}>
-            <LoadList list={data}></LoadList>
+            <LoadList t={t} list={data}></LoadList>
         </AppLayout>
     )
 
 }
 
-export async function getServerSideProps(context) {
+
+
+
+VideoHome.getInitialProps= async ()=>{
+      return  {
+        namespacesRequired:includeDefaultNamespaces(['video'])
+      }
+  }
+
+  export async function getServerSideProps(context) {
 
     const res=await Axios.get('https://randomuser.me/api/?results=50&inc=name,gender,email,nat&noinfo')
     
@@ -25,5 +34,4 @@ export async function getServerSideProps(context) {
       }, // will be passed to the page component as props
     }
   }
-
 export default VideoHome
