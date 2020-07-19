@@ -2,8 +2,9 @@ import React from 'react';
 import Admin from './Admin'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import './App.css';
+
 import 'antd/dist/antd.less'
+import './global.less'
 import store from './redux';
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
      <Provider store={store}>
       <BrowserRouter>
       <Switch>
-           
+            <Route path="/login"/>
             <Route path="/" component={Admin} />
           </Switch>
       </BrowserRouter>
