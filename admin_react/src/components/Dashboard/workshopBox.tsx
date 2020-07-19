@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flexbox } from '../../style'
 import { PlusSquareOutlined, CaretRightOutlined } from '@ant-design/icons'
-import { Space, Collapse } from 'antd'
+import { Space, Collapse, Skeleton } from 'antd'
 import './index.less'
 const {Panel}=Collapse
 export const WorkshopBox = () => {
@@ -19,7 +19,8 @@ export const WorkshopBox = () => {
                         <span className="nav_t_font">Workshop Poll</span>
                         <PlusSquareOutlined />
                     </Flexbox>
-                    <Collapse
+                   <Skeleton paragraph={{rows:6}} loading={false} active>
+                   <Collapse
                         bordered={false}
                         defaultActiveKey={['1']}
                         expandIconPosition="right"
@@ -36,11 +37,12 @@ export const WorkshopBox = () => {
                             <p>{text}</p>
                         </Panel>
                     </Collapse>
+                   </Skeleton>
                 </Space>
 
             </Flexbox >
             <div className="button_go_detail">
-
+                <span>Go Details</span>
             </div>
         </div>
     )
