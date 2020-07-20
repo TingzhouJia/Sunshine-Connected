@@ -4,7 +4,7 @@ import {QuestionCircleOutlined, PieChartOutlined, UserOutlined, PoweroffOutlined
 import './sider.less'
 export const UserBar:React.FC=()=>{
     const menu=(
-        <Menu>
+        <Menu style={{width:"10vw"}}>
             <Menu.Item >Coordinator</Menu.Item>
             <Divider/>
             <Menu.Item icon={<UserOutlined />}>
@@ -22,7 +22,7 @@ export const UserBar:React.FC=()=>{
         </Menu>
     )
     return(
-       <Dropdown overlay={menu} >
+       <Dropdown overlay={menu} overlayStyle={{width:"10vw !important"}}>
             <div className="user_section_div" >
             <Space direction="horizontal">
                 <Avatar shape="circle" size="large"/>

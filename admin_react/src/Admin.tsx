@@ -6,11 +6,13 @@ import SideMenu from './components/Sider'
 const { Content, Footer, Sider } = Layout
 const Admin: React.FC = () => {
 
-    return <Layout style={{ minHeight: "100vh" }}>
-        <Sider style={{ position: "fixed", left: 0, width: "15vw", height: "100vh", overflow: "auto",background:"white" }}>
+    return <Layout style={{ minHeight: "100vh",width:"100vw" }}>
+       <Layout style={{width:"15vw"}}>
+       <Sider width="15vw" style={{ position: "fixed", left: 0, width: "15vw !important", height: "100vh", overflow: "auto",background:"white" }}>
             <SideMenu/>
         </Sider>
-        <Layout style={{marginLeft:"15vw"}}>
+       </Layout>
+        <Layout style={{marginLeft:"15vw ",height:'100vh',width:"85vw"}}>
             <Content>
                 <Switch>
                     <Route exact path="/" component={DashBoard} />

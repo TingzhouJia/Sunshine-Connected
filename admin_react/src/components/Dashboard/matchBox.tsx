@@ -7,17 +7,15 @@ export const MatchBox = () => {
     const hisoty = useHistory()
     return (
         <div className="match_box">
-            <Flexbox direction="column" just="flex-start" align="center">
-                <Space direction="vertical" size="middle">
-                    <Flexbox direction="row" just="space-between" align="center">
+            <Flexbox direction="column" just="flex-start" align="center" >
+                    <Flexbox direction="row" just="space-between" align="flex-satrt" h="10%">
                         <span>Match Poll</span>
                         <ArrowRightOutlined style={{ fontSize: "1.4rem" }} />
                     </Flexbox>
-                    <List itemLayout="vertical"
-
-                        dataSource={[{ title: 'a' }]}
+                    <List itemLayout="vertical" style={{width:"100%"}}
+                        dataSource={[{ title: 'a' },{ title: 'a' }]}
                         renderItem={item => (
-                            <List.Item >
+                            <List.Item  style={{width:"100%"}}>
 
                                 {
                                     true ? <Flexbox direction="row" just="space-between" align="center">
@@ -44,7 +42,7 @@ export const MatchBox = () => {
                     >
 
                     </List>
-                </Space>
+                
             </Flexbox>
         </div>
     )
