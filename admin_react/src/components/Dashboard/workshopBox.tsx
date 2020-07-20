@@ -13,19 +13,20 @@ export const WorkshopBox = () => {
     return (
         <div className="workshop_box">
 
-            <Flexbox direction="column" just="center" align="flex-start">
-                <Space direction="vertical">
-                    <Flexbox direction="row" just="space-between" align="center">
+            <Flexbox direction="column" just="flex-start" align="center">
+               
+                    <Flexbox direction="row" just="space-between" align="center" h="10%">
                         <span className="nav_t_font">Workshop Poll</span>
                         <PlusSquareOutlined />
                     </Flexbox>
                    <Skeleton paragraph={{rows:6}} loading={false} active>
                    <Collapse
+                        style={{width:"100%",marginBottom:"2vh",marginTop:"1vw"}}
                         bordered={false}
                         defaultActiveKey={['1']}
                         expandIconPosition="right"
                         expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
-                        className="site-collapse-custom-collapse"
+                       
                     >
                         <Panel header="This is panel header 1" key="1" className="site-collapse-custom-panel">
                             <p>{text}</p>
@@ -38,12 +39,10 @@ export const WorkshopBox = () => {
                         </Panel>
                     </Collapse>
                    </Skeleton>
-                </Space>
+              
 
             </Flexbox >
-            <div className="button_go_detail">
-                <span>Go Details</span>
-            </div>
+           
         </div>
     )
 }
