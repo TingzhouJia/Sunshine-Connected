@@ -7,11 +7,11 @@ export const HeaderBread:React.FC=()=>{
     return (
         <Breadcrumb style={{marginLeft:'1vw'}} separator={<span className="title_font">/</span>}>
             {
-                breads.length<=2?<Breadcrumb.Item><a className="title_font">Dashboard</a></Breadcrumb.Item>:(
+                breads.length<=2?<Breadcrumb.Item><span className="title_font">Dashboard</span></Breadcrumb.Item>:(
                     breads.map((item,index)=>(
                         <Breadcrumb.Item>
                         {
-                            index!==breads.length-1?<Link to={`/${item}`}><a className="title_font">{item}</a></Link>:
+                            index!==breads.length-1?<Link to={`/${item}`}><span aria-label={`go to ${item} page`} className="title_font">{item}</span></Link>:
                         <span className="title_font">{item}</span>
                         }
                         </Breadcrumb.Item>

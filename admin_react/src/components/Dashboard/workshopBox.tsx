@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flexbox } from '../../style'
+import { Flexbox,Span } from '../../style'
 import { PlusSquareOutlined, CaretRightOutlined } from '@ant-design/icons'
 import { Space, Collapse, Skeleton } from 'antd'
 import './index.less'
@@ -16,8 +16,8 @@ export const WorkshopBox = () => {
             <Flexbox direction="column" just="flex-start" align="center">
                
                     <Flexbox direction="row" just="space-between" align="center" h="10%">
-                        <span className="nav_t_font">Workshop Poll</span>
-                        <PlusSquareOutlined />
+                        <Span weight="bold" size="1.2rem">Workshop Poll</Span>
+                        <PlusSquareOutlined  style={{fontSize:"1.2rem",color:"#F1C331"}}/>
                     </Flexbox>
                    <Skeleton paragraph={{rows:6}} loading={false} active>
                    <Collapse
