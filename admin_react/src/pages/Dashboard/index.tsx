@@ -1,9 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Flexbox } from '../../style'
-import { CalendarRowBox } from '../../components/Dashboard/calendarRowBox'
-import { WorkshopBox } from '../../components/Dashboard/workshopBox'
-import { MatchBox } from '../../components/Dashboard/matchBox'
+import { CalendarRowBox, WorkshopBox,MatchBox } from '../../components/Dashboard'
 import { HeaderBread } from '../../components/global'
 
 const Wrapper=styled.div`
@@ -14,8 +12,7 @@ const Wrapper=styled.div`
     padding-left:2vw;
     padding-bottom:1vw;
     justify-content: space-between;
-    align-items:space-evenly;
-
+    align-items:space-between;
 `
 
 export const DashBoard:React.FC=()=>{

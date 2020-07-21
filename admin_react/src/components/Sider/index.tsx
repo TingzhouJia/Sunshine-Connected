@@ -4,7 +4,7 @@ import { Link,useLocation } from 'react-router-dom'
 import './sider.less'
 import { UserBar } from './userBar'
 import {Span} from '../../style'
-import { TeamOutlined, EyeOutlined, ApiOutlined, UserSwitchOutlined, CommentOutlined, BellOutlined, AppstoreOutlined, CalendarOutlined, CarryOutOutlined, ContactsOutlined, PlaySquareOutlined, DesktopOutlined } from '@ant-design/icons'
+import { TeamOutlined, EyeOutlined, ApiOutlined, UserSwitchOutlined, CommentOutlined, BellOutlined, AppstoreOutlined, CalendarOutlined, CarryOutOutlined, ContactsOutlined, PlaySquareOutlined, DesktopOutlined, VideoCameraAddOutlined } from '@ant-design/icons'
 export const SideMenu: React.FC = () => {
     const menuItems=['buddy_sys','audit_sys','video_sys']
     const [curOpen, setcurOpen] = useState<string[]>([])
@@ -51,6 +51,11 @@ export const SideMenu: React.FC = () => {
                     <Menu.Item key="/workshop/poll" icon={<DesktopOutlined />}>
                        <Tooltip placement="topRight" title="Workshop Poll">
                        <Link to='/workshop/poll'>Workshop Poll</Link>
+                       </Tooltip>
+                    </Menu.Item>
+                    <Menu.Item key="/workshop/publish" icon={<VideoCameraAddOutlined />}>
+                       <Tooltip placement="topRight" title="Publish Video">
+                       <Link to='/workshop/publish'>Publish VIdeo</Link>
                        </Tooltip>
                     </Menu.Item>
                     <Menu.Item key="/workshop/video" icon={<PlaySquareOutlined />}>
