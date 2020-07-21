@@ -17,5 +17,7 @@ export class AppController {
   }
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
-  async upload(@UploadedFile('file') file) {}
+  async upload(@UploadedFile('file') file) {
+    return await this.appService.upload(file)
+  }
 }
