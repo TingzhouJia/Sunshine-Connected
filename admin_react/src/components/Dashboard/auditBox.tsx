@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flexbox } from '../../style'
+import { Flexbox,Span } from '../../style'
 import { Space, Tag, Button, Table } from 'antd'
 
 
@@ -61,9 +61,9 @@ export const AuditBox = () => {
         <div className="audit_box">
             <Space direction="vertical">
                 <Flexbox direction="column" just="space-between" align="flex-start">
-                    <span className="nav_t_font">Audit</span>
+                    <Span weight="bold" size="2rem">All Audit</Span>
                     <div>
-                        <span>All Audit</span>
+                        
 l
                     </div>
                 </Flexbox>

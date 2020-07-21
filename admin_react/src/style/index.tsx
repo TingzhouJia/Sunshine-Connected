@@ -9,3 +9,13 @@ export const Flexbox=styled.div<{direction:string,just:string,align:string,w?:st
     ${props=>props.extra};
 
 `
+
+export const Span=styled.span<{weight?:string,color?:string,size?:string}>`
+
+    width:auto;
+    font-weight:${props=>props.weight||500};
+    color:${props=>props.color||"#F1C331"};
+    font-size:${props=>props.size||"1rem"};
+
+
+`

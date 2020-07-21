@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import dayjs from 'dayjs'
 
 import { Select } from 'antd'
-const {Option}=Select
+import { Flexbox } from '../../style'
+const { Option } = Select
 const WeekdayView = styled.div`
     display:flex;
     flex-direction:column;
@@ -17,8 +18,7 @@ const HeaderView = styled.div`
     height:10%;
     width:100%;
     padding-left:7%;
-    padding-right:3%;
-   
+    padding-right:3%; 
     flex-direction:row;
     justify-content:space-between;
     align-items:center;
@@ -28,14 +28,16 @@ const HeaderView = styled.div`
 const SideView = styled.div`
     display:flex;
     flex-direction:column;
-    justify-content:stretch;
-    min-height:100%;
+    justify-content:space-between;
+    overflow:auto;
+    height:100%;
     width:7%;
     padding-right:1vw;
 `
 
 const ContentView = styled.div`
     width:100%;
+    height:90%;
     display:flex;
     flex-direction:row;
     align-items:flex-start;
@@ -57,24 +59,24 @@ const HeaderGrid = styled.div<{ width: number }>`
     justify-content:center;
     align-items:center;
     height:100%;
-    width:${props => props.width||100}%;
+    width:${props => props.width || 100}%;
 `
-const GridItem=styled.div<{top:boolean}>`
+const GridItem = styled.div<{ top: boolean }>`
     width:100%;
     height:50%;
-    ${props=>props.top?'border-top':'border-bottom'}:1px soild #DDD;
+    ${props => props.top ? 'border-top' : 'border-bottom'}:1px soild #DDD;
     border-left:1px solid #ddd;
     border-right:1px solid #ddd;
 `
-const GridGroup=styled.div<{width:number,istoday:boolean}>`
-    width:${props=>props.width||100}%;
+const GridGroup = styled.div<{ width: number, istoday: boolean }>`
+    width:${props => props.width || 100}%;
     height:100%;
     display:flex;
-    background-color:${props=>props.istoday?'rgba(241,195,49,0.3)':'white'};
+    background-color:${props => props.istoday ? 'rgba(241,195,49,0.3)' : 'white'};
     flex-direction:column;
     position:relative;
 `
-const EventContainer=styled.div`
+const EventContainer = styled.div`
     position:absolute;
     top:0;
     left:0;
@@ -84,14 +86,28 @@ const EventContainer=styled.div`
 export const WeekCalendar = () => {
     const [type, setType] = useState('weekday')//default week day
     const [time, setTime] = useState(0)//default sparse
-    const now=dayjs()
+    const now = dayjs()
 
     const renderTimeSlot = () => {
         let cols = []
-        for (let i = 0; i < 24; i += 2) {
+        if (time === 0) {
+            for (let i = 0; i < 24; i += 2) {
 
-            cols.push(<TimeGrid height={100 / 12}>{i}:00</TimeGrid>)
+                cols.push(<TimeGrid height={100 / 12}>{i}:00</TimeGrid>)
 
+            }
+        } else if (time === 1) {
+            for (let i = 0; i < 24; i += 4) {
+
+                cols.push(<TimeGrid height={100 / 6}>{i}:00</TimeGrid>)
+
+            }
+        } else {
+            for (let i = 0; i < 25; i += 12) {
+
+                cols.push(<TimeGrid height={100 / 2}>{i}:00</TimeGrid>)
+
+            }
         }
         return cols.map((each) => (each))
     }
@@ -104,45 +120,54 @@ export const WeekCalendar = () => {
             cols.push(<HeaderGrid width={(type === 'weekday' ? 90 / 5 : 90 / 7)}>{start.add(i, 'd').format('ddd D')}</HeaderGrid>)
 
         }
-        return cols.map((each)=>each)
+        return cols.map((each) => each)
     }
 
-    const renderColumn=()=>{
-        const cols=[]
+    const renderColumn = () => {
+        const cols = []
         for (let i = (type === 'weekday' ? 1 : 0); i < (type === 'weekday' ? 6 : 7); i++) {
 
-            cols.push(<GridGroup width={type === 'weekday' ? 90 / 5 : 90 / 7} istoday={now.day()===i}>
-            <GridItem top={true} ></GridItem>
-            <GridItem top={false}></GridItem>
-            <EventContainer>
+            cols.push(<GridGroup width={type === 'weekday' ? 90 / 5 : 90 / 7} istoday={now.day() === i}>
+                <GridItem top={true} ></GridItem>
+                <GridItem top={false}></GridItem>
+                <EventContainer>
 
-            </EventContainer>
-        </GridGroup>)
+                </EventContainer>
+            </GridGroup>)
 
         }
-        return cols.map(each=>each);
+        return cols.map(each => each);
     }
     return (
-       <div>
-            <Select defaultValue={type} style={{minWidth:"20%"}} onChange={val=>setType(val)}>
-                <Option value="weekday">Weekday</Option>
-                <Option value="week">Week</Option>
-            </Select>
-            <WeekdayView>
-           
-                <HeaderView>
-                    {renderHeaderSlot(now)}
-                </HeaderView>
-           
-            <ContentView>
-                <SideView>
-                    {renderTimeSlot()}
-                </SideView>
-                {
-                renderColumn()
-                }
-            </ContentView>
-        </WeekdayView>
-   </div> 
-    )   
+        <div style={{height:"100%"}}>
+            <Flexbox direction="row" h="10%" just="flex-start" align="center">
+                <Select defaultValue={type} style={{ minWidth: "20%" }} onChange={val => setType(val)}>
+                    <Option value="weekday">Weekday</Option>
+                    <Option value="week">Week</Option>
+                </Select>
+                <Select defaultValue={time} style={{ minWidth: "20%" }} onChange={val => setTime(val)}>
+                    <Option value={0}>detailed</Option>
+                    <Option value={1}>middle</Option>
+                    <Option value={2}>simple</Option>
+                </Select>
+            </Flexbox>
+            <div style={{ height: "80%" }}>
+                <WeekdayView>
+
+                    <HeaderView>
+                        {renderHeaderSlot(now)}
+                    </HeaderView>
+
+                    <ContentView>
+                        <SideView>
+                            {renderTimeSlot()}
+                        </SideView>
+                        {
+                            renderColumn()
+                        }
+                    </ContentView>
+                </WeekdayView>
+            </div>
+        </div>
+    )
 }

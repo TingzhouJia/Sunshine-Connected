@@ -22,7 +22,7 @@ export const DashBoard:React.FC=()=>{
 
     return (<Wrapper>
         <HeaderBread/>
-        <Flexbox direction="row" just="space-between" align="center" w="60vw" h="40%">
+        <Flexbox direction="row" just="space-between" align="center" w="57vw" h="40%">
             <WorkshopBox/>
             <MatchBox/>
         </Flexbox>

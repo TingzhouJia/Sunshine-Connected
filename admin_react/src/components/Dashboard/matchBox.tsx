@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flexbox } from '../../style'
+import { Flexbox,Span } from '../../style'
 import { Space, List, Avatar, Button, Skeleton } from 'antd'
 import { ArrowRightOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router-dom'
@@ -9,8 +9,8 @@ export const MatchBox = () => {
         <div className="match_box">
             <Flexbox direction="column" just="flex-start" align="center" >
                     <Flexbox direction="row" just="space-between" align="flex-satrt" h="10%">
-                        <span>Match Poll</span>
-                        <ArrowRightOutlined style={{ fontSize: "1.4rem" }} />
+                        <Span size="1.2rem" weight="bold">Match Poll</Span>
+                        <ArrowRightOutlined style={{ fontSize: "1.2rem" ,color:"#F1C331"}} />
                     </Flexbox>
                     <List itemLayout="vertical" style={{width:"100%"}}
                         dataSource={[{ title: 'a' },{ title: 'a' }]}
