@@ -29,7 +29,7 @@ const SideView = styled.div`
     display:flex;
     flex-direction:column;
     justify-content:space-between;
-    overflow:auto;
+    align-items:flex-end;
     height:100%;
     width:7%;
     padding-right:1vw;
@@ -38,6 +38,7 @@ const SideView = styled.div`
 const ContentView = styled.div`
     width:100%;
     height:90%;
+
     display:flex;
     flex-direction:row;
     align-items:flex-start;
@@ -47,8 +48,8 @@ const TimeGrid = styled.div<{ height: number }>`
     width:100%;
     height:${props => props.height};
     display:flex;
+    font-size:0.6rem;
     flex-direction:column;
-
     justify-content:center;
     align-items:flex-end;
 `
@@ -151,7 +152,7 @@ export const WeekCalendar = () => {
                     <Option value={2}>simple</Option>
                 </Select>
             </Flexbox>
-            <div style={{ height: "80%" }}>
+            <div style={{ height: "90%" }}>
                 <WeekdayView>
 
                     <HeaderView>

@@ -19,3 +19,23 @@ export const Span=styled.span<{weight?:string,color?:string,size?:string}>`
 
 
 `
+
+
+export const RadiusBoard=styled.div<{w:string,h:string}>`
+    width:${props=>props.w};
+    height:${props=>props.h};
+    border-radius:20px;
+    box-shadow: 4px 4px 11px #BEBBBB;
+    padding:1vw;
+`
+
+export const Wrapper = styled.div`
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    padding-left:2vw;
+    padding-bottom:1vw;
+    justify-content: space-between;
+    align-items:space-between;
+`
