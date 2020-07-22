@@ -1,10 +1,12 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { Crud } from 'nestjs-mongoose-crud';
 import { Question } from '@libs/db/model';
 import { InjectModel } from 'nestjs-typegoose';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { ApiTags } from '@nestjs/swagger';
-import { QuestionRepository } from '@libs/db/repository';
+
+import { Pagination } from '../decorator/pagination.decorator';
+import { QuestionsService } from './questions.service';
 @Crud({ model: Question })
 @ApiTags('question')
 @Controller('questions')
@@ -12,6 +14,11 @@ export class QuestionsController {
   constructor(
     @InjectModel(Question)
     private readonly model: ReturnModelType<typeof Question>,
-    private readonly questionRepository: QuestionRepository,
+    private readonly questionService: QuestionsService,
   ) {}
+
+  @Get('byOne/:id')
+  async getQuestionByOne(@Param('id') id:string){
+    return await this.questionService.getQuestionListByUser(id)
+  }
 }

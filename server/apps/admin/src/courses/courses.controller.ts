@@ -45,7 +45,8 @@ export class CoursesController {
     return await this.courseService.getMyCourse(id, pagination);
   }
 
-  @ApiOperation({ description: 'fetch question list for one publisher' })
+
+  @ApiOperation({ description: 'fetch all question list for one publisher' })
   @Get('all_question/:id')
   async fetchQuestionList(
     @Param('id') id: string,

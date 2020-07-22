@@ -1,7 +1,10 @@
 import { configureStore, combineReducers, Action } from '@reduxjs/toolkit'
 import ReduxThunk, { ThunkAction } from 'redux-thunk'
+import answer from './answerSlice'
+import question from './questionSlice'
+import video from './videoSlice'
 const reducer = combineReducers({
-
+  answer,question,video
   })
   
   const store = configureStore({

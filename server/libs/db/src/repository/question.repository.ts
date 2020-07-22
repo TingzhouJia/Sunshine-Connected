@@ -52,4 +52,12 @@ export class QuestionRepository extends BaseRepository<Question> {
       { populates: [{ path: 'author' }] },
     );
   }
+
+
+
+  // async getSpeficQuestion(id:string){
+  //   return await super.findById(id,'',{
+  //     populates:
+  //   })
+  // }
 }
