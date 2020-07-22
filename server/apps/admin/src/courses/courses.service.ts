@@ -2,10 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { CourseRepository } from '@libs/db/repository';
 import { PaginationDto } from './dto/pagination.dto';
 import { CourseDto } from './dto/course.dto';
-import { Course, Audit } from '@libs/db/model';
+import { Course } from '@libs/db/model';
 
 
-import { getClassForDocument,DocumentType } from '@typegoose/typegoose';
 
 @Injectable()
 export class CoursesService {

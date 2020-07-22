@@ -6,6 +6,7 @@
     "@ant-design/icons": "^4.2.1",
     "@reduxjs/toolkit": "^1.4.0",
     "antd": "^4.4.2",
+    "axios": "^0.19.2",
     "dayjs": "^1.8.29",
     "formik": "^2.1.5",
     "react": "^16.13.1",

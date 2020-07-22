@@ -74,8 +74,8 @@ export class Course {
   author: Ref<User>;
 
   @ApiProperty({description:'category'})
-  @prop({enum:CATEGORY})
-  category:string
+  @prop()
+  category:string[]
 
   @ApiProperty({ description: 'author_id' })
   @prop()
