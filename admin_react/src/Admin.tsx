@@ -3,7 +3,9 @@ import { Layout } from 'antd'
 import {Switch,Route} from 'react-router-dom'
 import {DashBoard} from './pages'
 import SideMenu from './components/Sider'
-const { Content, Footer, Sider } = Layout
+import { EditVideo,PublishVideo } from './pages/PublishVideo'
+import { MatchVolunteerPage } from './pages/MatchVolunteer'
+const { Content, Sider } = Layout
 const Admin: React.FC = () => {
 
     return <Layout style={{ minHeight: "100vh",width:"100vw" }}>
@@ -16,6 +18,10 @@ const Admin: React.FC = () => {
             <Content>
                 <Switch>
                     <Route exact path="/" component={DashBoard} />
+                    <Route exact path="/workshop/editVideo" component={EditVideo}/>
+                    <Route exact path="/workshop/publishVideo" component={PublishVideo}/>
+                    <Route exact path="/audit/matching" component={MatchVolunteerPage}/>
+
                 </Switch>
             </Content>
         </Layout>

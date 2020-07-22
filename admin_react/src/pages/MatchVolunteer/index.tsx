@@ -6,7 +6,7 @@ import { Input } from "antd"
 import { MatchTable } from "../../components/Match/matchTable"
 
 
-export const MatchVolunteerPage = () => {
+export const MatchVolunteerPage:React.FC = () => {
 
 
 

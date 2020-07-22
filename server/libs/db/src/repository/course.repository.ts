@@ -86,9 +86,9 @@ export class CourseRepository extends BaseRepository<Course> {
       {},
       {
         populates: [
-          { model: 'Question', path: 'questions_count' },
+          { path: 'questionsCount' },
           { path: 'viewedCount' },
-          { path: 'author', model: 'User' },
+          {path:'question',populate:[{path:'author'}]},
           { path: 'progress' },
           { path: 'likeCount' },
         ],
