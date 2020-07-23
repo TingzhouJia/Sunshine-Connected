@@ -13,4 +13,7 @@ interface Answer{
   content: string;
   
   isDraft: boolean;
+
+  _id:string,
+  updatedAt:string
 }

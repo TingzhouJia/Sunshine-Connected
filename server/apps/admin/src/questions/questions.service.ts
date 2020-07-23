@@ -16,6 +16,7 @@ export class QuestionsService {
       pagination,
     );
   }
+  //used for elder population
   async getQuestionListByUser(id: string) {
     return await this.questionRepository.findAllAsync(
       { author_id: id },
@@ -24,12 +25,18 @@ export class QuestionsService {
         populates: [
           {
             path: 'question',
-            populate: [{ path: 'course', select: 'title cover _id' }],
+            populate: [{ path: 'course', select: 'title  _id' }],
           },
         ],
       },
     );
   }
+  /**
+   * get 
+   */
+
+
+
   async getQuestionListByVideo(id: string) {
     return await this.questionRepository.findAllAsync({ course_id: id }, '', {
       populates: [{ path: 'author' }],

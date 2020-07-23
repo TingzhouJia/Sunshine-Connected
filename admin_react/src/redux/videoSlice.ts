@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import { AppThunk } from '.';
+import { getVideoList, getOneVideo, updateVideo, createOneVideo } from '../repository/videoRepo';
 
 
 interface VideoState {
@@ -39,8 +40,10 @@ const VideoSlice=createSlice({
     reducers:{
         fetchVideosStart:startLoad,
         fetchVideoStart:startLoad,
+        createVideoStart:startLoad,
         updateVideoStart:startLoad,
         removeVideoStart:startLoad,
+        createVideoSuccess:getVideoSuccess,
         fetchVideoSuccess:getVideoSuccess,
         fetchVideoListSuccess:getVideoListSuccess,
         removeVideoSuccess:getVideoListSuccess,
@@ -52,15 +55,35 @@ const VideoSlice=createSlice({
 export const {
     fetchVideosStart,
     fetchVideoStart,
-    updateVideoStart
+    createVideoStart,
+    updateVideoStart,
+    createVideoSuccess,
+    removeVideoStart,
+    removeVideoSuccess,
+    fetchVideoListSuccess,
+    fetchVideoSuccess,updateVideoSuccess
 }=VideoSlice.actions
 
 export const fetchVideoList=(uid:string,pagination:Partial<Pagination<Video>>):AppThunk=>async (dispatch)=>{
     dispatch(fetchVideosStart)
-    
+    const res=await getVideoList(uid,pagination)
+    dispatch(fetchVideoListSuccess(res.data))
 }
 
+export const fetchVideo=(video_id:string):AppThunk=>async (dispatch)=>{
+    dispatch(fetchVideoStart)
+    const res=await getOneVideo(video_id)
+    dispatch(fetchVideoSuccess(res.data))
+}
 
-
-
+export const reviseVideo=(video_id:string,body:Partial<Video>):AppThunk=>async (dispatch)=>{
+        dispatch(updateVideoStart)
+        const res=await updateVideo(video_id,body)
+        dispatch(updateVideoSuccess(res.data))
+}
+export const createVideo=(body:Partial<Video>):AppThunk=>async (dispatch)=>{
+    dispatch(createVideoStart)
+    const res=await createOneVideo(body)
+    dispatch(createVideoSuccess(res.data))
+}
 export default VideoSlice.reducer
