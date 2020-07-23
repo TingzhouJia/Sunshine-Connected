@@ -26,7 +26,7 @@ function saveQuestion(state:AnswerState,{payload}:PayloadAction<Partial<Answer>>
 function Start(state:AnswerState){
     state.loading=true
 }
-function SetSelectedAnswer(state:AnswerState,{payload}:PayloadAction<Partial<Answer>){
+function SetSelectedAnswer(state:AnswerState,{payload}:PayloadAction<Partial<Answer>>){
     state.selectedAnswer=payload
 }
 
@@ -98,6 +98,12 @@ export const deleteDraft=(id:string):AppThunk=>async (dispatch)=>{
     dispatch(deleteDraftFinish(id))
 }
 
+
+export const deleteAnswer=(id:string):AppThunk=>async (dispatch)=>{
+    dispatch(deleteAnswerStart)
+    await removeAnswerById(id)
+    dispatch(deleteAnswerFinish(id))
+}
 
 export default AnswerSlice.reducer
 

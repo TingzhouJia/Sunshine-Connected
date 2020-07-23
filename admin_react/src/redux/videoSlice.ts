@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import { AppThunk } from '.';
-import { getVideoList, getOneVideo, updateVideo, createOneVideo } from '../repository/videoRepo';
+import { getVideoList, getOneVideo, updateVideo, createOneVideo, removeOneVideo } from '../repository/videoRepo';
 
 
 interface VideoState {
@@ -31,6 +31,10 @@ const getVideoSuccess=(state:VideoState,{payload}:PayloadAction<Partial<Video>>)
     state.loading=false
 }
 
+const removeSuccess=(state:VideoState,{payload}:PayloadAction<string>)=>{
+    state.videoList=state.videoList.filter(item=>item._id!==payload)
+    state.loading=false
+}
 
 
 
@@ -46,7 +50,7 @@ const VideoSlice=createSlice({
         createVideoSuccess:getVideoSuccess,
         fetchVideoSuccess:getVideoSuccess,
         fetchVideoListSuccess:getVideoListSuccess,
-        removeVideoSuccess:getVideoListSuccess,
+        removeVideoSuccess:removeSuccess,
         updateVideoSuccess:getVideoSuccess,
        
     }
@@ -85,5 +89,10 @@ export const createVideo=(body:Partial<Video>):AppThunk=>async (dispatch)=>{
     dispatch(createVideoStart)
     const res=await createOneVideo(body)
     dispatch(createVideoSuccess(res.data))
+}
+export const removeVideo=(id:string):AppThunk=>async (dispatch)=>{
+    dispatch(removeVideoStart)
+    await removeOneVideo(id)
+    dispatch(removeVideoSuccess(id))
 }
 export default VideoSlice.reducer

@@ -69,5 +69,7 @@ export const removeQuestion=(id:string):AppThunk=>async (dispatch)=>{
     dispatch(removeQuestionSuccess(res.data))
 }
 
+
+
 export default QuestionSlice.reducer
 
