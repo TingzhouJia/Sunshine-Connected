@@ -1,7 +1,7 @@
 import React from 'react'
 import { Layout } from 'antd'
 import {Switch,Route} from 'react-router-dom'
-import {DashBoard, EditVideo, PublishVideo, MatchVolunteerPage, AnswerQuestion} from './pages'
+import {DashBoard, EditVideo, PublishVideo, MatchVolunteerPage, AnswerQuestion, QuestionPage} from './pages'
 import SideMenu from './components/Sider'
 
 const { Content, Sider } = Layout
@@ -20,8 +20,9 @@ const Admin: React.FC = () => {
                     <Route exact path="/workshop/editVideo" component={EditVideo}/>
                     <Route exact path="/workshop/publishVideo" component={PublishVideo}/>
                     <Route exact path="/audit/matching" component={MatchVolunteerPage}/>
-                    <Route  path="/answers/create" component={AnswerQuestion}/>
-                    <Route  path="/answers/edit" component={AnswerQuestion}/>
+                    <Route  path="/workshop/answers/create" component={AnswerQuestion}/>
+                    <Route  path="/workshop/answers/edit" component={AnswerQuestion}/>
+                    <Route exact path="/workshop/questions" component={QuestionPage}/>
                 </Switch>
             </Content>
         </Layout>

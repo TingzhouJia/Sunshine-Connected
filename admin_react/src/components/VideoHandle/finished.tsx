@@ -4,19 +4,19 @@ import { Button, Result, Typography } from 'antd'
 import { Link } from 'react-router-dom'
 import { CloseCircleOutlined } from '@ant-design/icons';
 const { Paragraph, Text } = Typography;
-export const FinishSection: React.FC<{ success: boolean }> = ({success}) => {
+export const FinishSection: React.FC<{source:Partial<Video> }> = ({source}) => {
 
 
     return <RadiusBoard w="73vw" h="71vh">
        {
-           success? <Result
+           source.progress==="successed"? <Result
            status="success"
            title="Your Video is successfully published to elder population platform"
            subTitle="You can check and answer questions below your video, thanks for your contribution for our system"
            extra={[
              <Button type="primary" key="console">
-                 <Link to="/workshop/video" replace>
-                     Go To My Video Page
+                 <Link to="/workshop/videos" replace>
+                     Back To Video Page
                  </Link>
              </Button>,
             
@@ -27,7 +27,7 @@ export const FinishSection: React.FC<{ success: boolean }> = ({success}) => {
          subTitle="Please check and modify the following information before resubmitting."
          extra={[
            <Button type="primary" key="console">
-             <Link to="/workshop/video" replace><Span color="black" >Go To Video Page</Span> </Link>
+             <Link to="/workshop/videos" replace><Span color="black" >Back To Video Page</Span> </Link>
            </Button>,
            <Button key="resubmit"><Link to="/workshop/edit" replace>Resubmit</Link></Button>,
          ]}
@@ -44,13 +44,9 @@ export const FinishSection: React.FC<{ success: boolean }> = ({success}) => {
              </Text>
            </Paragraph>
            <Paragraph>
-             <CloseCircleOutlined className="site-result-demo-error-icon" /> Your account has been
-             frozen.
+             <CloseCircleOutlined className="site-result-demo-error-icon" /> {source.progress?.message}
            </Paragraph>
-           <Paragraph>
-             <CloseCircleOutlined className="site-result-demo-error-icon" /> Your account is not yet
-             eligible to apply.
-           </Paragraph>
+          
          </div>
        </Result>
        }

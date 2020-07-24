@@ -1,14 +1,12 @@
-
-
 interface Answer{
 
-  question?: Partial<Question>;
+  question: Partial<Question>;
 
  
   question_id: string;
 
   
-  author?: Partial<User>;
+  author: Partial<User>;
   
   author_id: string;
  
@@ -17,5 +15,6 @@ interface Answer{
   isDraft: boolean;
 
   _id:string,
+
   updatedAt:string
 }
