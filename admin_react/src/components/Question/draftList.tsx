@@ -19,7 +19,7 @@ export const DraftList: React.FC = () => {
     const router = useHistory()
     const handleEdit = (target: Partial<Answer>) => {
         dispatch(fetchOneAnswer(target))
-        router.replace('/answers/edit')
+        router.push('/workshop/answers/edit')
     }
 
     const handleDelete = (id?: string) => {

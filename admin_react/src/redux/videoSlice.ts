@@ -5,7 +5,7 @@ import { getVideoList, getOneVideo, updateVideo, createOneVideo, removeOneVideo 
 
 interface VideoState {
     curVideo:Partial<Video>|undefined,
-    videoList:Partial<Video>[]|any[],
+    videoList:Partial<Video>[]|undefined,
     loading:boolean
 
 }
@@ -30,11 +30,17 @@ const getVideoSuccess=(state:VideoState,{payload}:PayloadAction<Partial<Video>>)
     state.curVideo=payload
     state.loading=false
 }
-
-const removeSuccess=(state:VideoState,{payload}:PayloadAction<string>)=>{
-    state.videoList=state.videoList.filter(item=>item._id!==payload)
+const updateVideoFinish=(state:VideoState,{payload}:PayloadAction<Partial<Video>>)=>{
+    state.curVideo=payload
+    state.videoList=state.videoList?state.videoList.map(item=>(item.id===payload.id?payload:item)):undefined
     state.loading=false
 }
+
+const removeSuccess=(state:VideoState,{payload}:PayloadAction<string>)=>{
+    state.videoList=state.videoList?state.videoList.filter(item=>item.id!==payload):undefined
+    state.loading=false
+}
+
 
 
 
@@ -51,7 +57,7 @@ const VideoSlice=createSlice({
         fetchVideoSuccess:getVideoSuccess,
         fetchVideoListSuccess:getVideoListSuccess,
         removeVideoSuccess:removeSuccess,
-        updateVideoSuccess:getVideoSuccess,
+        updateVideoSuccess:updateVideoFinish,
        
     }
 })

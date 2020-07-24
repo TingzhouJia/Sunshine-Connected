@@ -5,11 +5,11 @@ import { AnswerEditor } from "./answerEditor";
 
 
 const { TabPane } = Tabs;
-export const AnswerTabs:React.FC<{selectedAnswer:Partial<Answer>}>=({selectedAnswer})=>{
+export const AnswerTabs:React.FC=()=>{
    
     return <Tabs defaultActiveKey={"edit"} style={{height:"68vh"}}>
         <TabPane tab='Create Answer' key="edit">
-        <AnswerEditor selected={selectedAnswer} />
+        <AnswerEditor  />
         </TabPane>
         <TabPane tab="From Draft Box" key="draft">
             <DraftList />

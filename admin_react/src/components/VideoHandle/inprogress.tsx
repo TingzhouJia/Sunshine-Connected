@@ -1,19 +1,22 @@
 import { RadiusBoard, Flexbox, Span } from "../../style"
 import React from "react"
-import {Link} from 'react-router-dom'
-import { Button } from "antd"
+import { Link, useHistory } from 'react-router-dom'
+import { Button, Result } from "antd"
 
 
-export const Inprogress=()=>{
+export const Inprogress = () => {
+    const router=useHistory()
     return <RadiusBoard w="73vw" h="71vh">
-            <Flexbox direction="row" just="space-between" align="flex-start">
-                <RadiusBoard w="50%" h="100%">
-                    <img src="../../../public/progress.jpg" alt="progress image" width="100%" style={{objectFit:"fill"}}></img>
-                </RadiusBoard>
-                <Flexbox direction="column" just="flex-start" align="flex-start" w="45%">
-                    <Button ><Link to='/workshop/editVideo' replace><Span>Resbusmit</Span></Link></Button>
-                </Flexbox>
-            </Flexbox>
-            
+
+        <Result
+            title="Your operation has been executed"
+            subTitle="Our coordinator will evaluate your post as soon as possible, please be patient"
+            extra={
+                [<Button onClick={()=>router.replace('/workshop/videos')}  type="primary" key="console">Go Back To Video Page</Button>,
+                <Button ><Link to='/workshop/editVideo' replace><Span>Revise Material</Span></Link></Button>]
+            }
+        />
+
+
     </RadiusBoard>
 }

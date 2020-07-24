@@ -3,13 +3,14 @@ import React, { useState, useEffect } from "react"
 import {Editor} from '@tinymce/tinymce-react'
 import { Button, message, Modal } from "antd"
 import { useDispatch, useSelector } from "react-redux"
-import { RootState, createDraft, createAnswer, updateAnswer } from "../../redux"
+import { RootState, createDraft, createAnswer, updateAnswer, turnDtoA } from "../../redux"
 import { useHistory, useParams, useLocation } from "react-router"
 import { ExclamationCircleOutlined } from "@ant-design/icons"
 
 const { confirm } = Modal;
-export const AnswerEditor:React.FC<{selected:Partial<Answer>}>=({selected})=>{
-    const [content,setContent]=useState(selected.content?selected.content:'')
+export const AnswerEditor:React.FC=()=>{
+    const {loading,selectedAnswer}=useSelector((state:RootState)=>state.answer)
+    const [content,setContent]=useState(selectedAnswer?selectedAnswer.content:'')
     const [saved, setsaved] = useState(false)
     const dispatch=useDispatch()
     
@@ -50,13 +51,20 @@ export const AnswerEditor:React.FC<{selected:Partial<Answer>}>=({selected})=>{
               return
           }
             const answer:Partial<Answer>={
-                ...selected,
+                ...selectedAnswer,
                 content
                
 
             }
             setsaved(true)
-        param.pathname==='/answers/edit'? dispatch(createDraft(answer)):(selected._id?dispatch(updateAnswer(selected._id,answer)):'')
+            if(param.pathname==='/answers/create'){
+                dispatch(createDraft(answer))
+            }else{
+                if(selectedAnswer&&selectedAnswer._id){
+                    dispatch(updateAnswer(selectedAnswer._id,answer))
+                }
+            }
+            message.success('save answer success')
             route.goBack()
       }
       const handleReply=()=>{
@@ -65,13 +73,21 @@ export const AnswerEditor:React.FC<{selected:Partial<Answer>}>=({selected})=>{
             return
         }
         const answer:Partial<Answer>={
-            ...selected,
+            ...selectedAnswer,
             content,
            
 
         }
         setsaved(true)
+       if(param.pathname==='/answers/edit'){
+        if(selectedAnswer&&selectedAnswer._id){
+            dispatch(turnDtoA(selectedAnswer._id,answer))
+        }
+           
+       }else{
         dispatch(createAnswer(answer))
+       }
+       message.success('answer question success')
         route.goBack()
       }
     return <Flexbox direction="column" just="flex-start" align="space-between" h="90%" >

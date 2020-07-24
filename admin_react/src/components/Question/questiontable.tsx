@@ -66,7 +66,7 @@ export const QuestionTable: React.FC = () => {
     const handleAnswer=(val:string)=>{
        if(questionList){
         dispatch(fetchQuestion(val))
-        router.push('/answers/create')
+        router.push('/workshop/answers/create')
        }
        else{
            message.error('error happening!')

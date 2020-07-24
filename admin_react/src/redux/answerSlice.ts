@@ -27,6 +27,11 @@ function updateAnswerSuccess(state: AnswerState, { payload }: PayloadAction<Part
 
     state.loading = false
 }
+function turnDraftToAnswerSuccess(state:AnswerState,{payload}:PayloadAction<Partial<Answer>>){
+    state.draftList = state.draftList ? state.draftList.filter(item => item._id !== payload._id ) : undefined
+    state.answerList=state.answerList?[...state.answerList,payload]:[payload]
+    state.loading=false
+}
 
 function Start(state: AnswerState) {
     state.loading = true
@@ -58,6 +63,7 @@ const AnswerSlice = createSlice({
         answerQuestionSuccess: finishQuestion,
         fetchDraftSuccess: SetSelectedAnswer,
         fetchAnswerListSuccess: finishQuestion,
+        turnDraftToAnswerFinsih:turnDraftToAnswerSuccess,
         deleteAnswerStart: Start,
         saveAnswerStart: Start,
         updateAnswerFinish: updateAnswerSuccess,
@@ -71,6 +77,7 @@ export const {
     fetchAnswerListStart,
     fetchAnswerListSuccess,
     saveDraftSuccess,
+    turnDraftToAnswerFinsih,
     answerQuestionSuccess,
     updateAnswerFinish,
     saveAnswerStart,
@@ -131,6 +138,11 @@ export const deleteAnswer = (id: string): AppThunk => async (dispatch) => {
     dispatch(deleteAnswerFinish(id))
 }
 
+export const turnDtoA=(id:string,doc:Partial<Answer>): AppThunk => async (dispatch) =>{
+    dispatch(fetchDraftStart)
+    const res=await updateOneAnswer(id, doc)
+    dispatch(turnDraftToAnswerFinsih(res.data))
+}
 export default AnswerSlice.reducer
 
 
