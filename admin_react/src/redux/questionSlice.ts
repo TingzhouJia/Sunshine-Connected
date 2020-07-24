@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { AppThunk } from ".";
-import { getAllQuestionListByOnePublisher } from "../repository";
-import { deleteQuestionById } from "../repository/questionRepo";
+import { getAllQuestionListByOnePublisher, getTypedQuestionListByOne, deleteQuestionById, fetchOneQuestion  } from "../repository";
+
 
 
 interface QuestionState{
@@ -59,8 +59,15 @@ export const fetchQuestionList=(id:string,pagination:Pagination<Video>):AppThunk
     dispatch(fetchQuestionListSuccess(res.data))
 }
 
-export const fetchQuestion=(body:Partial<Question>)=>(dispatch:any)=>{
-    dispatch(fetchQuestionSuccess(body))
+export const fetchQuestion=(id:string):AppThunk=>async (dispatch)=>{
+    dispatch(fetchQuestionStart)
+    const res=await fetchOneQuestion(id)
+    dispatch(fetchQuestionSuccess(res.data))
+}
+export const fetchTypedList=(id:string,pagination:Pagination<Video>,answered:string):AppThunk=>async (dispatch)=>{
+    dispatch(fetchQuestionListStart)
+    const res=await getTypedQuestionListByOne(id,pagination,answered)
+    dispatch(fetchQuestionListSuccess(res.data))
 }
 
 export const removeQuestion=(id:string):AppThunk=>async (dispatch)=>{
@@ -68,6 +75,8 @@ export const removeQuestion=(id:string):AppThunk=>async (dispatch)=>{
     const res=await deleteQuestionById(id)
     dispatch(removeQuestionSuccess(res.data))
 }
+
+
 
 export default QuestionSlice.reducer
 

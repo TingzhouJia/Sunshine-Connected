@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query, Post } from '@nestjs/common';
+import { Controller, Get, Param, Query, Post, Put, Body } from '@nestjs/common';
 import { Answer } from '@libs/db/model';
 import { Crud } from 'nestjs-mongoose-crud';
 import { InjectModel } from 'nestjs-typegoose';
@@ -8,9 +8,10 @@ import { AnswersService } from './answers.service';
 import { ApiTags } from '@nestjs/swagger';
 import { Pagination } from '../decorator/pagination.decorator';
 import { PaginationDto } from '../courses/dto/pagination.dto';
+import { identity } from 'rxjs';
 
 @ApiTags('')
-@Crud({ model: Answer })
+@Crud({ model: Answer ,routes:{update:false}})
 @Controller('answers')
 export class AnswersController {
   constructor(
@@ -20,13 +21,18 @@ export class AnswersController {
 
   @Get('draft/:id')
   async getDraftList(@Param('id') id: string) {
-    return this.answerService.getDraftAnswer(id);
+    return await  this.answerService.getDraftAnswer(id);
   }
   @Get('pagination/:id')
   async getAnswerPagination(
     @Param('id') id: string,
     @Pagination() pagination: PaginationDto<Answer>,
   ) {
-    return this.answerService.getAnswerByAuthorId(id, pagination);
+    return  await this.answerService.getAnswerByAuthorId(id, pagination);
+  }
+
+  @Put(':id')
+  async updateAnswer(@Param('id') id:string,@Body('answers') body:AnswerDto){
+    return await this.answerService.updateAnswer(body,id)
   }
 }

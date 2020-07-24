@@ -7,7 +7,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 import { Pagination } from '../decorator/pagination.decorator';
 import { QuestionsService } from './questions.service';
-@Crud({ model: Question })
+@Crud({ model: Question, })
 @ApiTags('question')
 @Controller('questions')
 export class QuestionsController {
@@ -19,6 +19,6 @@ export class QuestionsController {
 
   @Get('byOne/:id')
   async getQuestionByOne(@Param('id') id:string){
-    return await this.questionService.getQuestionListByUser(id)
+    return await this.questionService.getSpQuestion(id)
   }
 }

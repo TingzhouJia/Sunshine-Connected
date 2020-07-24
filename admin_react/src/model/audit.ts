@@ -14,7 +14,8 @@ interface Audit {
  
   progress: Partial<Progress>;
 
- 
+  updatedAt:string,
+  
   progress_id: string;
 
  

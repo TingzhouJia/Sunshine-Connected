@@ -10,13 +10,15 @@ export const Flexbox=styled.div<{direction:string,just:string,align:string,w?:st
 
 `
 
-export const Span=styled.span<{weight?:string,color?:string,size?:string}>`
+export const Span=styled.span<{weight?:string,color?:string,size?:string,w?:string}>`
 
-    width:auto;
+    width:${props=>props.w||'auto'};
     font-weight:${props=>props.weight||500};
     color:${props=>props.color||"#F1C331"};
     font-size:${props=>props.size||"1rem"};
-
+    overflow: hidden; word-wrap: break-word; text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
 
 `
 

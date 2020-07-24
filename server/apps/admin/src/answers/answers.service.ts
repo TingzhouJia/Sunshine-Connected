@@ -29,4 +29,8 @@ export class AnswersService {
   async createAnswer(doc: AnswerDto) {
     return await this.answerRepository.createAnswer(doc);
   }
+
+  async updateAnswer(doc:AnswerDto,id:string){
+    return await this.answerRepository.updateAnswer(id,doc)
+  }
 }

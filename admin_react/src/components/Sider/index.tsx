@@ -65,7 +65,12 @@ export const SideMenu: React.FC = () => {
                     </Menu.Item>
                     <Menu.Item key="/workshop/questions" icon={<CommentOutlined />}>
                         <Tooltip placement="topRight" title="Recent Questions">
-                        <Link to='/BuddySystem/questions'>Recent Questions</Link>
+                        <Link to='/workshop/questions'>Recent Questions</Link>
+                        </Tooltip>
+                    </Menu.Item>
+                    <Menu.Item key="/workshop/answers" icon={<CommentOutlined />}>
+                        <Tooltip placement="topRight" title="My Answers">
+                        <Link to='/workshop/answers'>My Answers</Link>
                         </Tooltip>
                     </Menu.Item>
                 </Menu.SubMenu>
