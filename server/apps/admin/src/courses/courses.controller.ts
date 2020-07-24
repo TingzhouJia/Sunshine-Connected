@@ -44,7 +44,11 @@ export class CoursesController {
   ) {
     return await this.courseService.getMyCourse(id, pagination);
   }
-
+  @Get('fetch_by_type/:id/:answered')
+  async fetchByType(@Param('id') id:string,@Pagination() pagination:PaginationDto<Course>,@Param('answered') answered:string)
+{
+  return await this.courseService.getTypedListByUser(id,pagination,answered==='1')
+}
 
   @ApiOperation({ description: 'fetch all question list for one publisher' })
   @Get('all_question/:id')

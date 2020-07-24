@@ -1,4 +1,4 @@
-import { Course, ProgressType } from '../model';
+import { Course, ProgressType, Question } from '../model';
 import { ReturnModelType, DocumentType } from '@typegoose/typegoose';
 import { BaseRepository, PaginationParams, Paginator } from './base.repository';
 import { InjectModel } from 'nestjs-typegoose';
@@ -54,9 +54,19 @@ export class CourseRepository extends BaseRepository<Course> {
     return super.paginator(
       { ...pagenationParam, query: { author_id: uid } },
       'title ',
-      { populates: [{ path: 'question', populate: [{ path: 'author' }] }] },
+      { populates: [{ path: 'question', populate: [{ path: 'author',select:'username' }], }] },
     );
   }
+
+  async getTypedQuestionListFromUser(uid: string,answered:boolean,
+    pagenationParam: PaginationParams<Course>,){
+      return super.paginator(
+        {...pagenationParam,query:{author_id:uid}},'title',{
+          populates: [{ path: 'question',match:{'isAnswered':answered}, populate: [{ path: 'author',select:'username' }], }] 
+        }
+      )
+  }
+
 
   /**
    * @description this is api for home page video

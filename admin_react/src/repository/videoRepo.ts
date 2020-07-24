@@ -26,8 +26,13 @@ export const removeOneVideo=async (id:string)=>{
 export const getAllQuestionListByOnePublisher=async(id:string,pagination:Pagination<Video>)=>{
 
     return await axios.post(`${baseurl}/all_question/${id}`,{
-        params:{
+        params:
             pagination
-        },
+        ,
     })
+}
+
+
+export const getTypedQuestionListByOne=async (id:string,pagination:Pagination<Video>,answered:string)=>{
+    return await axios.get(`${baseurl}/fetch_by_type/${id}/${answered}`,{params:pagination})
 }

@@ -7,6 +7,7 @@ import { Question } from '@libs/db/model';
 export class QuestionsService {
   constructor(private readonly questionRepository: QuestionRepository) {}
 
+  //for volunteer 
   async getQuestionPaginationByUser(
     id: string,
     pagination: PaginationDto<Question>,
@@ -16,6 +17,8 @@ export class QuestionsService {
       pagination,
     );
   }
+
+
   //used for elder population
   async getQuestionListByUser(id: string) {
     return await this.questionRepository.findAllAsync(
@@ -48,5 +51,9 @@ export class QuestionsService {
   }
   async cascadeDeleteVideo(id: string) {
     return await this.questionRepository.deleteQuestionByVideoId(id);
+  }
+
+  async getSpQuestion(id:string){
+    return await this.questionRepository.findByIdAsync(id,'',{populates:[{path:'course',select:'title'},{path:'author'}]})
   }
 }
