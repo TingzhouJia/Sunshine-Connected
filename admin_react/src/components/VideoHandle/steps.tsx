@@ -11,7 +11,7 @@ export const StepBar:React.FC<{status?: "wait" | "process" | "finish" | "error" 
         <Flexbox direction="row" just="center" align="center">
                 <Steps current={curstep} status={status}>
                     <Steps.Step title="Upload Video" description="Upload your video"></Steps.Step>
-                    <Steps.Step title="In Progress" description="Coordinators will check it"></Steps.Step>
+                    <Steps.Step title="In Progress" description="waiting"></Steps.Step>
                     <Steps.Step title="Done" ></Steps.Step>
                 </Steps>
         </Flexbox>

@@ -12,7 +12,7 @@ export const HeaderBread:React.FC=()=>{
                     breads.map((item,index)=>(
                         <Breadcrumb.Item>
                         {
-                            index!==breads.length-1?<Link to={`/${item}`}><span aria-label={`go to ${item} page`} className="title_font">{item}</span></Link>:
+                            index!==breads.length-1?<span aria-label={`go to ${item} page`} className="title_font">{item}</span>:
                         <span className="title_font">{item}</span>
                         }
                         </Breadcrumb.Item>

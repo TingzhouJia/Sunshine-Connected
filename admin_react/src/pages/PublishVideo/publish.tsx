@@ -5,13 +5,13 @@ import { HeaderBread } from "../../components/global";
 
 
 export const PublishVideo:React.FC=()=>{
-    const [step, setstep] = useState(1);
+    const [step, setstep] = useState(0);
 
     const getPage=(step:number)=>{
         switch(step){
+            case 0:
+                return <UploadPage callback={()=>setstep(1)}/>;
             case 1:
-                return <UploadPage callback={()=>setstep(2)}/>;
-            case 2:
                 return <Inprogress/>
         }
     }
