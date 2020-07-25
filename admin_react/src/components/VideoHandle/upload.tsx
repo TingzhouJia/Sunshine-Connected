@@ -1,8 +1,10 @@
 import { RadiusBoard, Flexbox, Span } from "../../style"
 import React, { useState, useReducer } from "react"
 import { useFormik } from 'formik'
-import { Input, Upload, message, Select, Button } from "antd"
+import { Input, Upload, message, Select, Button, Skeleton } from "antd"
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons"
+import { useSelector } from "react-redux"
+import { RootState } from "../../redux"
 
 interface source {
     video: string,
@@ -12,6 +14,8 @@ interface source {
 }
 
 export const UploadPage:React.FC<{callback:()=>void}> = ({callback}) => {
+    const {loading,curVideo}=useSelector((state:RootState)=>state.video)
+    const [video, setvideo] = useState(curVideo)
     const handleSubmit = (values: source) => {
         const {video,category,cover,title}=values
         if(video===''||cover===''||title===''||category.length==0){
@@ -90,7 +94,8 @@ export const UploadPage:React.FC<{callback:()=>void}> = ({callback}) => {
     }
     return <RadiusBoard w="73vw" h="71vh">
 
-        <Flexbox direction="column" just="space-between" align="space-between">
+     <Skeleton loading={loading} paragraph={{rows:6}}>
+     <Flexbox direction="column" just="space-between" align="space-between">
             <Flexbox direction="row" just="space-between" align="center" h="50vh">
                 <RadiusBoard h="100%" w="35vw">
 
@@ -134,6 +139,7 @@ export const UploadPage:React.FC<{callback:()=>void}> = ({callback}) => {
                 <Button onClick={()=>handleSubmit(formik.values)} type="primary"><Span color="black">Submit</Span></Button>
             </Flexbox>
         </Flexbox>
+     </Skeleton>
 
     </RadiusBoard >
 }

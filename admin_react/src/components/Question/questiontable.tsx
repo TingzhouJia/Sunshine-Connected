@@ -7,6 +7,7 @@ import { RootState, fetchQuestionList, fetchQuestion } from '../../redux'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { useHistory } from 'react-router'
+import { Pagination, Question } from '../../model'
 
 
 

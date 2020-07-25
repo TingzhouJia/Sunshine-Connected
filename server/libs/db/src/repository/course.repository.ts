@@ -52,17 +52,18 @@ export class CourseRepository extends BaseRepository<Course> {
     pagenationParam: PaginationParams<Course>,
   ) {
     return super.paginator(
+      //stage: ProgressType.SUCCESSED should add stage 
       { ...pagenationParam, query: { author_id: uid } },
-      'title ',
-      { populates: [{ path: 'question', populate: [{ path: 'author',select:'username' }], }] },
+      'title updatedAt questions',
+      { populates: [{ path: 'questions', select:'isAnswered content timing updatedAt author', populate: [{ path: 'author',select:'username avatar' }], },{path:'viewedCount'},{path:'likeCount'}] },
     );
   }
 
   async getTypedQuestionListFromUser(uid: string,answered:boolean,
     pagenationParam: PaginationParams<Course>,){
       return super.paginator(
-        {...pagenationParam,query:{author_id:uid}},'title',{
-          populates: [{ path: 'question',match:{'isAnswered':answered}, populate: [{ path: 'author',select:'username' }], }] 
+        {...pagenationParam,query:{author_id:uid}},'title updatedAt questions',{
+          populates: [{ path: 'questions',match:{'isAnswered':answered},select:'isAnswered content timing updatedAt author', populate: [{ path: 'author',select:'username avatar' }], }] 
         }
       )
   }
@@ -84,7 +85,7 @@ export class CourseRepository extends BaseRepository<Course> {
           { path: 'viewedCount' },
           { path: 'likeCount' },
           { path: 'questionCount' },
-          { path: 'author', select: '_id username avatar' },
+          { path: 'author', select: 'username avatar' },
         ],
       },
     );
@@ -98,7 +99,7 @@ export class CourseRepository extends BaseRepository<Course> {
         populates: [
           { path: 'questionsCount' },
           { path: 'viewedCount' },
-          {path:'question',populate:[{path:'author'}]},
+          {path:'questions',populate:[{path:'author'}]},
           { path: 'progress' },
           { path: 'likeCount' },
         ],

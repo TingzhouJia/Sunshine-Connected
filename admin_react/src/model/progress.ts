@@ -1,4 +1,6 @@
-interface Progress {
+import { User } from "./user";
+
+export interface Progress {
     status: string;
    
     message: string;
@@ -9,3 +11,4 @@ interface Progress {
    
     auditer?: Partial<User>;
 }
+

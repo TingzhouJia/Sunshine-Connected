@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { AppThunk } from ".";
 import { fetchAnswerListByUID, fetchDraftListByUID, removeAnswerById, createAnswers, updateOneAnswer } from "../repository";
+import { Answer, Pagination } from "../model";
 
 interface AnswerState {
     draftList: Partial<Answer>[] | undefined,

@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import { AppThunk } from '.';
 import { getVideoList, getOneVideo, updateVideo, createOneVideo, removeOneVideo } from '../repository/videoRepo';
+import { Video, Pagination } from '../model';
 
 
 interface VideoState {

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Video, Pagination } from '../model'
 const baseurl= `${process.env.REACT_TEST_URL}/courses`
 export const getVideoList=async(id:string,pagination:Partial<Pagination<Video>>)=>{
     

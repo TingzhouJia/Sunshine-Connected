@@ -17,6 +17,7 @@ import { IsOptional, Max, Min } from 'class-validator';
 import { ReturnModelType, DocumentType } from '@typegoose/typegoose';
 import { AnyParamConstructor } from '@typegoose/typegoose/lib/types';
 import { InternalServerErrorException } from '@nestjs/common';
+import { type } from 'os';
 
 export type OrderType<T> = Partial<
   Record<keyof Partial<T>, 'asc' | 'desc' | 'ascending' | 'descending' | 1 | -1>
@@ -211,8 +212,10 @@ export abstract class BaseRepository<T> {
       [key: string]: AnyType;
     } = {},
   ): Promise<Paginator<T>> {
-    const { limit, offset, page, order,query } = conditions;
-
+    let { limit, offset, page, order,query } = conditions;
+    
+    limit=+limit
+    
     // 拼装分页返回参数
     const result: Paginator<T> = {
       items: [],
@@ -244,6 +247,7 @@ export abstract class BaseRepository<T> {
       result.items = await this.findAllAsync(query, projection, options);
       // 获取总条数
       result.total = await this.count(query);
+      
       // 返回分页结果
       return Promise.resolve(result);
     } catch (e) {

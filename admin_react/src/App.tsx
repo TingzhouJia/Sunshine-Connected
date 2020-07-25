@@ -2,7 +2,7 @@ import React from 'react';
 import Admin from './Admin'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import "node_modules/video-react/dist/video-react.css";
+
 import 'antd/dist/antd.less'
 import './global.less'
 import store from './redux';

@@ -1,4 +1,8 @@
-interface Question{
+import { Answer } from "./answer";
+import { Video } from "./video";
+import { User } from "./user";
+
+export interface Question{
 
   course?: Partial<Video>,
 

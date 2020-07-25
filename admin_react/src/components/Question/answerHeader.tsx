@@ -1,6 +1,7 @@
 import { Flexbox,Span } from "../../style"
 import React from "react"
 import { Avatar } from "antd"
+import { Question, User } from "../../model"
 
 export const AnswerHeader:React.FC<{header:Partial<Question>,author:Partial<User>}>=({author,header})=>{
 
