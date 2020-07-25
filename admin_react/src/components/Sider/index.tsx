@@ -58,9 +58,9 @@ export const SideMenu: React.FC = () => {
                        <Link to='/workshop/publishVideo'>Publish VIdeo</Link>
                        </Tooltip>
                     </Menu.Item>
-                    <Menu.Item key="/workshop/video" icon={<PlaySquareOutlined />}>
+                    <Menu.Item key="/workshop/videos" icon={<PlaySquareOutlined />}>
                         <Tooltip title="Your Video">
-                        <Link to='/workshop/video'>Your Videos</Link>
+                        <Link to='/workshop/videos'>Your Videos</Link>
                         </Tooltip>
                     </Menu.Item>
                     <Menu.Item key="/workshop/questions" icon={<CommentOutlined />}>

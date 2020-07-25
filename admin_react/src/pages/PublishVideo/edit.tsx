@@ -10,7 +10,7 @@ import { useHistory } from 'react-router'
 
 export const EditVideo: React.FC = () => {
     const { loading, curVideo } = useSelector((state: RootState) => state.video)
-    const [curPos, setcurPos] = useState(2)
+    const [curPos, setcurPos] = useState(1)
     const router=useHistory()
     const getStep = useCallback(
         () => {

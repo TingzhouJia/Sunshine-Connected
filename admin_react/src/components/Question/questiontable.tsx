@@ -27,7 +27,7 @@ export const QuestionTable: React.FC = () => {
             dataIndex: 'author',
             key: 'author',
             ellipsis: true,
-            width: "20%"
+            width: "15%"
         }, {
             title: 'content',
             dataIndex: 'content',
@@ -46,7 +46,7 @@ export const QuestionTable: React.FC = () => {
             title: 'Date',
             dataIndex: 'date',
             key: 'date',
-            width: "25%",
+            width: "15%",
             sorter:true
         }, {
             title: "Video Name",
@@ -88,9 +88,9 @@ export const QuestionTable: React.FC = () => {
     return <Flexbox direction="column" just="flex-start" align="space-between">
       
         <Skeleton loading={loading} active paragraph={{rows:7}}>
-        <Flexbox direction="row" just="flex-start" align="center">
-            <Button disabled={!hasSelected} danger style={{ marginRight: "10px" }}><Span color="white">Delete</Span></Button>
-            <Button style={{ marginRight: "10px" }} icon={<RedoOutlined />}><Span color="black">Reload</Span></Button>
+        <Flexbox direction="row" just="flex-start" align="center" h="15%">
+            <Button disabled={!hasSelected} danger style={{ marginRight: "10px" }}><Span color="black">Delete</Span></Button>
+            <Button style={{ marginRight: "10px" }} icon={<RedoOutlined />}>Reload</Button>
 
         </Flexbox>
         <Table rowSelection={rowSelection} onChange={onTablechange} columns={columns} dataSource={questionList}>

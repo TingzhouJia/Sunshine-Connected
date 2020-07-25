@@ -78,7 +78,7 @@ export const VideoTable:React.FC =()=>{
            <Flexbox direction="row" just="flex-start" align="center" h="10%">
 
            </Flexbox>
-       <Table dataSource={[]} columns={columns} style={{width:"100%",height:"85%"}}/>
+       <Table dataSource={[]} columns={columns} style={{width:"100%",minHeight:"68vh"}}/>
        </Flexbox>
     </RadiusBoard>
 }
