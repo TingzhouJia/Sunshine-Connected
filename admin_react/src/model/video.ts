@@ -1,4 +1,8 @@
-interface Video {
+import { Question } from "./question";
+import { User } from "./user";
+import { Progress } from "./progress";
+
+export interface Video {
     id:string,
     stage:string,
     time:number,

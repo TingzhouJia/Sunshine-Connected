@@ -3,6 +3,7 @@ import { RadiusBoard, Span } from '../../style'
 import { Button, Result, Typography } from 'antd'
 import { Link } from 'react-router-dom'
 import { CloseCircleOutlined } from '@ant-design/icons';
+import { Video } from '../../model';
 const { Paragraph, Text } = Typography;
 export const FinishSection: React.FC<{source:Partial<Video> }> = ({source}) => {
 

@@ -1,13 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { OrderType } from '@libs/db/repository';
+import { OrderType, PaginationParams } from '@libs/db/repository';
 
-export class PaginationDto<T> {
-  @ApiProperty()
-  readonly limit: any;
-  @ApiProperty()
-  readonly offset: number;
-  @ApiProperty()
-  readonly page: number;
+export class PaginationDto<T> extends PaginationParams<T> {
+  public order?: Partial<Record<keyof T, "asc" | "desc" | "ascending" | "descending" | 1 | -1>>;
 
-  readonly order: OrderType<T>;
 }

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState, createDraft, createAnswer, updateAnswer, turnDtoA } from "../../redux"
 import { useHistory, useParams, useLocation } from "react-router"
 import { ExclamationCircleOutlined } from "@ant-design/icons"
+import { Answer } from "../../model"
 
 const { confirm } = Modal;
 export const AnswerEditor:React.FC=()=>{

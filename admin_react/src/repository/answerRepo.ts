@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Pagination, Answer } from '../model'
 
 
 export const fetchAnswerListByUID=async (id:string,pagination:Partial<Pagination<Answer>>)=>{

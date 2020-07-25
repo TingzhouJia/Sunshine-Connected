@@ -49,10 +49,10 @@ export class CoursesService {
   }
 
   async getAnswerListByUser(id: string, pagination: PaginationDto<Course>) {
-    await this.courseRepository.getQuestionListFromUser(id, pagination);
+   return await this.courseRepository.getQuestionListFromUser(id, pagination);
   }
 
   async getTypedListByUser(id:string,pagination:PaginationDto<Course>,answered:boolean){
-    await this.courseRepository.getTypedQuestionListFromUser(id,answered,pagination)
+    return await this.courseRepository.getTypedQuestionListFromUser(id,answered,pagination)
   }
 }

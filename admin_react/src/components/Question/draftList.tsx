@@ -5,6 +5,7 @@ import { Space, Button, message, Spin, Empty } from "antd"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchOneAnswer, deleteAnswer, RootState, fetchDraftList } from "../../redux"
 import { useHistory } from "react-router"
+import { Answer } from "../../model"
 export const DraftList: React.FC = () => {
 
 

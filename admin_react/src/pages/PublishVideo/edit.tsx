@@ -8,7 +8,6 @@ import { Skeleton, Button, Result } from 'antd'
 import { useHistory } from 'react-router'
 
 
-
 export const EditVideo: React.FC = () => {
     const { loading, curVideo } = useSelector((state: RootState) => state.video)
     const [curPos, setcurPos] = useState(2)

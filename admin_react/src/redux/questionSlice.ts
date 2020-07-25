@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { AppThunk } from ".";
 import { getAllQuestionListByOnePublisher, getTypedQuestionListByOne, deleteQuestionById, fetchOneQuestion  } from "../repository";
+import { Question, Pagination, Video } from "../model";
 
 
 

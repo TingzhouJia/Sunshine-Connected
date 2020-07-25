@@ -1,4 +1,9 @@
-interface Audit {
+import { Progress } from "./progress";
+import { Video } from "./video";
+import { User } from "./user";
+import { Workshop } from "./workshop";
+
+export interface Audit {
 
   auditer?: Partial<User>;
  
