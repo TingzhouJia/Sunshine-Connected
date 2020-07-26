@@ -93,8 +93,8 @@ export const {
 
 export const fetchAnswerList = (id: string, pagination: Partial<Pagination<Answer>>): AppThunk => async (dispatch) => {
     dispatch(fetchAnswerListStart)
-    const res = await fetchAnswerListByUID(id, pagination)
-    dispatch(fetchAnswerListSuccess(res.data))
+    const res = await fetchAnswerListByUID('5f04f91ae7ffdbbd6bb87e34', pagination)
+    dispatch(fetchAnswerListSuccess(res.data.items))
 }
 
 export const updateAnswer = (id: string, doc: Partial<Answer>): AppThunk => async (dispatch) => {
@@ -109,8 +109,8 @@ export const fetchOneAnswer = (body: Partial<Answer>) => (dispatch: any) => {
 
 export const fetchDraftList = (id: string): AppThunk => async (dispatch) => {
     dispatch(fetchDraftStart)
-    const res = await fetchDraftListByUID(id)
-    dispatch(fetchDraftSuccess(res.data))
+    const res = await fetchDraftListByUID('5f04f91ae7ffdbbd6bb87e34')
+    dispatch(fetchDraftSuccess(res.data.items))
 }
 
 export const deleteDraft = (id: string): AppThunk => async (dispatch) => {

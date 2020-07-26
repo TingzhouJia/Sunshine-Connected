@@ -57,7 +57,7 @@ export class CoursesController {
     @Param('id') id: string,
     @Pagination() pagination: PaginationDto<Course>,
   ) {
-    console.log(pagination)
+   
     return await this.courseService.getAnswerListByUser(id, pagination);
   }
   @ApiOperation({ description: 'create a video' })
