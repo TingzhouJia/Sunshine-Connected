@@ -56,8 +56,8 @@ export const {
 
 export const fetchQuestionList=(id:string,pagination:Pagination<Video>):AppThunk=>async (dispatch)=>{
     dispatch(fetchQuestionListStart)
-    const res=await getAllQuestionListByOnePublisher(id,pagination)
-    dispatch(fetchQuestionListSuccess(res.data))
+    const res=await getAllQuestionListByOnePublisher('5f04f91ae7ffdbbd6bb87e34',pagination)
+    dispatch(fetchQuestionListSuccess(res.data.items))
 }
 
 export const fetchQuestion=(id:string):AppThunk=>async (dispatch)=>{
@@ -67,8 +67,8 @@ export const fetchQuestion=(id:string):AppThunk=>async (dispatch)=>{
 }
 export const fetchTypedList=(id:string,pagination:Pagination<Video>,answered:string):AppThunk=>async (dispatch)=>{
     dispatch(fetchQuestionListStart)
-    const res=await getTypedQuestionListByOne(id,pagination,answered)
-    dispatch(fetchQuestionListSuccess(res.data))
+    const res=await getTypedQuestionListByOne('5f04f91ae7ffdbbd6bb87e34',pagination,answered)
+    dispatch(fetchQuestionListSuccess(res.data.items))
 }
 
 export const removeQuestion=(id:string):AppThunk=>async (dispatch)=>{

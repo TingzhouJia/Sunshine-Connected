@@ -21,11 +21,12 @@ export interface Video {
   
   
 
-    progress?: Partial<Progress>,
+    progress?: Partial<Progress>;
   
 
     viewedCount: number;
   
-    createdAt:string,
+    createdAt:string;
+    updatedAt:Date;
     likeCount: number;
 }

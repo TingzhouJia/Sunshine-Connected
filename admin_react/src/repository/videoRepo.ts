@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { Video, Pagination } from '../model'
-const baseurl= `${process.env.REACT_TEST_URL}/courses`
+const baseurl= `http://localhost:3009/courses`
 export const getVideoList=async(id:string,pagination:Partial<Pagination<Video>>)=>{
     
-    return await axios.get(`${baseurl}/fetch_all`,{
+    return await axios.get(`${baseurl}/fetch_all/${id}`,{
         params:{pagination}
     })
 }

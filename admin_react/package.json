@@ -10,6 +10,7 @@
     "axios": "^0.19.2",
     "dayjs": "^1.8.29",
     "formik": "^2.1.5",
+    "griffith": "^1.5.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-player": "^2.5.0",

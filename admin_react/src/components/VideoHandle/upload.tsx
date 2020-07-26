@@ -1,8 +1,8 @@
 import { RadiusBoard, Flexbox, Span } from "../../style"
-import React, { useState, useReducer } from "react"
+import React, { useState, useReducer, createRef, useRef } from "react"
 import { useFormik } from 'formik'
-import { Input, Upload, message, Select, Button, Skeleton, Space } from "antd"
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons"
+import { Input, message, Select, Button, Skeleton, Space } from "antd"
+import { LoadingOutlined, PlusOutlined, RestOutlined, ToTopOutlined } from "@ant-design/icons"
 import { useSelector } from "react-redux"
 import { RootState } from "../../redux"
 
@@ -15,7 +15,7 @@ interface source {
 
 export const UploadPage: React.FC<{ callback: () => void }> = ({ callback }) => {
     const { loading, curVideo } = useSelector((state: RootState) => state.video)
-    const [video, setvideo] = useState(curVideo)
+    const inputref=useRef<HTMLInputElement>(null)
 
     const handleSubmit = (values: source) => {
         const { video, category, cover, title } = values
@@ -27,7 +27,9 @@ export const UploadPage: React.FC<{ callback: () => void }> = ({ callback }) => 
             callback()
         }
     }
-    const reducer = (state: any, action: { type: 'load' } | { type: 'finish-source', source: any } | { type: 'finish-cover', cover: any }) => {
+    const reducer = (state: any,
+        action: { type: 'load' } | { type: 'finish-source', source: any }
+            | { type: 'finish-cover', cover: any } | { type: 'clean-cover' } | { type: 'clean-video' }) => {
         switch (action.type) {
             case "load":
                 return { ...state, loading: true }
@@ -35,6 +37,10 @@ export const UploadPage: React.FC<{ callback: () => void }> = ({ callback }) => 
                 return { ...state, source: action.source, loading: false }
             case "finish-cover":
                 return { ...state, loading: false, cover: action.cover }
+            case 'clean-cover':
+                return { ...state, cover: '' }
+            case 'clean-video':
+                return { ...state, source: '' }
         }
     }
 
@@ -49,16 +55,22 @@ export const UploadPage: React.FC<{ callback: () => void }> = ({ callback }) => 
 
 
     }
-
+    const list=(<input type="file" onChange={handleCoverUpload} ref={inputref} style={{display:"none"}} />)
     const reviseVideo = () => {
 
     }
     const uploadButton = (
-        <Flexbox w="10vw" h="10vw" direction="column" just="center" align="space-evenly">
-            <input type="file" onChange={handleCoverUpload} />
-            {Imgstate.loading ? <LoadingOutlined /> : <PlusOutlined />}
-            <Span color="black" size="1.5rem">Upload</Span>
+        <div style={{cursor:"pointer"}}>
+            <Flexbox w="10vw" h="10vw" direction="column" just="center" align="center" onClick={()=>{
+            if(inputref!==null&&inputref.current!==null){
+                inputref.current.click()
+            }
+        }}>
+            {list}
+            <ToTopOutlined  style={{color:"#F1C331",fontSize:"1.5rem"}}/>
+            <Span color="black" size="1.1rem">Upload</Span>
         </Flexbox>
+        </div>
     );
     const formik = useFormik<{ video: string, cover: string, title: string, category: string[] }>({
         initialValues: {
@@ -73,27 +85,32 @@ export const UploadPage: React.FC<{ callback: () => void }> = ({ callback }) => 
         formik.setValues({ ...formik.values, category: values })
     }
 
-    return <RadiusBoard w="73vw" h="71vh">
-
-
+    return (
+        <RadiusBoard w="73vw" h="71vh">
         <Skeleton loading={loading} paragraph={{ rows: 6 }}>
             <Flexbox direction="column" just="space-between" align="space-between">
-                <Flexbox direction="row" just="space-between" align="center" h="50vh">
-                    <RadiusBoard h="100%" w="35vw">
-
-                    </RadiusBoard>
+                <Flexbox direction="row" just="space-between" align="flex-start" h="50vh">
+                    <div style={{width:"35vw",height:"45vh",borderRadius:"5px",border:"1px dashed #979797",display:'flex',flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
+                        <img width="50%" height="50%" src={`${process.env.PUBLIC_URL}/upload.jpg`}/>
+                        <Button type="primary" color="black">Upload Video</Button>
+                    </div>
                     <Flexbox w="35vw" direction="column" just="flex-start" align="flex-start">
-                        <Flexbox direction="row" just="space-between" align="center" h="5vh">
-                            <Space direction="horizontal">
-                                <Span color="black">Title:</Span>
-                                <Input width="" placeholder="title name for video" id="name" onChange={(e) => formik.handleChange(e)}></Input>
-                            </Space>
+                        <Flexbox direction="row" just="flex-start" align="center" h="5vh">
+                         
+                                <Span color="black">Title: </Span>
+                                <Input style={{width:"30vw"}} placeholder="Title name for video" id="name" onChange={(e) => formik.handleChange(e)}></Input>
+                           
                         </Flexbox>
                         <Flexbox direction="row" just="space-between" align="flex-start" h="20vh" >
                             <Space direction="horizontal" >
                                 <Span color="black">Cover:</Span>
 
-                                {Imgstate.cover !== "" ? <img src={Imgstate.cover} alt="video cover" style={{ width: '10vw', height: "10vw", objectFit: "contain" }} /> : uploadButton}
+                                {Imgstate.cover !== "" ?
+                                    <>
+                                        <img src={Imgstate.cover} alt="video cover" style={{ width: '10vw', height: "10vw", objectFit: "contain" }} />
+                                        <RestOutlined onClick={() => dispatchImg({ type: 'clean-cover' })} />
+                                    </>
+                                    : uploadButton}
 
                             </Space>
 
@@ -118,7 +135,7 @@ export const UploadPage: React.FC<{ callback: () => void }> = ({ callback }) => 
                 </Flexbox>
             </Flexbox>
         </Skeleton>
-
-
     </RadiusBoard >
+    )
+
 }

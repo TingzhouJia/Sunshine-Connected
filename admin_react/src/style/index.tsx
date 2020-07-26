@@ -27,8 +27,9 @@ export const RadiusBoard=styled.div<{w:string,h:string}>`
     width:${props=>props.w};
     height:${props=>props.h};
     border-radius:20px;
-    box-shadow: 4px 4px 11px #BEBBBB;
+    box-shadow: 4px 4px 22px  #BEBBBB;
     padding:1vw;
+    background:white;
 `
 
 export const Wrapper = styled.div`
@@ -37,7 +38,7 @@ export const Wrapper = styled.div`
     display:flex;
     flex-direction:column;
     padding-left:2vw;
-    padding-bottom:1vw;
+    padding-bottom:3vw;
     justify-content: space-between;
     align-items:space-between;
 `

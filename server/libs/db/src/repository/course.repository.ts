@@ -27,15 +27,15 @@ export class CourseRepository extends BaseRepository<Course> {
     authorId: string,
     pagenationParam?: PaginationParams<Course>,
   ) {
+  
     return super.paginator(
       { ...pagenationParam, query: { author_id: authorId } },
-      {},
+      'title createdAt category stage',
       {
         populates: [
           { path: 'viewedCount' },
           { path: 'likeCount' },
           { path: 'questionCount' },
-          { path: 'progress' },
         ],
       },
     );
@@ -54,8 +54,8 @@ export class CourseRepository extends BaseRepository<Course> {
     return super.paginator(
       //stage: ProgressType.SUCCESSED should add stage 
       { ...pagenationParam, query: { author_id: uid } },
-      'title updatedAt questions',
-      { populates: [{ path: 'questions', select:'isAnswered content timing updatedAt author', populate: [{ path: 'author',select:'username avatar' }], },{path:'viewedCount'},{path:'likeCount'}] },
+      'title updatedAt questions author_id',
+      { populates: [{ path: 'questions', select:'isAnswered content timing updatedAt author_id author', populate: [{ path: 'author',select:'username avatar' }], },{path:'viewedCount'},{path:'likeCount'}] },
     );
   }
 
@@ -63,7 +63,7 @@ export class CourseRepository extends BaseRepository<Course> {
     pagenationParam: PaginationParams<Course>,){
       return super.paginator(
         {...pagenationParam,query:{author_id:uid}},'title updatedAt questions',{
-          populates: [{ path: 'questions',match:{'isAnswered':answered},select:'isAnswered content timing updatedAt author', populate: [{ path: 'author',select:'username avatar' }], }] 
+          populates: [{ path: 'questions',match:{'isAnswered':answered},select:'isAnswered content timing updatedAt author_id author', populate: [{ path: 'author',select:'username avatar' }], }] 
         }
       )
   }

@@ -1,17 +1,25 @@
 import { Table, Tag, Button } from "antd"
-import React from "react"
-import { Flexbox, RadiusBoard } from "../../style"
+import React, { useCallback } from "react"
+import { Flexbox, RadiusBoard, Span } from "../../style"
 import dayjs from "dayjs"
 import { useHistory } from "react-router"
 import { useDispatch } from "react-redux"
 import { fetchVideo } from "../../redux"
+import { Video } from "../../model"
 
-export const VideoTable:React.FC =()=>{
+export const VideoTable:React.FC<{source:Partial<Video>[],loading:boolean}> =({source,loading})=>{
     const router=useHistory()
     const dispatch=useDispatch()
-    const handleClick=(id:string)=>{
-        dispatch(fetchVideo(id))
-        router.push('/workshop/editVideo')
+    const handleClick=useCallback(
+        (id:string)=>{
+     
+            dispatch(fetchVideo(id))
+            router.push('/workshop/editVideo')
+        }
+        ,[]
+    )
+    const handleChange=(pagination: any, filters: any, sorter: any)=>{
+        console.log(sorter)
     }
     const columns=[
         {
@@ -29,16 +37,17 @@ export const VideoTable:React.FC =()=>{
                     case 'failed':
                         return <Tag  color="#f50">Failed</Tag>
                 }
-            }
+            },
+            
         },
         {
             title:'Type',
             dataIndex:'category',
             key:'category',
-            render:(category:any[])=>{
+            render:(item:Partial<Video>)=>{
                 return <Flexbox direction="column" just="center" align="space-between">
                    {
-                        category.map((item)=>{
+                        item.category?.map((item)=>{
                             return <Tag>{item}</Tag>
                             })
                    }
@@ -47,22 +56,31 @@ export const VideoTable:React.FC =()=>{
         },
         {
             title:"Title",
-            dataIndex:'title',
-            key:'title',
-
-        },{
-            title:'Date',
-            dateIndex:'date',
-            render:(val:string)=>{
-                return (dayjs(val,'YYYY/MM/DD'))
-            },
-            sorter:true
-        },{
+            dataIndex:'title'
+        },
+       {
             title:"Viewed By",
-            dataIndex:'viewedCount'
-        },{
+            dataIndex:'viewedCount',
+            key:"viewedCount"
+        },
+        {
+            title:'Date',
+            dataIndex:'createdAt',
+            render:(val: any)=>{
+                return <span>{dayjs(val).format('YYYY/MM/DD')}</span>
+            },
+          
+            
+        },
+        {
+            title:"Questions ",
+            dataIndex:'questionCount',
+            key:"questionCount"
+        },
+        {
             title:"Liked Count",
-            dataIndex:'likeCount'
+            dataIndex:'likeCount',
+            key:"likeCount"
         },{
             title:"Action",
             dataIndex:'_id',
@@ -72,13 +90,13 @@ export const VideoTable:React.FC =()=>{
         }
     ]
 
-    return <RadiusBoard w="78vw" h="78vh">
+    return <RadiusBoard w="78vw" h="74vh">
 
-       <Flexbox direction="column" just="center" align="space-between">
-           <Flexbox direction="row" just="flex-start" align="center" h="10%">
-
+       <Flexbox direction="column" just="space-between" align="flex-start">
+           <Flexbox direction="row" just="flex-start" align="center" h="10vh">
+                <Span weight="700" size="1.4rem" color="black">Video Table</Span>
            </Flexbox>
-       <Table dataSource={[]} columns={columns} style={{width:"100%",minHeight:"68vh"}}/>
+            <Table loading={loading}  dataSource={source} columns={columns} style={{width:"100%",minHeight:"64vh"}}/>
        </Flexbox>
     </RadiusBoard>
 }

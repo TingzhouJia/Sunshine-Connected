@@ -22,7 +22,7 @@ export const AnswerQuestion = () => {
             <HeaderBread />
             <Spin spinning={loading||qloading}>
                {
-                   history.pathname==='/answers/edit'?
+                   history.pathname==='/workshop/answers/edit'?
                    (
                     selectQuestion&&selectQuestion.author&&selectQuestion.content?(
                         <Flexbox h="85%" direction="column" just="center" align="space-between">

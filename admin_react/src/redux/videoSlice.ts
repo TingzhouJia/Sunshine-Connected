@@ -28,8 +28,10 @@ const getVideoListSuccess=(state:VideoState,{payload}:PayloadAction<Partial<Vide
 }
 
 const getVideoSuccess=(state:VideoState,{payload}:PayloadAction<Partial<Video>>)=>{
+   
     state.curVideo=payload
     state.loading=false
+
 }
 const updateVideoFinish=(state:VideoState,{payload}:PayloadAction<Partial<Video>>)=>{
     state.curVideo=payload
@@ -77,13 +79,15 @@ export const {
 
 export const fetchVideoList=(uid:string,pagination:Partial<Pagination<Video>>):AppThunk=>async (dispatch)=>{
     dispatch(fetchVideosStart)
-    const res=await getVideoList(uid,pagination)
-    dispatch(fetchVideoListSuccess(res.data))
+    const res=await getVideoList('5f04f91ae7ffdbbd6bb87e34',pagination)
+    dispatch(fetchVideoListSuccess(res.data.items))
 }
 
 export const fetchVideo=(video_id:string):AppThunk=>async (dispatch)=>{
+
     dispatch(fetchVideoStart)
     const res=await getOneVideo(video_id)
+    
     dispatch(fetchVideoSuccess(res.data))
 }
 
