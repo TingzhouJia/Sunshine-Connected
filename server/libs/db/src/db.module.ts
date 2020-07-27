@@ -41,7 +41,7 @@ const models = TypegooseModule.forFeature([
     }),
     models,
   ],
-  providers: [DbService],
+  providers: [DbService,],
   exports: [DbService, models],
 })
 export class DbModule {}

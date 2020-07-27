@@ -3,14 +3,14 @@ import { User } from "./user";
 import { Progress } from "./progress";
 
 export interface Video {
-    id:string,
-    stage:string,
-    time:number,
-    title:string,
-    question?:Partial<Question>[],
-
-    questionCount: number,
-
+    id:string
+    stage:string
+    time:number
+    title:string
+    question:Partial<Question>[]
+    cover:string
+    questionCount: number
+    format:string,
     file: string,
 
     author: Partial<User>,
@@ -21,7 +21,7 @@ export interface Video {
   
   
 
-    progress?: Partial<Progress>;
+    progress: Partial<Progress>;
   
 
     viewedCount: number;
