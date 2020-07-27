@@ -16,6 +16,7 @@ export class CourseDto {
   readonly progress_id?: string;
   @ApiProperty()
   readonly category:string[];
-  
+  @ApiProperty()
+  readonly format:string
 
 }

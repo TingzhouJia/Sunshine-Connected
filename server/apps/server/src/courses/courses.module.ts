@@ -5,7 +5,7 @@ import { CoursesController } from './courses.controller';
 
 
 @Module({
-  imports:[CourseRepository],
+  imports:[CourseRepository,],
   providers: [CoursesService,CourseRepository],
   controllers:[CoursesController]
 })

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { CloseCircleOutlined } from '@ant-design/icons';
 import { Video } from '../../model';
 const { Paragraph, Text } = Typography;
-export const FinishSection: React.FC<{source:Partial<Video> }> = ({source}) => {
+export const FinishSection: React.FC<{source:Partial<Video>,callback?:()=>void }> = ({source,callback}) => {
 
 
     return <RadiusBoard w="73vw" h="71vh">
@@ -30,7 +30,7 @@ export const FinishSection: React.FC<{source:Partial<Video> }> = ({source}) => {
            <Button type="primary" key="console">
              <Link to="/workshop/videos" replace><Span color="black" >Back To Video Page</Span> </Link>
            </Button>,
-           <Button key="resubmit"><Link to="/workshop/edit" replace>Resubmit</Link></Button>,
+           <Button key="resubmit" onClick={callback}>Resubmit</Button>,
          ]}
        >
          <div className="desc">

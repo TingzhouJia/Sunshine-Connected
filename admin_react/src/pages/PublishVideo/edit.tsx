@@ -55,11 +55,11 @@ export const EditVideo: React.FC = () => {
         (video) => {
             switch (curPos) {
                 case 0:
-                    return <UploadPage callback={() => setcurPos(1)} />
+                    return <UploadPage callback={() => setcurPos(1)} video={video} />
                 case 1:
                     return <Inprogress />
                 case 2:
-                    return <FinishSection source={video} />
+                    return <FinishSection source={video} callback={()=>setcurPos(0)} />
 
             }
         }, [curPos]

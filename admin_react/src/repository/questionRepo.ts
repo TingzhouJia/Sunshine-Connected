@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseurl=`${process.env.REACT_TEAT_URL}/questions`
+const baseurl=`http://localhost:3009/questions`
 
 
 

@@ -64,6 +64,8 @@ export class Course {
   questionCount: number;
   @prop()
   file: string;
+  @prop()
+  format:string;
   @ApiProperty({ description: 'author' })
   @prop({
     ref: 'User',

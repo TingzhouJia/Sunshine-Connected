@@ -12,8 +12,8 @@ export const Inprogress = () => {
             title="Your operation has been executed"
             subTitle="Our coordinator will evaluate your post as soon as possible, please be patient"
             extra={
-                [<Button onClick={()=>router.replace('/workshop/videos')}  type="primary" key="console">Go Back To Video Page</Button>,
-                <Button ><Link to='/workshop/editVideo' replace><Span>Revise Material</Span></Link></Button>]
+                <Button onClick={()=>router.replace('/workshop/videos')}  type="primary" key="console">Go Back To Video Page</Button>
+               
             }
         />
 
