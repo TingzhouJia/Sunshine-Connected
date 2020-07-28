@@ -1,8 +1,8 @@
 import { Wrapper, Flexbox } from "../../style"
 import React, { useEffect } from "react"
 import { HeaderBread } from "../../components/global"
-import { Button, Space } from "antd"
-import { VideoTable } from "../../components/VideoHandle/videoList"
+import { Button } from "antd"
+import { VideoTable } from "../../components/VideoHandle"
 import { useHistory } from "react-router"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState, fetchVideoList } from "../../redux"
@@ -14,7 +14,7 @@ export const VideoListPage:React.FC=()=>{
     const dispath=useDispatch()
     useEffect(() => {
         dispath(fetchVideoList('id',{limit:10}))
-    }, [])
+    }, [dispath])
     return <Wrapper>
         <HeaderBread/>
        {

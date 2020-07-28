@@ -11,7 +11,7 @@ import { PaginationDto } from '../courses/dto/pagination.dto';
 import { identity } from 'rxjs';
 
 @ApiTags('')
-@Crud({ model: Answer ,routes:{update:false}})
+@Crud({ model: Answer ,routes:{update:false,create:false}})
 @Controller('answers')
 export class AnswersController {
   constructor(
@@ -34,5 +34,9 @@ export class AnswersController {
   @Put(':id')
   async updateAnswer(@Param('id') id:string,@Body('answers') body:AnswerDto){
     return await this.answerService.updateAnswer(body,id)
+  }
+  @Post()
+  async create(@Body('answers') answer:AnswerDto){
+    return await this.answerService.createAnswer(answer)
   }
 }

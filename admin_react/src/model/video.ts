@@ -7,7 +7,7 @@ export interface Video {
     stage:string
     time:number
     title:string
-    question:Partial<Question>[]
+    questions:Partial<Question>[]
     cover:string
     questionCount: number
     format:string,

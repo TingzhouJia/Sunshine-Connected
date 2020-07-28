@@ -19,18 +19,18 @@ export const AnswerEditor:React.FC=()=>{
     const param=useLocation()
   
     const makesureLeave=()=>{
-        confirm({
-            title: 'Do you Want to leave page without save it?',
-            icon: <ExclamationCircleOutlined />,
-            content: 'Some descriptions',
-            onOk() {
-                setsaved(true)
-              route.goBack()
-            },
-            onCancel() {
+        // confirm({
+        //     title: 'Do you Want to leave page without save it?',
+        //     icon: <ExclamationCircleOutlined />,
+        //     content: 'Some descriptions',
+        //     onOk() {
+        //     setsaved(true)
+        //       route.goBack()
+        //     },
+        //     onCancel() {
              
-            },
-          });
+        //     },
+        //   });
     }
     useEffect(() => {
         
@@ -43,7 +43,7 @@ export const AnswerEditor:React.FC=()=>{
     }, [route])
     const handleEditorChange = (content: any, editor: any) => {
         setContent(content)
-        console.log('Content was updated:', content);
+      
       }
     
       const handleSave=()=>{
@@ -54,12 +54,11 @@ export const AnswerEditor:React.FC=()=>{
             const answer:Partial<Answer>={
                 ...selectedAnswer,
                 content
-               
-
             }
             setsaved(true)
-            if(param.pathname==='/answers/create'){
-                dispatch(createDraft(answer))
+            if(param.pathname==='/workshop/answers/create'){
+            
+                dispatch(createDraft({...answer,isDraft:true}))
             }else{
                 if(selectedAnswer&&selectedAnswer._id){
                     dispatch(updateAnswer(selectedAnswer._id,answer))
@@ -80,7 +79,7 @@ export const AnswerEditor:React.FC=()=>{
 
         }
         setsaved(true)
-       if(param.pathname==='/answers/edit'){
+       if(param.pathname==='/workshop/answers/edit'){
         if(selectedAnswer&&selectedAnswer._id){
             dispatch(turnDtoA(selectedAnswer._id,answer))
         }
@@ -93,7 +92,7 @@ export const AnswerEditor:React.FC=()=>{
       }
     return <Flexbox direction="column" just="flex-start" align="space-between" h="90%" >
             <Editor apiKey={process.env.REACT_APP_EDITOR_KEY} init={{
-                height:"80%",
+                height:"60vh",
                 menubar: false,
                 plugins: [
                   'advlist autolink lists link image charmap print preview anchor',
@@ -110,8 +109,8 @@ export const AnswerEditor:React.FC=()=>{
             onEditorChange={(content,editor)=>handleEditorChange(content,editor)}
             >
             </Editor>
-            <Flexbox direction="row" just="flex-end" align="center" h="10%">
-                    <Flexbox direction="row" w="50%" just="space-between" align="center"> 
+            <Flexbox direction="row" just="flex-end" align="center" h="20%">
+                    <Flexbox direction="row" w="30%" just="space-between" align="center"> 
                         <Button onClick={handleSave} style={{background:"#61BAFD",color:"white"}}>Save</Button>
                         <Button onClick={handleReply} type="primary">Reply Question</Button>
                     </Flexbox>

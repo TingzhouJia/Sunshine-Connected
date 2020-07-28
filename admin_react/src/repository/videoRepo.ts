@@ -26,7 +26,7 @@ export const removeOneVideo=async (id:string)=>{
 
 export const getAllQuestionListByOnePublisher=async(id:string)=>{
 
-    return await axios.post(`${baseurl}/all_question/${id}`)
+    return await axios.get(`${baseurl}/all_question/${id}`)
 }
 
 

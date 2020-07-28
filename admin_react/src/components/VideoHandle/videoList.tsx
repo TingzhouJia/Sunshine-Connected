@@ -29,7 +29,7 @@ export const VideoTable:React.FC<{source:Partial<Video>[],loading:boolean}> =({s
             render:(val:string)=>{
                 switch(val){
                     case 'need audit':
-                        return <Tag  color="yellow">Waiting</Tag>
+                        return <Tag  color="#f1c331">Waiting</Tag>
                     case 'in audit':
                         return <Tag color="#2db7f5">In Progress</Tag>
                     case 'successed':
