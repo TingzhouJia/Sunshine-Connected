@@ -7,19 +7,18 @@ import { RootState, fetchQuestionList, fetchQuestion } from '../../redux'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { useHistory } from 'react-router'
-import { Pagination, Question } from '../../model'
+import { Pagination, Question, Video } from '../../model'
+import dayjs from 'dayjs'
 
 
 
-export const QuestionTable: React.FC = () => {
+export const QuestionTable: React.FC<{sourcelist:Partial<Video>[],load:boolean}> = ({load,sourcelist}) => {
     const [selectedRowKeys, setSelected] = useState([])
-    const [paginations, setpagination] = useState<Pagination<Question>>({ limit: 10, page: 0, offset: 0, order: {} })
-    const { questionList, loading } = useSelector((state: RootState) => state.question)
+    const [paginations, setpagination] = useState<Partial<Pagination<Question>>>({ limit: 10, page: 0, offset: 0, order: {} })
+    const dispatch=useDispatch()
     const router=useHistory()
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(fetchQuestionList('', paginations))
-    }, [dispatch, questionList])
+  
+
     const hasSelected = selectedRowKeys.length > 0;
     const columns = [
         {
@@ -27,6 +26,7 @@ export const QuestionTable: React.FC = () => {
             dataIndex: 'author',
             key: 'author',
             ellipsis: true,
+            render:(author: any)=>author.username,
             width: "15%"
         }, {
             title: 'content',
@@ -35,49 +35,48 @@ export const QuestionTable: React.FC = () => {
             ellipsis: true
         },
         {
-            title:"Condition",dataIndex:'answered',key:'answered',
+            title:"Condition",dataIndex:'isAnswered',key:'answered',
             render:(val:boolean)=>(val?<Tag color="success">Answered</Tag>:<Tag color="red">Need Answer</Tag>),
-            filter:[
+            filters:[
                 {text:"answered",value:"1"},
                 {text:"not answered",value:"0"},
             ]
         },
          {
             title: 'Date',
-            dataIndex: 'date',
+            dataIndex: 'createdAt',
             key: 'date',
-            width: "15%",
-            sorter:true
+            render:(val:any)=>dayjs(val).format('YYYY/MM/DD'),
+            sorter:(a:any,b:any)=>dayjs(a).isBefore(dayjs(b))?-1:1
         }, {
             title: "Video Name",
-            dataIndex: 'title',
+            dataIndex: 'course',
             key: "title",
-            width: "25%"
+            width: "20%",
+            render:(val:any)=>val.title
         },
         {
             title: 'Action',
             dataIndex: '_id',
             key: "_id",
             render: (val: any) => {
-                return <Button onClick={()=>handleAnswer(val)}  style={{ background: "green" }}>Answer</Button>
+                return <Button onClick={()=>handleAnswer(val)}   >Answer</Button>
             }
         }
     ]
 
     const handleAnswer=(val:string)=>{
-       if(questionList){
+     
         dispatch(fetchQuestion(val))
         router.push('/workshop/answers/create')
-       }
-       else{
-           message.error('error happening!')
-       }
+      
     }
     const onSelectChange = (selectedRowKeys: any) => {
         console.log(selectedRowKeys)
+        setSelected(selectedRowKeys)
     }
     const onTablechange= (pagination:any,filter: any,orter: any) => {
-        console.log(pagination)
+        console.log(filter)
        // dispatch(fetchQuestionList('', pagination))
 
     }
@@ -87,15 +86,14 @@ export const QuestionTable: React.FC = () => {
     };
     return <Flexbox direction="column" just="flex-start" align="space-between">
       
-        <Skeleton loading={loading} active paragraph={{rows:7}}>
+      
         <Flexbox direction="row" just="flex-start" align="center" h="15%">
-            <Button disabled={!hasSelected} danger style={{ marginRight: "10px" }}><Span color="black">Delete</Span></Button>
+            <Button disabled={!hasSelected} danger style={{ marginRight: "10px" }}>Delete</Button>
             <Button style={{ marginRight: "10px" }} icon={<RedoOutlined />}>Reload</Button>
-
         </Flexbox>
-        <Table rowSelection={rowSelection} onChange={onTablechange} columns={columns} dataSource={questionList}>
+        <Table rowSelection={rowSelection} rowKey="_id" pagination={{defaultCurrent:1,total:sourcelist.length,defaultPageSize:10}} onChange={onTablechange} columns={columns} dataSource={sourcelist}>
         </Table>
-        </Skeleton>
+       
      
     </Flexbox>
 }

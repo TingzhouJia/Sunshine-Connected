@@ -18,7 +18,7 @@ export const QuestionPage:React.FC=()=>{
             <HeaderBread/>
             <RadiusBoard w="77vw" h="85vh"> 
               
-               <Skeleton active loading={loading}>
+               <Skeleton active loading={loading} paragraph={{rows:7}}>
                    {
                        questionList?<QuestionTable sourcelist={questionList} load={loading}/>:<></>
                    }

@@ -60,14 +60,20 @@ export const fetchQuestionList=(id:string):AppThunk=>async (dispatch)=>{
     dispatch(fetchQuestionListStart)
     const res=await getAllQuestionListByOnePublisher('5f04f91ae7ffdbbd6bb87e34')
     let source:Partial<Question>[]=[]
-    res.data.items.map((each:Partial<Video>)=>{
-        if(each.question){
-            source=[...source,...each.question]
+    res.data.map((each:Partial<Video>)=>{
+        if(each.questions){
+            each.questions.map((eachone)=>{
+               
+                source.push({...eachone,course:{title:each.title}})
+            })
+           
         }
     })
+
     let pagi:Partial<Pagination<Video>>={
         total:source.length,
     }
+   
     dispatch(fetchQuestionListSuccess({list:source,pagination:pagi}))
 }
 
@@ -81,8 +87,11 @@ export const fetchTypedList=(id:string,answered:string):AppThunk=>async (dispatc
     const res=await getTypedQuestionListByOne('5f04f91ae7ffdbbd6bb87e34',answered)
     let source:Partial<Question>[]=[]
     res.data.items.map((each:Partial<Video>)=>{
-        if(each.question){
-            source=[...source,...each.question]
+        if(each.questions){
+            each.questions.map((eachone)=>{
+                source.push({...eachone,course:{title:each.title}})
+            })
+           
         }
     })
     let pagi:Partial<Pagination<Video>>={

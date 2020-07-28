@@ -83,7 +83,7 @@ export const {
 export const fetchVideoList=(uid:string,pagination:Partial<Pagination<Video>>):AppThunk=>async (dispatch)=>{
     dispatch(fetchVideosStart)
     const res=await getVideoList('5f04f91ae7ffdbbd6bb87e34',pagination)
-    dispatch(fetchVideoListSuccess(res.data.items))
+    dispatch(fetchVideoListSuccess({list:res.data.items,pagi:{}}))
 }
 
 export const fetchVideo=(video_id:string):AppThunk=>async (dispatch)=>{

@@ -142,6 +142,7 @@ export const createAnswer = (dto: Partial<Answer>): AppThunk => async (dispatch)
 export const createDraft = (dto: Partial<Answer>): AppThunk => async (dispatch) => {
     dispatch(saveAnswerStart)
     const res = await createAnswers(dto)
+    console.log(res.data)
     dispatch(saveDraftSuccess(res.data))
 }
 
