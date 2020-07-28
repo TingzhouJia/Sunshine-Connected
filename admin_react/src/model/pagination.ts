@@ -1,6 +1,7 @@
 export interface Pagination<T> {
-    limit: any,
+    limit: any
     order: Partial<Record<keyof Partial<T>, 'asc' | 'desc' | 'ascending' | 'descending' | 1 | -1>>,
-    offset:number,
-    page:number;
+    offset:number
+    page:number
+    total:number
 }

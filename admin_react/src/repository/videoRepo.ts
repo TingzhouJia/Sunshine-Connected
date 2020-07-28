@@ -24,16 +24,12 @@ export const removeOneVideo=async (id:string)=>{
     return await axios.delete(`${baseurl}/${id}`)
 }
 
-export const getAllQuestionListByOnePublisher=async(id:string,pagination:Pagination<Video>)=>{
+export const getAllQuestionListByOnePublisher=async(id:string)=>{
 
-    return await axios.post(`${baseurl}/all_question/${id}`,{
-        params:
-            pagination
-        ,
-    })
+    return await axios.post(`${baseurl}/all_question/${id}`)
 }
 
 
-export const getTypedQuestionListByOne=async (id:string,pagination:Pagination<Video>,answered:string)=>{
-    return await axios.get(`${baseurl}/fetch_by_type/${id}/${answered}`,{params:pagination})
+export const getTypedQuestionListByOne=async (id:string,answered:string)=>{
+    return await axios.get(`${baseurl}/fetch_by_type/${id}/${answered}`,)
 }

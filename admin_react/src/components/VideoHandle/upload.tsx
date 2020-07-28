@@ -10,8 +10,7 @@ import { Video } from "../../model"
 import axios from "axios"
 const { confirm } = Modal;
 interface source {
-    video: string,
-    cover: string,
+
     title: string,
     category: string[],
     format: string
@@ -22,8 +21,8 @@ export const UploadPage: React.FC<{ callback: () => void, video?: Partial<Video>
     const inputref = useRef<HTMLInputElement>(null)
     const videoRef = useRef<HTMLInputElement>(null)
     const handleSubmit = (values: source) => {
-        const { video, category, cover, title, format } = values
-        if (video === '' || cover === '' || title === '' || category.length == 0) {
+        const {  category, title, format } = values
+        if ( title === '' || category.length == 0) {
             message.error('you cannot submit video with blank fields')
             return;
         } else {
@@ -136,9 +135,9 @@ export const UploadPage: React.FC<{ callback: () => void, video?: Partial<Video>
             </Flexbox>
         </div>
     );
-    const formik = useFormik<{ video: string, cover: string, title: string, category: string[], format: string }>({
+    const formik = useFormik<{ title: string, category: string[], format: string }>({
         initialValues: {
-            video: '', cover: '', title: '', category: [], format: ''
+            title: '', category: [], format: ''
         },
         onSubmit: values => {
         }

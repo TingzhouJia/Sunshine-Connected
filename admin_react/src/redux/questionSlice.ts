@@ -8,11 +8,13 @@ import { Question, Pagination, Video } from "../model";
 interface QuestionState{
     questionList:Partial<Question>[]|undefined,
     loading:boolean,
+    pagnination:Partial<Pagination<Question>>,
     selectQuestion:Partial<Question>|undefined
 }
 const initialState:QuestionState={
     questionList:undefined,
     loading:false,
+    pagnination:{limit:10},
     selectQuestion:undefined
 }
 
@@ -21,9 +23,9 @@ function Start(state:QuestionState){
     state.loading=true
 }
 
-function getQuestionList(state:QuestionState,{payload}:PayloadAction<Partial<Question>[]>){
+function getQuestionList(state:QuestionState,{payload}:PayloadAction<{list:Partial<Question>[],pagination:Partial<Pagination<Question>>}>){
     state.loading=false
-    state.questionList=payload
+    state.questionList=payload.list
 }
 
 function getQuestion(state:QuestionState,{payload}:PayloadAction<Partial<Question>>){
@@ -54,10 +56,19 @@ export const {
 
 }=QuestionSlice.actions
 
-export const fetchQuestionList=(id:string,pagination:Pagination<Video>):AppThunk=>async (dispatch)=>{
+export const fetchQuestionList=(id:string):AppThunk=>async (dispatch)=>{
     dispatch(fetchQuestionListStart)
-    const res=await getAllQuestionListByOnePublisher('5f04f91ae7ffdbbd6bb87e34',pagination)
-    dispatch(fetchQuestionListSuccess(res.data.items))
+    const res=await getAllQuestionListByOnePublisher('5f04f91ae7ffdbbd6bb87e34')
+    let source:Partial<Question>[]=[]
+    res.data.items.map((each:Partial<Video>)=>{
+        if(each.question){
+            source=[...source,...each.question]
+        }
+    })
+    let pagi:Partial<Pagination<Video>>={
+        total:source.length,
+    }
+    dispatch(fetchQuestionListSuccess({list:source,pagination:pagi}))
 }
 
 export const fetchQuestion=(id:string):AppThunk=>async (dispatch)=>{
@@ -65,10 +76,19 @@ export const fetchQuestion=(id:string):AppThunk=>async (dispatch)=>{
     const res=await fetchOneQuestion(id)
     dispatch(fetchQuestionSuccess(res.data))
 }
-export const fetchTypedList=(id:string,pagination:Pagination<Video>,answered:string):AppThunk=>async (dispatch)=>{
+export const fetchTypedList=(id:string,answered:string):AppThunk=>async (dispatch)=>{
     dispatch(fetchQuestionListStart)
-    const res=await getTypedQuestionListByOne('5f04f91ae7ffdbbd6bb87e34',pagination,answered)
-    dispatch(fetchQuestionListSuccess(res.data.items))
+    const res=await getTypedQuestionListByOne('5f04f91ae7ffdbbd6bb87e34',answered)
+    let source:Partial<Question>[]=[]
+    res.data.items.map((each:Partial<Video>)=>{
+        if(each.question){
+            source=[...source,...each.question]
+        }
+    })
+    let pagi:Partial<Pagination<Video>>={
+        total:source.length,
+    }
+    dispatch(fetchQuestionListSuccess({list:source,pagination:pagi}))
 }
 
 export const removeQuestion=(id:string):AppThunk=>async (dispatch)=>{

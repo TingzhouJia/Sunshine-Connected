@@ -5,12 +5,11 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
-  "main": "dist/apps/admin/main.js",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
-    "start": "node ./dist/apps/admin/main.js",
+    "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",

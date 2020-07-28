@@ -7,7 +7,8 @@ import { Video, Pagination } from '../model';
 interface VideoState {
     curVideo:Partial<Video>|undefined,
     videoList:Partial<Video>[]|undefined,
-    loading:boolean
+    loading:boolean,
+    pagination:Partial<Pagination<Video>>
 
 }
 
@@ -15,15 +16,17 @@ interface VideoState {
 const initialState:VideoState={
     curVideo:undefined,
     videoList:[],
-    loading:false
+    loading:false,
+    pagination:{limit:10}
 }
 const startLoad=(state:VideoState,)=>{
     state.loading=true;
 
 }
 
-const getVideoListSuccess=(state:VideoState,{payload}:PayloadAction<Partial<Video>[]>)=>{
-    state.videoList=payload
+const getVideoListSuccess=(state:VideoState,{payload}:PayloadAction<{list:Partial<Video>[],pagi:Partial<Pagination<Video>>}>)=>{
+    state.videoList=payload.list
+    state.pagination=payload.pagi
     state.loading=false
 }
 
