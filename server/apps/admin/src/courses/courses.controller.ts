@@ -46,19 +46,19 @@ export class CoursesController {
     return await this.courseService.getMyCourse(id, pagination);
   }
   @Get('fetch_by_type/:id/:answered')
-  async fetchByType(@Param('id') id:string,@Pagination() pagination:PaginationDto<Course>,@Param('answered') answered:string)
+  async fetchByType(@Param('id') id:string,@Param('answered') answered:string)
 {
-  return await this.courseService.getTypedListByUser(id,pagination,answered==='1')
+  return await this.courseService.getTypedListByUser(id,answered==='1')
 }
 
   @ApiOperation({ description: 'fetch all question list for one publisher' })
   @Get('all_question/:id')
   async fetchQuestionList(
     @Param('id') id: string,
-    @Pagination() pagination: PaginationDto<Course>,
+    
   ) {
    
-    return await this.courseService.getAnswerListByUser(id, pagination);
+    return await this.courseService.getAnswerListByUser(id);
   }
   @ApiOperation({ description: 'create a video' })
   @ApiBody({ type: CourseDto, description: 'body for course' })

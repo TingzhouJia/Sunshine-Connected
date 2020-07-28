@@ -1,5 +1,5 @@
 import { Course, ProgressType, Question } from '../model';
-import { ReturnModelType, DocumentType } from '@typegoose/typegoose';
+import { ReturnModelType, DocumentType, isDocument, isDocumentArray } from '@typegoose/typegoose';
 import { BaseRepository, PaginationParams, Paginator } from './base.repository';
 import { InjectModel } from 'nestjs-typegoose';
 import { FindAndModifyWriteOpResultObject } from 'mongodb';
@@ -49,20 +49,22 @@ export class CourseRepository extends BaseRepository<Course> {
    */
   async getQuestionListFromUser(
     uid: string,
-    pagenationParam: PaginationParams<Course>,
   ) {
-    return super.paginator(
+    return await super.findAllAsync(
       //stage: ProgressType.SUCCESSED should add stage 
-      { ...pagenationParam, query: { author_id: uid } },
-      'title updatedAt questions author_id',
+    { author_id: uid } ,
+      'title updatedAt questions ',
       { populates: [{ path: 'questions', select:'isAnswered content timing updatedAt author_id author', populate: [{ path: 'author',select:'username avatar' }], },{path:'viewedCount'},{path:'likeCount'}] },
     );
+   
+ 
+    
   }
 
   async getTypedQuestionListFromUser(uid: string,answered:boolean,
-    pagenationParam: PaginationParams<Course>,){
-      return super.paginator(
-        {...pagenationParam,query:{author_id:uid}},'title updatedAt questions',{
+   ){
+      return await super.findAllAsync(
+       {author_id:uid},'title updatedAt questions',{
           populates: [{ path: 'questions',match:{'isAnswered':answered},select:'isAnswered content timing updatedAt author_id author', populate: [{ path: 'author',select:'username avatar' }], }] 
         }
       )
@@ -77,7 +79,7 @@ export class CourseRepository extends BaseRepository<Course> {
   async getAllCoursePublished(
     pagenationParam: PaginationParams<Course>,
   ): Promise<Paginator<Course>> {
-    return super.paginator(
+    return await  super.paginator(
       { ...pagenationParam, query: { stage: ProgressType.SUCCESSED } },
       '-file',
       {

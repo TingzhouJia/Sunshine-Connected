@@ -13,7 +13,7 @@ export class CoursesService {
     ) {}
 
   async getMyCourse(id: string, pagination?: PaginationDto<Course>) {
-    return this.courseRepository.getCourseByAuthorId(id, { ...pagination });
+    return await  this.courseRepository.getCourseByAuthorId(id, { ...pagination });
   }
 
   async createCourse(dto: CourseDto) {
@@ -26,11 +26,11 @@ export class CoursesService {
    * @param id
    */
   async getCourseById(id: string) {
-    return this.courseRepository.getVideo(id);
+    return await  this.courseRepository.getVideo(id);
   }
   
   async deleteCourseById(id: string) {
-    return this.courseRepository.deleteVideo(id);
+    return await this.courseRepository.deleteVideo(id);
   }
 
   async updateCourse(id: string, doc: CourseDto) {
@@ -48,11 +48,11 @@ export class CoursesService {
     return await this.courseRepository.getAllCourseNeedAudit(pagination,id)
   }
 
-  async getAnswerListByUser(id: string, pagination: PaginationDto<Course>) {
-   return await this.courseRepository.getQuestionListFromUser(id, pagination);
+  async getAnswerListByUser(id: string) {
+   return await this.courseRepository.getQuestionListFromUser(id,);
   }
 
-  async getTypedListByUser(id:string,pagination:PaginationDto<Course>,answered:boolean){
-    return await this.courseRepository.getTypedQuestionListFromUser(id,answered,pagination)
+  async getTypedListByUser(id:string,answered:boolean){
+    return await this.courseRepository.getTypedQuestionListFromUser(id,answered)
   }
 }
