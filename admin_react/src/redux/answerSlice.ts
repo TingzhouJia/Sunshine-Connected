@@ -115,7 +115,7 @@ export const updateAnswer = (id: string, doc: Partial<Answer>): AppThunk => asyn
     const res = await updateOneAnswer(id, doc)
     dispatch(updateAnswerFinish(res.data))
 }
-export const fetchOneAnswer = (body: Partial<Answer>) => (dispatch: any) => {
+export const fetchOneAnswer = (body: Partial<Answer>)=> (dispatch: any) => {
 
     dispatch(fetchAnswer(body))
 }

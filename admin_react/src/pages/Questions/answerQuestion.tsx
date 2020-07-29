@@ -17,6 +17,7 @@ export const AnswerQuestion = () => {
     const q = useSelector((state: RootState) => state.question)
     const qloading = q.loading
     const { selectQuestion } = q
+    
     return (
         <Wrapper>
             <HeaderBread />
@@ -27,7 +28,7 @@ export const AnswerQuestion = () => {
                             selectQuestion && selectQuestion.author && selectQuestion.content ? (
                                 <Flexbox h="85%" direction="column" just="center" align="space-between" w="90%" >
                                     <AnswerHeader header={selectQuestion} author={selectQuestion.author} />
-                                    <AnswerTabs />
+                                    <AnswerTabs  />
                                 </Flexbox>
                             ) : <Result
                                     status="500"
