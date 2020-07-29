@@ -6,42 +6,39 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState, createDraft, createAnswer, updateAnswer, turnDtoA } from "../../redux"
 import { useHistory, useParams, useLocation } from "react-router"
 import { ExclamationCircleOutlined } from "@ant-design/icons"
-import { Answer } from "../../model"
+import { Answer, Question } from "../../model"
+
 
 const { confirm } = Modal;
-export const AnswerEditor:React.FC=()=>{
-    const {loading,selectedAnswer}=useSelector((state:RootState)=>state.answer)
-    const [content,setContent]=useState(selectedAnswer?selectedAnswer.content:'')
+
+export const AnswerEditor:React.FC<{resource:Partial<Question>|undefined,an:Partial<Answer>|undefined}>=({resource,an})=>{
+    
+
+    const param=useLocation()
+    const createdOrEdit=param.pathname==="/workshop/answers/create"
+    const [content,setContent]=useState(createdOrEdit?'':an?.content)
     const [saved, setsaved] = useState(false)
     const dispatch=useDispatch()
     
     const route=useHistory()
-    const param=useLocation()
+   
   
     const makesureLeave=()=>{
-        // confirm({
-        //     title: 'Do you Want to leave page without save it?',
-        //     icon: <ExclamationCircleOutlined />,
-        //     content: 'Some descriptions',
-        //     onOk() {
-        //     setsaved(true)
-        //       route.goBack()
-        //     },
-        //     onCancel() {
+        confirm({
+            title: 'Do you Want to leave page without save it?',
+            icon: <ExclamationCircleOutlined />,
+            content: 'Some descriptions',
+            onOk() {
+            setsaved(true)
+              route.goBack()
+            },
+            onCancel() {
              
-        //     },
-        //   });
+            },
+          });
     }
-    useEffect(() => {
-        
-        return route.listen((localtion)=>{
-            if(!saved){
-                route.block('')
-                makesureLeave()
-            }
-        })
-    }, [route])
-    const handleEditorChange = (content: any, editor: any) => {
+
+    const handleEditorChange = (content: string, editor: any) => {
         setContent(content)
       
       }
@@ -51,19 +48,20 @@ export const AnswerEditor:React.FC=()=>{
               message.error('no answer provided!')
               return
           }
-            const answer:Partial<Answer>={
-                ...selectedAnswer,
-                content
-            }
+            let answer:Partial<Answer>={}
             setsaved(true)
-            if(param.pathname==='/workshop/answers/create'){
-            
-                dispatch(createDraft({...answer,isDraft:true}))
+            if(createdOrEdit){
+                answer={question_id:resource?.id,content,isDraft:true}
+                dispatch(createDraft(answer))
             }else{
-                if(selectedAnswer&&selectedAnswer._id){
-                    dispatch(updateAnswer(selectedAnswer._id,answer))
+               
+                if(an&&an._id){
+                    answer={...an,content}
+                    dispatch(updateAnswer(an._id,answer))
                 }
             }
+          
+         
             message.success('save answer success')
             route.goBack()
       }
@@ -72,20 +70,18 @@ export const AnswerEditor:React.FC=()=>{
             message.error('no answer provided!')
             return
         }
-        const answer:Partial<Answer>={
-            ...selectedAnswer,
-            content,
-           
-
-        }
+        let answer:Partial<Answer>={}
         setsaved(true)
-       if(param.pathname==='/workshop/answers/edit'){
-        if(selectedAnswer&&selectedAnswer._id){
-            dispatch(turnDtoA(selectedAnswer._id,answer))
-        }
+       if(createdOrEdit){
+        answer={question_id:resource?.id,content,isDraft:false}
+        dispatch(createAnswer(answer))
            
        }else{
-        dispatch(createAnswer(answer))
+        if(an&&an._id){
+            answer={...an,content,isDraft:false}
+            dispatch(turnDtoA(an._id,answer))
+        }
+       
        }
        message.success('answer question success')
         route.goBack()

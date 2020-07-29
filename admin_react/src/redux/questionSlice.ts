@@ -63,7 +63,6 @@ export const fetchQuestionList=(id:string):AppThunk=>async (dispatch)=>{
     res.data.map((each:Partial<Video>)=>{
         if(each.questions){
             each.questions.map((eachone)=>{
-               
                 source.push({...eachone,course:{title:each.title}})
             })
            
