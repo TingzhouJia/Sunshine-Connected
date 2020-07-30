@@ -126,7 +126,7 @@ export class CourseRepository extends BaseRepository<Course> {
     return await super.paginator(
       { ...pagination, query: { stage: ProgressType.STAGE1,author_id:{$ne:id}} },
       '',
-      { populates: [{ path: 'author', select: '_id username avatar' }] },
+      { populates: [{ path: 'author', select: '_id username avatar' },{path:'progress',select:'_id'}] },
     );
   }
 

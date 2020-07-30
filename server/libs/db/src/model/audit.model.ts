@@ -54,6 +54,7 @@ import { Progress, ProgressType } from './progress.model';
 //delete means course is validated
 @Post('findOneAndRemove', function (doc: DocumentType<Audit>) {
   const a = getModelForClass(Course).findById(doc.obj_id).exec();
+  getModelForClass(Progress).findByIdAndRemove(doc.progress_id)
   a.then((val) => {
     if (val.time !== 3) {
       getModelForClass(Course).updateOne(

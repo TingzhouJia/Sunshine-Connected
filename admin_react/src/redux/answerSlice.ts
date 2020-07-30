@@ -13,8 +13,8 @@ interface AnswerState {
 
 
 const initialState: AnswerState = {
-    draftList: [],
-    answerList: [],
+    draftList: undefined,
+    answerList: undefined,
     loading: false,
     selectedAnswer: undefined,
     pagination:{limit:10}
