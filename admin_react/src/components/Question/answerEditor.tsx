@@ -4,7 +4,7 @@ import {Editor} from '@tinymce/tinymce-react'
 import { Button, message, Modal } from "antd"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState, createDraft, createAnswer, updateAnswer, turnDtoA } from "../../redux"
-import { useHistory, useParams, useLocation } from "react-router"
+import { useHistory, useParams, useLocation, Prompt } from "react-router"
 import { ExclamationCircleOutlined } from "@ant-design/icons"
 import { Answer, Question } from "../../model"
 
@@ -21,22 +21,36 @@ export const AnswerEditor:React.FC<{resource:Partial<Question>|undefined,an:Part
     const dispatch=useDispatch()
     
     const route=useHistory()
-   
-  
+    const location=useLocation()
     const makesureLeave=()=>{
-        confirm({
-            title: 'Do you Want to leave page without save it?',
-            icon: <ExclamationCircleOutlined />,
-            content: 'Some descriptions',
-            onOk() {
+      confirm({
+          title: 'Do you Want to leave page without save it?',
+          icon: <ExclamationCircleOutlined />,
+          content: 'Some descriptions',
+          onOk() {
             setsaved(true)
-              route.goBack()
-            },
-            onCancel() {
-             
-            },
-          });
-    }
+           route.block(true)
+           route.goBack()
+           return
+          },
+          onCancel() {
+           
+          },
+        });
+  }
+    useEffect(() => {
+     
+        route.block(false)
+        if(saved){
+          route.block(true)
+        }
+        route.listen((location)=>{
+        if(location.pathname==="/workshop/answers/create"){
+          makesureLeave()
+        }
+        })
+     
+    }, [])
 
     const handleEditorChange = (content: string, editor: any) => {
         setContent(content)
@@ -87,6 +101,9 @@ export const AnswerEditor:React.FC<{resource:Partial<Question>|undefined,an:Part
         route.goBack()
       }
     return <Flexbox direction="column" just="flex-start" align="space-between" h="90%" >
+      <Prompt when={false} message="Are sure to leave without save answer?" />
+
+      
             <Editor apiKey={process.env.REACT_APP_EDITOR_KEY} init={{
                 height:"60vh",
                 menubar: false,

@@ -10,7 +10,5 @@ export class AuditDto{
     @ApiProperty()
     deadline?:Date
     @ApiProperty()
-    progress_id?:string
-    @ApiProperty()
     message?:string
 }
