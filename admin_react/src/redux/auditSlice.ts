@@ -1,13 +1,13 @@
-import { Audit, Pagination } from "../model";
+import { Audit, Pagination, Video } from "../model";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { AppThunk } from ".";
 import { GetAuditList, CreateAudit, deleteAudit, updateAudit } from "../repository";
 
 interface AuditState{
-    auditList:Partial<Audit>[]|undefined,
+    auditList:Partial<Video>[]|undefined,
     loading:boolean,
-    curaudit:Partial<Audit>|undefined,
-    pagination:Partial<Pagination<Audit>>
+    curaudit:Partial<Audit>|undefined|Partial<Video>,
+    pagination:Partial<Pagination<Audit|Video>>
 }
 
 const initialState:AuditState={
@@ -17,7 +17,7 @@ const initialState:AuditState={
     pagination:{limit:10}
 }
 
-function saveList(state:AuditState,{payload}:PayloadAction<{list:Partial<Audit>[],pagination:Partial<Pagination<Audit>>}>){
+function saveList(state:AuditState,{payload}:PayloadAction<{list:Partial<Video>[],pagination:Partial<Pagination<Audit>>}>){
     state.auditList=payload.list
     state.pagination=payload.pagination
     state.loading=false
