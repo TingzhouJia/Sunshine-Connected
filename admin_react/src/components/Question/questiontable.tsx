@@ -91,7 +91,7 @@ export const QuestionTable: React.FC<{sourcelist:Partial<Video>[],load:boolean}>
             <Button disabled={!hasSelected} danger style={{ marginRight: "10px" }}>Delete</Button>
             <Button style={{ marginRight: "10px" }} icon={<RedoOutlined />}>Reload</Button>
         </Flexbox>
-        <Table rowSelection={rowSelection} rowKey="_id" pagination={{defaultCurrent:1,total:sourcelist.length,defaultPageSize:10}} onChange={onTablechange} columns={columns} dataSource={sourcelist}>
+        <Table loading={load} rowSelection={rowSelection} rowKey="_id" pagination={{defaultCurrent:1,total:sourcelist.length,defaultPageSize:10}} onChange={onTablechange} columns={columns} dataSource={sourcelist}>
         </Table>
        
      

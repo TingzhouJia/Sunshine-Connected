@@ -1,11 +1,13 @@
-import React from "react"
+import React, { useState } from "react"
 import { RadiusBoard, Flexbox, Span } from "../../style"
 import { Button, Space, Table, Tag } from "antd"
-import { User, Video, Progress } from "../../model"
+import { User, Video, Progress, Pagination, Audit } from "../../model"
 import dayjs from "dayjs"
+import { useDispatch } from "react-redux"
+import { createAudit } from "../../redux/auditSlice"
 
-export const AuditTable:React.FC<{source:Partial<Video>[]}>=({source})=>{
-
+export const AuditTable:React.FC<{source:Partial<Video>[],load:boolean,paginations:Partial<Pagination<Video>>}>=({source,paginations,load})=>{
+    const dispatch=useDispatch()
     const columns=[
         {
             title:"Sender",
@@ -33,7 +35,8 @@ export const AuditTable:React.FC<{source:Partial<Video>[]}>=({source})=>{
         {
             title:"Date",
               dataIndex:"updatedAt",
-              render:(data:any)=>(dayjs(data).format('YYYY/MM/DD'))
+              render:(data:any)=>(dayjs(data).format('YYYY/MM/DD')),
+              sorter:true
         },
         {
             title:"Status",
@@ -50,8 +53,13 @@ export const AuditTable:React.FC<{source:Partial<Video>[]}>=({source})=>{
             }
         }
     ]
+    const [pagi, setPagi] = useState(paginations)
     const StartAudit=(id:string)=>{
-
+        const turn=source.findIndex((item,index)=>item.id===id)
+        const doc:Partial<Audit>={
+            
+        }
+        dispatch(createAudit(doc,turn))
     }
     const SortByMineAudit=()=>{
 
@@ -59,7 +67,7 @@ export const AuditTable:React.FC<{source:Partial<Video>[]}>=({source})=>{
     const SortByNeed=()=>{
 
     }
-    const SortDate=()=>{
+    const SortDate=(pagination: any, filters: any, sorter: any)=>{
 
     }
     return <RadiusBoard w="77vw" h="87vh">
@@ -69,11 +77,10 @@ export const AuditTable:React.FC<{source:Partial<Video>[]}>=({source})=>{
                 <Space direction="horizontal">
                 <Button onClick={SortByMineAudit}>Check My Audit</Button>
                 <Button onClick={SortByNeed}>Check Video Need Audit</Button>
-                <Button onClick={SortDate}>Filter By Date</Button>
                 </Space>
             </Flexbox>
-            <Table columns={columns} dataSource={source}>
-                
+            <Table loading={load} columns={columns} dataSource={source} onChange={SortDate}>
+
             </Table>
         </Flexbox>
     </RadiusBoard>

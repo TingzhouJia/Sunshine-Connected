@@ -3,7 +3,6 @@ import { Menu, Tooltip } from 'antd'
 import { Link,useLocation } from 'react-router-dom'
 import './sider.less'
 import { UserBar } from './userBar'
-import {Span} from '../../style'
 import { TeamOutlined, EyeOutlined, ApiOutlined, UserSwitchOutlined, CommentOutlined, BellOutlined, AppstoreOutlined, CalendarOutlined, CarryOutOutlined, ContactsOutlined, PlaySquareOutlined, DesktopOutlined, VideoCameraAddOutlined } from '@ant-design/icons'
 export const SideMenu: React.FC = () => {
     const menuItems=['buddy_sys','audit_sys','video_sys']
