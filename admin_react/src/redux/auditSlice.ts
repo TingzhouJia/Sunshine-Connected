@@ -7,7 +7,7 @@ interface AuditState{
     auditList:Partial<Video>[]|undefined,
     loading:boolean,
     curaudit:Partial<Audit>|undefined|Partial<Video>,
-    pagination:Partial<Pagination<Audit|Video>>
+    pagination:Partial<Pagination<Video>>
 }
 
 const initialState:AuditState={
@@ -58,7 +58,7 @@ export const {
     cleanCur,
     changeCur
 }=AuditSlice.actions
-export const fetchAuditList=(id:string,pagination:Partial<Pagination<Audit>>):AppThunk=>async(dispatch)=>{
+export const fetchAuditList=(id:string,pagination:Partial<Pagination<Video>>):AppThunk=>async(dispatch)=>{
     dispatch(fetchStart)
     const res=await GetAuditList(id,pagination)
     const pagi={

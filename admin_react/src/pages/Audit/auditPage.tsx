@@ -1,22 +1,28 @@
 import { Wrapper, Flexbox } from "../../style"
-import React from "react"
+import React, { useEffect } from "react"
 import { HeaderBread } from "../../components/global"
 import { AuditTable } from "../../components/Audit"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "../../redux"
 import { Skeleton } from "antd"
+import { fetchAuditList } from "../../redux/auditSlice"
 
 
 export const AuditPage:React.FC=()=>{
-    const {loading,auditList}=useSelector((state:RootState)=>state.audit)
+    const {loading,auditList,pagination}=useSelector((state:RootState)=>state.audit)
+    const dispatch=useDispatch()
+    useEffect(() => {
+        dispatch(fetchAuditList('',pagination))
+       
+    }, [dispatch])
     return <Wrapper>
         <HeaderBread/>
         <Flexbox direction="column" just="center" align="center" h="85vh" w="100%">
-           <Skeleton active loading={loading} paragraph={{rows:7}}>
+        
             {
-                auditList? <AuditTable source={auditList}/>:<></>
+                auditList? <AuditTable load={loading} source={auditList} paginations={pagination}/>:<></>
             }
-           </Skeleton>
+          
         </Flexbox>
     </Wrapper>
 }

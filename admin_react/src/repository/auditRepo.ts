@@ -6,7 +6,7 @@ const baseurl=process.env.REACT_APP_TEST_URL
 
 
 export const GetAuditList=async(id:string,pagination:Partial<Pagination<Audit>>)=>{
-    return await Axios.get(`${baseurl}/courses/need_audit`,{
+    return await Axios.get(`${baseurl}/courses/need_audit/${"5f0cb357567b285666cbe7cd"}`,{
         params:pagination
     })
 }
