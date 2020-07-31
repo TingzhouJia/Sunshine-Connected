@@ -5,8 +5,9 @@ import storage from 'redux-persist/lib/storage'
 import answer from './answerSlice'
 import question from './questionSlice'
 import video from './videoSlice'
+import audit from './auditSlice'
 const reducer = combineReducers({
-  answer, question, video
+  answer, question, video,audit
 })
 const persistConfig = {
   key: 'root',
