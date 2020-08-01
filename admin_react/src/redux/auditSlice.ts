@@ -1,13 +1,13 @@
 import { Audit, Pagination, Video } from "../model";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { AppThunk } from ".";
-import { GetAuditList, CreateAudit, deleteAudit, updateAudit } from "../repository";
+import { GetAuditList, CreateAudit, deleteAudit, updateAudit, getMyAudit } from "../repository";
 
 interface AuditState{
-    auditList:Partial<Video>[]|undefined,
+    auditList:Partial<Video|Audit>[]|undefined,
     loading:boolean,
-    curaudit:Partial<Audit>|undefined|Partial<Video>,
-    pagination:Partial<Pagination<Video>>
+    curaudit:Partial<Audit|Video>|undefined,
+    pagination:Partial<Pagination<Video|Audit>>
 }
 
 const initialState:AuditState={
@@ -17,7 +17,7 @@ const initialState:AuditState={
     pagination:{limit:10}
 }
 
-function saveList(state:AuditState,{payload}:PayloadAction<{list:Partial<Video>[],pagination:Partial<Pagination<Audit>>}>){
+function saveList(state:AuditState,{payload}:PayloadAction<{list:Partial<Video|Audit>[],pagination:Partial<Pagination<Audit|Video>>}>){
     state.auditList=payload.list
     state.pagination=payload.pagination
     state.loading=false
@@ -58,7 +58,7 @@ export const {
     cleanCur,
     changeCur
 }=AuditSlice.actions
-export const fetchAuditList=(id:string,pagination:Partial<Pagination<Video>>):AppThunk=>async(dispatch)=>{
+export const fetchAuditList=(id:string,pagination:Partial<Pagination<Video|Audit>>):AppThunk=>async(dispatch)=>{
     dispatch(fetchStart)
     const res=await GetAuditList(id,pagination)
     const pagi={
@@ -85,6 +85,18 @@ export const reviseAuditSuccess=(id:string,audit:Partial<Audit>):AppThunk=>async
     dispatch(fetchStart)
     const res=await updateAudit(id,audit)
     dispatch(changeCur(res.data))
+}
+
+export const GetMyAuditList=(id:string,pagi:Partial<Pagination<Audit>>):AppThunk=>async (dispatch)=>{
+    dispatch(fetchStart)
+    const res=await getMyAudit(id,pagi)
+    const pagination={
+        limit:10,
+        total:res.data.total,
+        page:res.data.page
+    }
+    dispatch(fetchListSuccess({list:res.data.items,pagination}))
+
 }
 
 

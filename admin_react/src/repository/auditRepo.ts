@@ -22,3 +22,7 @@ export const deleteAudit=async(id:string)=>{
 export const updateAudit=async(id:string,audit:Partial<Audit>)=>{
     return await Axios.put(`$${baseurl}/audit/${id}`,{audit})
 }
+
+export const getMyAudit=async (id:string,pagi:Partial<Pagination<Audit>>)=>{
+    return await Axios.get(`${baseurl}/audit/pagination/${id}`,{params:pagi})
+}

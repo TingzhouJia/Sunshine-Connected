@@ -11,7 +11,7 @@ export class AuditRepository extends BaseRepository<Audit> {
   }
 
   async getAuditPagination(pagination: PaginationParams<Audit>) {
-    return super.paginator(pagination);
+    return super.paginator(pagination,'',{populates:[{path:"progress"},{path:'auditor'}]});
   }
   async getMyAudit(pagination: PaginationParams<Audit>, id: string) {
     return super.paginator({ ...pagination, query: { auditor_id: id } }, '', {
@@ -22,6 +22,7 @@ export class AuditRepository extends BaseRepository<Audit> {
   async createIt(doc:Partial<Audit>){
     return super.create(doc)
   }
+
 
 
 }
