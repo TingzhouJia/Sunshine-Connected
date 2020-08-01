@@ -1,10 +1,10 @@
 
 import React, { useState, useEffect } from 'react'
-import { Table, Button, Skeleton, message, Tag } from 'antd'
+import { Table, Button, Tag } from 'antd'
 import { Flexbox, Span } from '../../style'
 import { RedoOutlined } from '@ant-design/icons'
 import { RootState, fetchQuestionList, fetchQuestion } from '../../redux'
-import { useSelector, useDispatch } from 'react-redux'
+import {  useDispatch } from 'react-redux'
 
 import { useHistory } from 'react-router'
 import { Pagination, Question, Video } from '../../model'
@@ -12,7 +12,7 @@ import dayjs from 'dayjs'
 
 
 
-export const QuestionTable: React.FC<{sourcelist:Partial<Video>[],load:boolean}> = ({load,sourcelist}) => {
+export const QuestionTable: React.FC<{sourcelist:Partial<Question>[],load:boolean,}> = ({load,sourcelist}) => {
     const [selectedRowKeys, setSelected] = useState([])
     const [paginations, setpagination] = useState<Partial<Pagination<Question>>>({ limit: 10, page: 0, offset: 0, order: {} })
     const dispatch=useDispatch()

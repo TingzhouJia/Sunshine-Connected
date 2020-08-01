@@ -27,4 +27,5 @@ export const persistor= persistStore(store)
 export * from './answerSlice'
 export * from './questionSlice'
 export * from './videoSlice'
+export * from './auditSlice'
 export default store

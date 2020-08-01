@@ -4,7 +4,7 @@ import { User } from "./user";
 import { Workshop } from "./workshop";
 
 export interface Audit {
-
+  id:string
   auditer?: Partial<User>;
  
   auditor_id: string;
